@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace TourPlanner.UI.Dialogs.DialogService
 {
@@ -16,9 +11,31 @@ namespace TourPlanner.UI.Dialogs.DialogService
                 win.Owner = owner;
             win.DataContext = vm;
             win.ShowDialog();
-            DialogResult result =
-                (win.DataContext as DialogViewModelBase).UserDialogResult;
+            DialogResult result = (win.DataContext as DialogViewModelBase).UserDialogResult;
             return result;
         }
+
+        public static DialogResult OpenDialog(DialogViewModelBase vm, Window owner, out IInputData data)
+        {
+            DialogWindow win = new DialogWindow();
+            if (owner != null)
+                win.Owner = owner;
+
+            win.DataContext = vm;
+            win.ShowDialog();
+            DialogResult result = (win.DataContext as DialogViewModelBase).UserDialogResult; //??
+
+            if(result == DialogResult.No)
+            {
+                data = null;
+            }
+            else
+            {
+                data = (win.DataContext as DialogViewModelBase).InputData;
+            }
+
+            return result;
+        }
+
     }
 }

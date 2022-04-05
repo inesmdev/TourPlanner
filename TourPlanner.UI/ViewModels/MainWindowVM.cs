@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Input;
 using TourPlanner.BL;
 using TourPlanner.Models;
+using TourPlanner.UI.Dialogs;
+using TourPlanner.UI.Dialogs.DialogCreateTour;
 
 namespace TourPlanner.UI.ViewModels
 {
@@ -37,7 +39,10 @@ namespace TourPlanner.UI.ViewModels
         private void OnOpenDialog(object parameter)
         {
             Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel("Add new Tour");
-            Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
+            Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out IInputData data);
+
+            TourList.Add(new Tour() { Tourname="Crazy Tour",Description=data.ToString()});
+
         }
 
 
@@ -62,14 +67,12 @@ namespace TourPlanner.UI.ViewModels
 
 
 
-        private void AddTour(object commandParameter)
+        private void AddTour(object parameter)
         {
-            //var window = new Views.AddTourWindow();
-            //window.ShowDialog();
+            Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("test");
+            Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out IInputData data);
 
-
-
-            //TourList.Add(new Tour() { Tourname="Crazy Tour", Description="Supercoole Tour"});
+            TourList.Add(new Tour() { Tourname = data.ToString()});
         }
     }
 }

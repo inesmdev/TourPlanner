@@ -12,6 +12,7 @@ namespace TourPlanner.UI.Dialogs.DialogYesNo
 {
     class DialogYesNoViewModel : DialogViewModelBase
     {
+     
         private ICommand yesCommand = null;
         public ICommand YesCommand
         {

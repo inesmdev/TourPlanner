@@ -3,13 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:TourPlanner.UI.ViewModels"
              xmlns:dialogYesNo="clr-namespace:TourPlanner.UI.Dialogs.DialogYesNo"   
+             xmlns:dialogCreateTour="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTour"
              StartupUri="Views/MainWindow.xaml">
-    
+
+    <!-- https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.resources?view=windowsdesktop-6.0 -->
     <Application.Resources>
         <viewModels:MainWindowVM x:Key="MainWindowVM"/>
 
         <DataTemplate DataType="{x:Type dialogYesNo:DialogYesNoViewModel}">
             <dialogYesNo:DialogYesNoView></dialogYesNo:DialogYesNoView>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type dialogCreateTour:DialogCreateTourViewModel}">
+            <dialogCreateTour:DialogCreateTourView></dialogCreateTour:DialogCreateTourView>
+        </DataTemplate>
+        
+        
     </Application.Resources>
 </Application>

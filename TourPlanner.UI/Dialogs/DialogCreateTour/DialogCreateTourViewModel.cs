@@ -5,35 +5,50 @@ using TourPlanner.UI.Dialogs.DialogService;
 
 namespace TourPlanner.UI.Dialogs.DialogCreateTour
 {
-    class DialogCreateTourViewModel : DialogViewModelBase
+    public class DialogCreateTourViewModel : DialogViewModelBase
     {
-        private ICommand submitTourCommand = null;
-        public ICommand SubmitTourCommand
+        public string Tourname { get; set; }
+        public string Description { get; set; }
+
+        private ICommand yesCommand = null;
+        public ICommand YesCommand
         {
-            get { return submitTourCommand; }
-            set { submitTourCommand = value; }
+            get { return yesCommand; }
+            set { yesCommand = value; }
         }
 
-        private ICommand cancelCommand = null;
-        public ICommand CancelCommand
+        private ICommand noCommand = null;
+        public ICommand NoCommand
         {
-            get { return cancelCommand; }
-            set { cancelCommand = value; }
+            get { return noCommand; }
+            set { noCommand = value; }
         }
 
         public DialogCreateTourViewModel(string message)
         : base(message)
         {
-            this.submitTourCommand = new RelayCommand(OnSubmitClicked);
-            this.cancelCommand = new RelayCommand(OnCancelClicked);
+            this.yesCommand = new RelayCommand(OnYesClicked);
+            this.noCommand = new RelayCommand(OnNoClicked);
+
+            this.Tourname = null;
+            this.Description = null;
         }
 
-        private void OnSubmitClicked(object parameter)
+        private void OnYesClicked(object parameter)
         {
-            this.CloseDialogWithResult(parameter as Window, DialogResult.Yes); //our Parameter of Data?
+            // Check if everything is set
+            if(Tourname != null && Description != null)
+            {
+                IInputData data = new TourInputData { Tourname = this.Tourname, Description = this.Description};
+
+                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, data);
+            }
+
+            // Pop Up -> Ok Window
+
         }
 
-        private void OnCancelClicked(object parameter)
+        private void OnNoClicked(object parameter)
         {
             this.CloseDialogWithResult(parameter as Window, DialogResult.No);
         }
