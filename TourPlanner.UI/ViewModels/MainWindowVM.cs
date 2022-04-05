@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using TourPlanner.BL;
 using TourPlanner.Models;
-using TourPlanner.UI.ViewModels;
 
 namespace TourPlanner.UI.ViewModels
 {
@@ -14,6 +14,34 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand addTourCommand;
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour);
 
+
+        private ICommand openDialogCommand = null;
+        public ICommand OpenDialogCommand
+        {
+            get { return this.openDialogCommand; }
+            set { this.openDialogCommand = value; }
+        }
+
+        /*
+         *  Constructor
+         */
+        public MainWindowVM()
+        {
+            // Init Tours with some data
+            TourList = new ObservableCollection<Tour>(TourController.GetAllTours());
+            this.openDialogCommand = new RelayCommand(OnOpenDialog);
+
+        }
+
+
+        private void OnOpenDialog(object parameter)
+        {
+            Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel("Add new Tour");
+            Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
+        }
+
+
+
         // Selected Tour
         private Tour selectedTour;
         public Tour SelectedTour
@@ -24,7 +52,7 @@ namespace TourPlanner.UI.ViewModels
             }
             set
             {
-                if(selectedTour != value)
+                if (selectedTour != value)
                 {
                     selectedTour = value;
                     RaisePropertyChangedEvent("SelectedTour");
@@ -32,17 +60,16 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-        public MainWindowVM()
-        {
-            // Init Tours with some data
-            TourList = new ObservableCollection<Tour>();
-            TourList.Add(new Tour() { Tourname = "TestTour1", Description = "Die beste Tour!" });
-            TourList.Add(new Tour() { Tourname = "TestTour2", Description="Bergauf & Bergab"});
-        }
+
 
         private void AddTour(object commandParameter)
         {
-            TourList.Add(new Tour() { Tourname="Crazy Tour", Description="Supercoole Tour"});
+            //var window = new Views.AddTourWindow();
+            //window.ShowDialog();
+
+
+
+            //TourList.Add(new Tour() { Tourname="Crazy Tour", Description="Supercoole Tour"});
         }
     }
 }
