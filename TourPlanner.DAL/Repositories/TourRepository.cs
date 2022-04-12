@@ -1,11 +1,12 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
 
-namespace TourPlanner.DAL
+namespace TourPlanner.DAL.Repositories
 {
-    public class TourRepository : IRepository<Tour>, IDisposable
+    public class TourRepository : ITourRepository, IDisposable
     {      
         private NpgsqlConnection conn;
         private const string TABLE_NAME = "tour";
@@ -18,7 +19,6 @@ namespace TourPlanner.DAL
             conn.ReloadTypes();
         }
 
-        // 2nd Constructor for Unit Testing?
 
         public bool Create(Tour tour)
         {

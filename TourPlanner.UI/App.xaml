@@ -4,11 +4,13 @@
              xmlns:viewModels="clr-namespace:TourPlanner.UI.ViewModels"
              xmlns:dialogYesNo="clr-namespace:TourPlanner.UI.Dialogs.DialogYesNo"   
              xmlns:dialogCreateTour="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTour"
-             StartupUri="Views/MainWindow.xaml">
+             Startup="OnStartup"
+             >
 
     <!-- https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.resources?view=windowsdesktop-6.0 -->
+    <!-- Resources defined at the application level can be accessed by all other pages that are part of the application -->
     <Application.Resources>
-        <viewModels:MainWindowVM x:Key="MainWindowVM"/>
+        <!-- <viewModels:MainViewModel x:Key="MainViewModel"/> -->
 
         <DataTemplate DataType="{x:Type dialogYesNo:DialogYesNoViewModel}">
             <dialogYesNo:DialogYesNoView></dialogYesNo:DialogYesNoView>
@@ -18,6 +20,9 @@
             <dialogCreateTour:DialogCreateTourView></dialogCreateTour:DialogCreateTourView>
         </DataTemplate>
         
+        <!-- Ref to Config Class-->
+        <!-- Another Config for TestProject -> Mock DB -->
         
+        <!-- Define some Styles van be referenced-->
     </Application.Resources>
 </Application>

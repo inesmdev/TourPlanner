@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TourPlanner.DAL
+namespace TourPlanner.Repositories
 {
     public interface IRepository<T>
     {

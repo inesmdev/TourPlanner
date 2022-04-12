@@ -1,9 +1,9 @@
 ﻿<Window x:Class="TourPlanner.UI.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        DataContext="{StaticResource ResourceKey=MainWindowVM}"
-        Title="TourPlanner" Height="450" Width="800">
+        Title="TourPlanner" Height="1080" Width="1920"
+        WindowState="Maximized"
+        >
 
     <DockPanel>
         <Menu DockPanel.Dock="Top" Padding="2">
@@ -31,7 +31,7 @@
         <!-- Main Grid-->
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition MaxWidth="600"/>
                 <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -55,11 +55,29 @@
                     </ToolBar>
                 </ToolBarTray>
 
-                <DataGrid Grid.Row="1" 
-                         ItemsSource="{Binding TourList, UpdateSourceTrigger=PropertyChanged}" 
-                         SelectedItem="{Binding SelectedTour, Mode=TwoWay}">
-                         
-                </DataGrid>
+                <!--<DataGrid 
+                    Grid.Row="1" 
+                    ItemsSource="{Binding TourList, UpdateSourceTrigger=PropertyChanged}" 
+                    SelectedItem="{Binding SelectedTour, Mode=TwoWay}"
+                    AutoGenerateColumns="False">
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tourname" Binding="{Binding Tourname}"/>
+                        <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate}"/>
+                    </DataGrid.Columns>
+                </DataGrid>-->
+
+                <ListView 
+                    Grid.Row="1" 
+                    ItemsSource="{Binding TourList, UpdateSourceTrigger=PropertyChanged}" 
+                    SelectedItem="{Binding SelectedTour, Mode=TwoWay}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Tourname}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
             </Grid>
 
             <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>

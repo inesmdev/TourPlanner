@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.UI.Dialogs.DialogService;
@@ -9,6 +9,8 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
     {
         public string Tourname { get; set; }
         public string Description { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
 
         private ICommand yesCommand = null;
         public ICommand YesCommand
@@ -24,6 +26,8 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             set { noCommand = value; }
         }
 
+        public DialogCreateTourViewModel() : base() { }
+
         public DialogCreateTourViewModel(string message)
         : base(message)
         {
@@ -34,20 +38,34 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             this.Description = null;
         }
 
+
+        /*
+         *  Executes when "Yes" (or "CreateTour") button is clicked
+         */
         private void OnYesClicked(object parameter)
         {
             // Check if everything is set
             if(Tourname != null && Description != null)
             {
-                IInputData data = new TourInputData { Tourname = this.Tourname, Description = this.Description};
+                TourInputData data = new TourInputData { 
+                                                Tourname = this.Tourname, 
+                                                Description = this.Description,
+                                                From = this.From,
+                                                To = this.To
+                                                };
 
-                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, data);
+                // To Json -> String
+                string dataJson = JsonConvert.SerializeObject(data);
+
+                
+
+                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
             }
-
-            // Pop Up -> Ok Window
-
         }
 
+        /*
+        *  Executes when "No" (or "Cancel") button is clicked
+        */
         private void OnNoClicked(object parameter)
         {
             this.CloseDialogWithResult(parameter as Window, DialogResult.No);

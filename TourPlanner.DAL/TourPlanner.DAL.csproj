@@ -1,13 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="6.0.3" />
