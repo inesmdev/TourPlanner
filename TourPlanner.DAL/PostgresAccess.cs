@@ -18,7 +18,7 @@ namespace TourPlanner.DAL
         {
             try
             {
-                _connection = new NpgsqlConnection("Host=localhost;Username=postgres;Password=password123;Database=TourPlannerDB;Port=5432");
+                _connection = new NpgsqlConnection("Host=localhost;Username=docker;Password=pass123;Database=tourplannerdb;Port=5432");
                 _connection.Open();
 
             }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Input;
+using TourPlanner.Models;
 using TourPlanner.UI.Dialogs.DialogService;
 
 namespace TourPlanner.UI.Dialogs.DialogCreateTour
