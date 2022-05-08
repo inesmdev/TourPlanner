@@ -8,7 +8,7 @@ namespace TourPlanner.Repositories
         /*
          *  Create
          */
-        public bool Create(T entity);
+        public void Create(T entity);
 
         /*
          *  Read
@@ -25,6 +25,6 @@ namespace TourPlanner.Repositories
         /*
          * Delete
          */
-        public bool Delete(T entity);
+        public bool Delete(Guid id);
     }
 }

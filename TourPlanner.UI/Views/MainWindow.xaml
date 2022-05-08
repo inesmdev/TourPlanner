@@ -3,9 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="TourPlanner" Height="1080" Width="1920"
         WindowState="Maximized"
+        xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
         >
+    
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding WindowLoadedCommand}"/>
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
 
     <DockPanel>
+       
         <Menu DockPanel.Dock="Top" Padding="2">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -50,8 +58,18 @@
                             Margin="5 0 5 0" 
                             Command="{Binding AddTourCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
-                        <Button Content="Delete" Margin="5 0 5 0"/>
-                        <Button Content="Edit" Margin="5 0 5 0"/>
+                        <Button 
+                            Content="Delete" 
+                            Margin="5 0 5 0"
+                            Command="{Binding DeleteTourCommand}"  
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            />
+                        <Button 
+                            Content="Edit" 
+                            Margin="5 0 5 0"
+                            Command="{Binding EditTourCommand}"  
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            />
                     </ToolBar>
                 </ToolBarTray>
 
@@ -74,7 +92,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Tourname}"></TextBlock>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>

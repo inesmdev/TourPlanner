@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.Models;
 
-namespace TourPlanner.BL
+namespace TourPlanner.Api.Services.MapQuestService
 {
     // Directions API (MapQuest)
     public interface IMapQuestService

@@ -9,7 +9,7 @@ namespace TourPlanner.Test
         [SetUp]
         public void Setup()
         {
-            ITourService tourService = new TourService(new MockTourRepository());
+            ITourService tourService = new TourService2(new MockTourRepository());
         }
 
         [Test]

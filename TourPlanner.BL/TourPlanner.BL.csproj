@@ -5,12 +5,18 @@
   </PropertyGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.14" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog" Version="2.11.0" />
 	</ItemGroup>
 
 	<ItemGroup>
     <ProjectReference Include="..\TourPlanner.DAL\TourPlanner.DAL.csproj" />
     <ProjectReference Include="..\TourPlanner.Models\TourPlanner.Models.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="TourService\" />
+	</ItemGroup>
 
 </Project>

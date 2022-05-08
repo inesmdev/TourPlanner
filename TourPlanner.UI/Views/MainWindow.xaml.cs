@@ -12,5 +12,7 @@ namespace TourPlanner.UI.Views
             InitializeComponent();
 
         }
+
+       
     }
 }

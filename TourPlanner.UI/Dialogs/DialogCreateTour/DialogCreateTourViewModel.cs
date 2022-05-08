@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Models;
@@ -46,19 +47,17 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
         private void OnYesClicked(object parameter)
         {
             // Check if everything is set
-            if(Tourname != null && Description != null)
+            if(ValidateInput())
             {
-                TourInputData data = new TourInputData { 
-                                                Tourname = this.Tourname, 
+                TourInput data = new TourInput { 
+                                                Name = this.Tourname, 
                                                 Description = this.Description,
                                                 From = this.From,
                                                 To = this.To
                                                 };
 
-                // To Json -> String
+                // Json -> String
                 string dataJson = JsonConvert.SerializeObject(data);
-
-                
 
                 this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
             }
@@ -70,6 +69,39 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
         private void OnNoClicked(object parameter)
         {
             this.CloseDialogWithResult(parameter as Window, DialogResult.No);
+        }
+
+
+        private bool ValidateLocation(string location)
+        {
+            string locationPattern = @"[A-Za-z]\w+ [0-9]{1,3}(\/[0-9]{1,3})*, ([0-9]{4}) [A-Za-z]\w+, [A-Za-z]\w+";
+            Regex regex = new Regex(locationPattern, RegexOptions.IgnoreCase);
+
+            var match = regex.Match(location);
+
+            if (match.Success)
+                return true;
+            else
+                return false;
+        }
+
+        private bool ValidateInput()
+        {
+            bool isValid = true;
+
+            // Are all Inputs filled out?
+            if(Tourname == null || Description == null || From == null || To == null)
+            {
+                isValid = false;
+            }
+
+            // Do the given Locations have the correct Format?
+            if(!ValidateLocation(From) || !ValidateLocation(To))
+            {
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }
