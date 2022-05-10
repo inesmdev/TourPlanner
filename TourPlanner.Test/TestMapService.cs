@@ -5,7 +5,7 @@ using TourPlanner.Test.Mocks;
 
 namespace TourPlanner.Test
 {
-    public class TestMapQuest
+    public class TestMapService
     {
         private IMapQuestService _mapQuestService;
 
@@ -19,10 +19,10 @@ namespace TourPlanner.Test
         public void TestGetCoordinates()
         {
             Location from = new Location() { City = "Vienna", Country = "AT", PostalCode = "1200", Street = "Handlskai 94-96" };
-            Location to = new Location() { City = "Vienna", Country = "AT", PostalCode = "1200", Street = "Höchstädtplatz 6" };
+            Location to = new Location() { City = "", Country = "AT", PostalCode = "", Street = "Prater" };
 
-            string result = _mapQuestService.GetTour(from, to).Result;
-            Assert.IsNotNull(result);
+            MapQuestTour result = _mapQuestService.GetTour(from, to).Result;
+            Assert.IsNotNull(result.Distance);
         }
     }
 }

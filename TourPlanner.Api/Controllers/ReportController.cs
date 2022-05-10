@@ -25,8 +25,9 @@ namespace TourPlanner.Api.Controllers
         public IActionResult Create(Tour tour)
         {
             //??
-            // Call the Report Service 
+            // Call the Report Service
             // return BadRequest() -> Error
+            _reportservice.GeneratePdfReport(tour);
 
              return Ok();
         }

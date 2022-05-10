@@ -11,6 +11,6 @@ namespace TourPlanner.Api.Services.MapQuestService
     public interface IMapQuestService
     {
         //Tour GetTour(string start, string end);
-        public Task<string> GetTour(Location from, Location to);
+        public Task<MapQuestTour> GetTour(Location from, Location to);
     }
 }

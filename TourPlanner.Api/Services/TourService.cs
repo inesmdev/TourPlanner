@@ -33,8 +33,8 @@ namespace TourPlanner.Api.Services
 
             try
             {
-                string res = _mapQuestService.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
-                tour.Description = res;
+                MapQuestTour res = _mapQuestService.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
+                tour.Description = res.EstimatedTime.ToString();
             }
             catch
             {

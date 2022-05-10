@@ -9,10 +9,20 @@ namespace TourPlanner.Api.Services.MapQuestService
 {
     public class MapQuestService : IMapQuestService
     {
-        public async Task<string> GetTour(Location from, Location to)
+        public async Task<MapQuestTour> GetTour(Location from, Location to)
         {
             MapQuestTour tour = new MapQuestTour();
-            var url = "http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&" + "from=" + from.Street + "," + from.City + "," + from.Country + "," + from.PostalCode + "&to=" + to.Street + "," + to.City + "," + to.Country + "," + to.PostalCode + "&time";
+            /*var url = @"http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&unit=k&from=";
+            url += (from.Street != null) ? from.Street + "," : "";
+            url += (from.City != null) ? from.City + "," : "";
+            url += (from.County != null) ? from.Country + "," : "";
+            url += (from.PostalCode != null) ? from.PostalCode + "," : "";
+            url += "&to=";
+            url += (to.Street != null) ? to.Street + "," : "";
+            url += (to.City != null) ? to.City + "," : "";
+            url += (to.County != null) ? to.County + "," : "";
+            url += (to.PostalCode != null) ? to.PostalCode + "," : "";*/
+            var url = "http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&unit=k&" + "from=" + from.Street + "," + from.City + "," + from.Country + "," + from.PostalCode + "&to=" + to.Street + "," + to.City + "," + to.Country + "," + to.PostalCode + "&time";
             using var client = new HttpClient();
             var response = await client.PostAsync(url, null);
             string result = response.Content.ReadAsStringAsync().Result;
@@ -27,13 +37,7 @@ namespace TourPlanner.Api.Services.MapQuestService
                 Console.WriteLine(tour.EstimatedTime);
                 Console.WriteLine(tour.Distance);
             }
-            /*Tour tour = new Tour()
-            {
-                EstimatedTime = deserialize.formattedTime,
-                Distance = deserialize.distance,
-            };*/
-            return result;
+            return tour;
         }
     }
 }
-//var url = "http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&" + "from=" + start + "&to=" + end;
