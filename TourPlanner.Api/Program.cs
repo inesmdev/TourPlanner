@@ -16,10 +16,8 @@ namespace TourPlanner.Api
         {
             CreateHostBuilder(args).Build().Run();
 
-            // Add Serilog?
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("loggg.txt", Serilog.Events.LogEventLevel.Verbose, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+
+      
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,6 +25,7 @@ namespace TourPlanner.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog();
+
     }
 }

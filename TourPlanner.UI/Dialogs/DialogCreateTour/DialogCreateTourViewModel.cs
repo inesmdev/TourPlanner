@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -40,21 +41,34 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             this.Description = null;
         }
 
+        public DialogCreateTourViewModel(string message, Tour tour)
+        : base(message)
+        {
+            this.yesCommand = new RelayCommand(OnYesClicked);
+            this.noCommand = new RelayCommand(OnNoClicked);
+
+            this.Tourname = tour.Name;
+            this.Description = tour.Description;
+            this.From = tour.From;
+            this.To = tour.To;
+        }
+
 
         /*
          *  Executes when "Yes" (or "CreateTour") button is clicked
          */
         private void OnYesClicked(object parameter)
         {
+
             // Check if everything is set
-            if(ValidateInput())
+            if (ValidateInput())
             {
-                TourInput data = new TourInput { 
-                                                Name = this.Tourname, 
-                                                Description = this.Description,
-                                                From = this.From,
-                                                To = this.To
-                                                };
+                TourInput data = new TourInput {
+                    Name = this.Tourname,
+                    Description = this.Description,
+                    From = this.From,
+                    To = this.To,
+            };
 
                 // Json -> String
                 string dataJson = JsonConvert.SerializeObject(data);

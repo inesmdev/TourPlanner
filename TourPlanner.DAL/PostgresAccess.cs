@@ -25,6 +25,7 @@ namespace TourPlanner.DAL
             catch (System.Exception e)
             {
                 Console.WriteLine($"[{DateTime.UtcNow}]\tError connecting to PostgresDB: {e.Message}");
+
                 throw; 
             }
 

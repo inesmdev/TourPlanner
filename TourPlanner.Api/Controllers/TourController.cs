@@ -34,7 +34,7 @@ namespace TourPlanner.Api.Controllers
             if (tour == null)
                 return NotFound();
 
-            return tour;
+            return Ok(tour);
          }
 
 
@@ -47,26 +47,30 @@ namespace TourPlanner.Api.Controllers
             if(tour == null)
                 return BadRequest();
             else
-                return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description }, tour);;
+                return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To }, tour);;
         }
 
 
         // PUT action -> Aktualisieren
-        /*
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, Tour tour)
+        public IActionResult Update(string id, Tour tour)
         {
-            if (id != tour.TourId)
+            Guid idParsed = Guid.Parse(id);
+
+            if (idParsed != tour.Id)
                 return BadRequest();
 
-            var existingPizza = PizzaService.Get(id);
-            if (existingPizza is null)
+            var existingTour = _tourservice.Get(idParsed);
+            if (existingTour is null)
                 return NotFound();
 
-            TourService.Update(tour);
+            Tour tourdb = _tourservice.Update(tour);
 
-            return NoContent();
-        }*/
+            if (tourdb is null)
+                return BadRequest();
+            else
+                return Ok(tourdb); // 204?
+        }
 
         
 

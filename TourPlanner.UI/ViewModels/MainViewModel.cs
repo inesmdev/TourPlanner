@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Serilog;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TourPlanner.Api.Services;
 using TourPlanner.Models;
 
 namespace TourPlanner.UI.ViewModels
@@ -17,7 +13,7 @@ namespace TourPlanner.UI.ViewModels
      *  ViewModel for the Main Window
      */
     public class MainViewModel : BaseVM
-    {        
+    {
         public ObservableCollection<Tour> TourList { get; private set; }
 
         private RelayCommand addTourCommand;
@@ -28,6 +24,8 @@ namespace TourPlanner.UI.ViewModels
 
         private RelayCommand editTourCommand;
         public ICommand EditTourCommand => editTourCommand ??= new RelayCommand(EditTour);
+
+      
 
         private RelayCommand windowLoadedCommand;
         public ICommand WindowLoadedCommand => windowLoadedCommand ??= new RelayCommand(WindowLoaded);
@@ -65,12 +63,12 @@ namespace TourPlanner.UI.ViewModels
          */
         private async void AddTour(object parameter)
         {
-            Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("");
+            Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Create new Tour");
             Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
-           
+
             // If user clickt on "Create Tour"
-            if(result == Dialogs.DialogService.DialogResult.Yes)
-            {    
+            if (result == Dialogs.DialogService.DialogResult.Yes)
+            {
                 // Send Htttp POST Request to /Tour
                 using (HttpClient client = new HttpClient())
                 {
@@ -96,16 +94,16 @@ namespace TourPlanner.UI.ViewModels
                         {
                             Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour");
                             _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
-     
-                        }                
+
+                        }
                     }
                     else
                     {
                         Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour");
                         _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
                     }
-                }  
-            }     
+                }
+            }
         }
 
 
@@ -113,10 +111,10 @@ namespace TourPlanner.UI.ViewModels
          *  Delete Tour
          */
         private async void DeleteTour(object parameter)
-        {     
-            if(selectedTour != null)
+        {
+            if (selectedTour != null)
             {
-                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel($"Delete Tour\nId:{selectedTour.Id}, Tourname: {selectedTour.Name}"); // Add Tour Details
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel($"Are your sure you want to delete Tour  \"{selectedTour.Name}\", {selectedTour.Description}? Deleted Tours cannot be recovered!"); // Add Tour Details
                 Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
 
                 if (result == Dialogs.DialogService.DialogResult.Yes)
@@ -125,7 +123,7 @@ namespace TourPlanner.UI.ViewModels
                     using (HttpClient client = new HttpClient())
                     {
                         var content = new StringContent(selectedTour.Id.ToString("N"), Encoding.UTF8, "application/json");
-                        var res = await client.DeleteAsync($"https://localhost:44314/Tour/"+selectedTour.Id.ToString("N"));
+                        var res = await client.DeleteAsync($"https://localhost:44314/Tour/" + selectedTour.Id.ToString("N"));
 
                         //res.EnsureSuccessStatusCode();
                         if (res.IsSuccessStatusCode)
@@ -142,16 +140,47 @@ namespace TourPlanner.UI.ViewModels
                         }
                     }
                 }
-            }          
+            }
         }
 
 
         /*
         *  Edit Tour
         */
-        private void EditTour(object parameter)
+        private async void EditTour(object parameter)
         {
-            throw new System.NotImplementedException();
+            if (selectedTour != null)
+            {
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Edit Tour", selectedTour); // Add Tour Details
+                Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
+
+                // If user clickt on "Create Tour"
+                if (result == Dialogs.DialogService.DialogResult.Yes)
+                {
+                    // Send Htttp POST Request to /Tour
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var content = new StringContent(data, Encoding.UTF8, "application/json");
+                        var res = await client.PutAsync("https://localhost:44314/Tour/" + selectedTour.Id.ToString("N"), content);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            // Update Tour in Observable Collection
+                            var httpcontent = res.Content.ReadAsStringAsync().Result;
+
+                            Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
+
+                            var index = TourList.IndexOf(selectedTour);
+                            TourList[index] = tour;
+                        }
+                        else
+                        {
+                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not Update Tour");
+                            _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -173,8 +202,8 @@ namespace TourPlanner.UI.ViewModels
                     // String -> List<Tour>
                     List<Tour> tours = JsonConvert.DeserializeObject<List<Tour>>(content);
 
-                   
-                    foreach(Tour tour in tours)
+
+                    foreach (Tour tour in tours)
                     {
                         TourList.Add(tour);
                     }

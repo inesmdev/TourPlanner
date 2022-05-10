@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
+using TourPlanner.Repositories;
 
 namespace TourPlanner.Test.Mocks
 {
@@ -9,22 +10,29 @@ namespace TourPlanner.Test.Mocks
     {
         List<Tour> tours = new List<Tour>();
 
-
         public bool Create(Tour tour)
         {
             tours.Add(tour);
-
             return true;
         }
 
-        public bool Delete(Tour entity)
+        public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            foreach(Tour tour in tours)
+            {
+                if(tour.Id == id)
+                {
+                    tours.Remove(tour);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public IEnumerable<Tour> GetAll()
         {
-            throw new NotImplementedException();
+            return tours;
         }
 
         public Tour GetByID(Guid id)
@@ -33,6 +41,11 @@ namespace TourPlanner.Test.Mocks
         }
 
         public bool Update(Tour entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Tour>.Create(Tour entity)
         {
             throw new NotImplementedException();
         }
