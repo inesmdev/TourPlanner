@@ -18,14 +18,15 @@ namespace TourPlanner.UI
         // Constructor Injection:
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            /*// Setup Serilog:
+            // Setup Serilog:
+           /*
             Log.Logger = new LoggerConfiguration()
                           .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                           .MinimumLevel.Verbose()
                           .CreateLogger();
 
-            Log.Logger.Debug("Programm started");
-            */
+            Log.Debug("Programm started");*/
+            
 
             var mainViewModel = new MainViewModel();
 

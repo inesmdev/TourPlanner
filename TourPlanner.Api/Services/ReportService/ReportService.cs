@@ -10,7 +10,6 @@ namespace TourPlanner.Api.Services.ReportService
         public void GeneratePdfReport()
         {
             throw new NotImplementedException();
-            
         }
     }
 }

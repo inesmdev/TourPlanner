@@ -77,6 +77,7 @@ namespace TourPlanner.Api.Services
 
         public bool Delete(Guid id)
         {
+            _tourlogger.LogInformation("Hallo :D");
             return _repository.Delete(id);
         }
 

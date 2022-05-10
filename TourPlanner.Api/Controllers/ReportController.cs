@@ -26,9 +26,9 @@ namespace TourPlanner.Api.Controllers
         {
             //??
             // Call the Report Service 
+            // return BadRequest() -> Error
 
-
-                return Ok();
+             return Ok();
         }
 
 

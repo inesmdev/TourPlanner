@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using TourPlanner.Api.Services;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.Api.Services.ReportService;
+using TourPlanner.DAL;
 using TourPlanner.DAL.Repositories;
 
 namespace TourPlanner.Api
@@ -27,6 +28,7 @@ namespace TourPlanner.Api
             services.AddSingleton<ITourRepository, TourRepository>(); //??
             services.AddSingleton<IMapQuestService, MapQuestService>(); //??
             services.AddSingleton<IReportService, ReportService>();
+            services.AddSingleton<PostgresAccess>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
