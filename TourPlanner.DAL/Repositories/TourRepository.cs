@@ -11,9 +11,8 @@ namespace TourPlanner.DAL.Repositories
         private NpgsqlConnection conn;
         private const string TABLE_NAME = "tour";
 
-        public TourRepository()
+        public TourRepository(PostgresAccess db)
         {
-            PostgresAccess db = PostgresAccess.Instance;
             conn = db.GetConnection();
             conn.MapEnum<EnumTransportType>("transporttype"); //?
             conn.ReloadTypes();

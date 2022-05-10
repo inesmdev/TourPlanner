@@ -10,6 +10,12 @@
         public string Country { get; set; }
         public string PostalCode { get; set; }
 
+        public Location()
+        {
+
+        }
+
+
         public Location(string location)
         {
             ParseLocation(location);
