@@ -12,7 +12,7 @@ namespace TourPlanner.Api.Services
 
         Tour Add(TourInput tourinput);
 
-        Tour Update(TourInput tourinput);
+        public Tour? Update(Tour tour);
 
         bool Delete(Guid id);
 

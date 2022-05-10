@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
+using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.Models;
-using TourPlanner.BL;
-using TourPlanner.BL.MapQuestService;
 using TourPlanner.Test.Mocks;
 
 namespace TourPlanner.Test
@@ -9,6 +8,7 @@ namespace TourPlanner.Test
     public class TestMapQuest
     {
         private IMapQuestService _mapQuestService;
+
         [SetUp]
         public void Setup()
         {

@@ -5,6 +5,7 @@ using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
 using Serilog;
 using TourPlanner.Api.Services.MapQuestService;
+using Microsoft.Extensions.Logging;
 
 namespace TourPlanner.Api.Services
 {
@@ -12,11 +13,13 @@ namespace TourPlanner.Api.Services
     {
         ITourRepository _repository; // _  -> being created externaly
         IMapQuestService _mapQuestService;
+        ILogger<TourService> _tourlogger;
                                      
-        public TourService(ITourRepository repository, IMapQuestService mapapi)
+        public TourService(ITourRepository repository, IMapQuestService mapapi, ILogger<TourService> logger)
         {
             _repository = repository;
-            _mapQuestService =  mapapi;
+            _mapQuestService = mapapi;
+            _tourlogger = logger;
         }
 
         public Tour? Add(TourInput tourinput)
@@ -45,6 +48,7 @@ namespace TourPlanner.Api.Services
             {
                 _repository.Create(tour);
                 tour.GenerateSummary();
+                _tourlogger.LogInformation("Test");
                 return tour;
             }
             catch
@@ -76,9 +80,23 @@ namespace TourPlanner.Api.Services
             return _repository.Delete(id);
         }
 
-        Tour ITourService.Update(TourInput tourinput)
+        public Tour? Update(Tour tour)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                //? Call Api? 
+                // Edit Tour what can be change?
+
+                _repository.Update(tour);
+                return tour;
+            }
+            catch
+            {
+                return null;
+            }
+
+
         }
     }
 }

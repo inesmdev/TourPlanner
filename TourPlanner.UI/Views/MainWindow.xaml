@@ -31,7 +31,7 @@
             </MenuItem>
             <MenuItem HorizontalAlignment="Right">
                 <MenuItem.Header>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">Help</TextBlock>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"><Hyperlink NavigateUri="https://github.com/xxaemy/TourPlanner/tree/restapi">Help</Hyperlink></TextBlock>
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
