@@ -26,9 +26,13 @@
             <MenuItem Header="_Edit">
                 <MenuItem Header="Cut"/>
             </MenuItem>
+            <MenuItem Header="_Report">
+                <MenuItem Header="Generate Pdf Report" Command="{Binding GeneratePdfReportCommand}"/>
+            </MenuItem>
             <MenuItem Header="_Options">
                 <MenuItem Header="Cut"/>
             </MenuItem>
+            
             <MenuItem HorizontalAlignment="Right">
                 <MenuItem.Header>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"><Hyperlink NavigateUri="https://github.com/xxaemy/TourPlanner/tree/restapi">Help</Hyperlink></TextBlock>

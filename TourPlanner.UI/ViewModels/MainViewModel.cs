@@ -25,7 +25,37 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand editTourCommand;
         public ICommand EditTourCommand => editTourCommand ??= new RelayCommand(EditTour);
 
-      
+        private RelayCommand generatePdfReportCommand;
+        public ICommand GeneratePdfReportCommand => generatePdfReportCommand ??= new RelayCommand(GeneratePdfReport);
+
+        private async void GeneratePdfReport(object parameter)
+        {
+            if (selectedTour != null)
+            {
+                // Call the Api
+                // Send Htttp POST Request to /Tour
+                using (HttpClient client = new HttpClient())
+                {
+                    var jsonTour = JsonConvert.SerializeObject(selectedTour);
+                    var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
+                    var res = await client.PostAsync("https://localhost:5001/Report", content);
+
+                    //res.EnsureSuccessStatusCode();
+                    if (res.IsSuccessStatusCode)
+                    {
+                        //var httpcontent = await res.Content.ReadAsStringAsync(); //??
+                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
+                        _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+  
+                    }
+                    else
+                    {
+                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Report");
+                        _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                    }
+                }
+            }
+        }
 
         private RelayCommand windowLoadedCommand;
         public ICommand WindowLoadedCommand => windowLoadedCommand ??= new RelayCommand(WindowLoaded);
@@ -73,7 +103,7 @@ namespace TourPlanner.UI.ViewModels
                 using (HttpClient client = new HttpClient())
                 {
                     var content = new StringContent(data, Encoding.UTF8, "application/json");
-                    var res = await client.PostAsync("https://localhost:44314/Tour", content);
+                    var res = await client.PostAsync("https://localhost:5001/Tour", content);
 
                     //res.EnsureSuccessStatusCode();
                     if (res.IsSuccessStatusCode)
@@ -123,7 +153,7 @@ namespace TourPlanner.UI.ViewModels
                     using (HttpClient client = new HttpClient())
                     {
                         var content = new StringContent(selectedTour.Id.ToString("N"), Encoding.UTF8, "application/json");
-                        var res = await client.DeleteAsync($"https://localhost:44314/Tour/" + selectedTour.Id.ToString("N"));
+                        var res = await client.DeleteAsync($"https://localhost:5001/Tour/" + selectedTour.Id.ToString("N"));
 
                         //res.EnsureSuccessStatusCode();
                         if (res.IsSuccessStatusCode)
@@ -161,7 +191,7 @@ namespace TourPlanner.UI.ViewModels
                     using (HttpClient client = new HttpClient())
                     {
                         var content = new StringContent(data, Encoding.UTF8, "application/json");
-                        var res = await client.PutAsync("https://localhost:44314/Tour/" + selectedTour.Id.ToString("N"), content);
+                        var res = await client.PutAsync("https://localhost:5001/Tour/" + selectedTour.Id.ToString("N"), content);
 
                         if (res.IsSuccessStatusCode)
                         {
@@ -191,7 +221,7 @@ namespace TourPlanner.UI.ViewModels
         {
             using (HttpClient client = new HttpClient())
             {
-                var res = await client.GetAsync("https://localhost:44314/Tour");
+                var res = await client.GetAsync("https://localhost:5001/Tour");
 
                 res.EnsureSuccessStatusCode();
 
