@@ -19,13 +19,13 @@ namespace TourPlanner.UI
         private void OnStartup(object sender, StartupEventArgs e)
         {
             // Setup Serilog:
-           /*
-            Log.Logger = new LoggerConfiguration()
+           
+            /*Log.Logger = new LoggerConfiguration()
                           .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                           .MinimumLevel.Verbose()
-                          .CreateLogger();
+                          .CreateLogger();*/
 
-            Log.Debug("Programm started");*/
+            Log.Logger.Debug("Programm started");
             
 
             var mainViewModel = new MainViewModel();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using TourPlanner.Api.Services;
@@ -13,10 +14,12 @@ namespace TourPlanner.Api.Controllers
     public class ReportController : ControllerBase
     {
         private readonly IReportService _reportservice;
+        ILogger _logger;
 
-        public ReportController(IReportService reportservice)
+        public ReportController(IReportService reportservice, ILogger<ReportController> logger)
         {
             _reportservice = reportservice;
+            _logger = logger;
         }
 
 
@@ -24,9 +27,7 @@ namespace TourPlanner.Api.Controllers
         [HttpPost]
         public IActionResult Create(Tour tour)
         {
-            //??
-            // Call the Report Service
-            // return BadRequest() -> Error
+            // Error Handling?
             _reportservice.GeneratePdfReport(tour);
 
              return Ok();

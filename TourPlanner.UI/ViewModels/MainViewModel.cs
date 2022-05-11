@@ -105,7 +105,6 @@ namespace TourPlanner.UI.ViewModels
                     var content = new StringContent(data, Encoding.UTF8, "application/json");
                     var res = await client.PostAsync("https://localhost:5001/Tour", content);
 
-                    //res.EnsureSuccessStatusCode();
                     if (res.IsSuccessStatusCode)
                     {
                         //var httpcontent = await res.Content.ReadAsStringAsync(); //??
@@ -155,12 +154,9 @@ namespace TourPlanner.UI.ViewModels
                         var content = new StringContent(selectedTour.Id.ToString("N"), Encoding.UTF8, "application/json");
                         var res = await client.DeleteAsync($"https://localhost:5001/Tour/" + selectedTour.Id.ToString("N"));
 
-                        //res.EnsureSuccessStatusCode();
+                        res.EnsureSuccessStatusCode();
                         if (res.IsSuccessStatusCode)
                         {
-                            // Remove tour
-                            // Tour Deleted
-                            // Event auslösen dass Daten neu lädt aus DB? -> schönste Lösung
                             TourList.Remove(selectedTour);
                         }
                         else

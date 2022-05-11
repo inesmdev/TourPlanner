@@ -34,8 +34,6 @@ namespace TourPlanner.Api.Services.MapQuestService
                 double distance = deserialize.route.distance;
                 tour.Distance = distance;
                 tour.EstimatedTime = time;
-                Console.WriteLine(tour.EstimatedTime);
-                Console.WriteLine(tour.Distance);
             }
             return tour;
         }

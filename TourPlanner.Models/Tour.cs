@@ -22,11 +22,11 @@ namespace TourPlanner.Models
         public string From { get; set; }
         public string To { get; set; }
         //public EnumTransportType TransportType { get; set; }
-        public string Summary { get; private set; }
+        public string Summary { get; set; }
 
         public void GenerateSummary()
         {
-            Summary = $"Tourname: {Name}\nFrom:{From}\nTo:{To}\nDescription: {Description}\nEstimated Time: {EstimatedTime}\nDistance: {Distance}";
+            this.Summary = $"Tourname: {Name}\nFrom:{From}\nTo:{To}\nDescription: {Description}\nEstimated Time: {EstimatedTime}\nDistance: {Distance}";
         }      
     }
 }

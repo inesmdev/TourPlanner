@@ -117,7 +117,7 @@
                         <TextBlock Text="Map Placeholder"/>
                     </TabItem>
                     <TabItem Header="Description">
-                        <TextBlock Text="{Binding SelectedTour.Description}"/>
+                        <TextBlock Text="{Binding SelectedTour.Summary}"/>
                     </TabItem>
                 </TabControl>
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using TourPlanner.Api.Services;
-using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
 
 namespace TourPlanner.Api.Controllers
@@ -12,21 +12,28 @@ namespace TourPlanner.Api.Controllers
     public class TourController : ControllerBase
     {
         private readonly ITourService _tourservice;
+        ILogger _logger;
 
-        public TourController(ITourService tourservice)
+        public TourController(ITourService tourservice, ILogger<TourController> logger)
         {
             _tourservice = tourservice;
+            _logger = logger;
         }
 
 
         // GET all action
         [HttpGet]
-        public ActionResult<List<Tour>> GetAll() =>
-            _tourservice.GetAll();
+        public ActionResult<List<Tour>> GetAll()
+        {
+            var tours = _tourservice.GetAll();
+            _logger.LogInformation($"Tours: {tours[0].Summary}");
+
+            return Ok(tours);
+        }
 
 
-           // GET by Id action
-         [HttpGet("{id}")]
+        // GET by Id action
+        [HttpGet("{id}")]
          public ActionResult<Tour> Get(string id)
          {
             var tour = _tourservice.Get(Guid.Parse(id));
@@ -47,7 +54,7 @@ namespace TourPlanner.Api.Controllers
             if(tour == null)
                 return BadRequest();
             else
-                return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To }, tour);;
+                return CreatedAtAction(nameof(Create), new {Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);;
         }
 
 

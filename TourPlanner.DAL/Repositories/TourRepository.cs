@@ -1,21 +1,25 @@
-﻿using Npgsql;
+﻿using Microsoft.Extensions.Logging;
+using Npgsql;
 using System;
 using System.Collections.Generic;
-using TourPlanner.DAL.Repositories;
+using TourPlanner.Exceptions;
 using TourPlanner.Models;
 
 namespace TourPlanner.DAL.Repositories
 {
-    public class TourRepository : ITourRepository, IDisposable
+    public class TourRepository : ITourRepository
     {      
         private NpgsqlConnection conn;
         private const string TABLE_NAME = "tour";
+        ILogger _logger;
 
-        public TourRepository(PostgresAccess db)
+
+        public TourRepository(PostgresAccess db, ILogger<TourRepository> logger)
         {
             conn = db.GetConnection();
-            conn.MapEnum<EnumTransportType>("transporttype"); //?
+            conn.MapEnum<EnumTransportType>("transporttype"); // Deprecated?
             conn.ReloadTypes();
+            _logger = logger;
         }
 
 
@@ -25,37 +29,35 @@ namespace TourPlanner.DAL.Repositories
             {
                 using (var command = conn.CreateCommand())
                 {
-                    /*string sql = $@"INSERT INTO {TABLE_NAME} 
-                                (tour_id, tour_name, description, creation_date, estimated_time, distance, tour_from, tour_to, transport_type) 
-                                VALUES (@tour_name, @description, @creation_date, @estimated_time, @distance, @tour_from, @tour_to, @transport_type)";*/
                     string sql = $@"INSERT INTO {TABLE_NAME} 
-                                (tour_id, tour_name, description) 
-                                VALUES (@tour_id, @tour_name, @description)";
+                                (tour_id, tour_name, description, estimated_time, distance, tour_from, tour_to) 
+                                VALUES (@tour_id, @tour_name, @description, @estimated_time, @distance, @tour_from, @tour_to);";
 
                     command.CommandText = sql;
                     command.Parameters.AddWithValue("@tour_id", tour.Id.ToString("N"));
                     command.Parameters.AddWithValue("@tour_name", tour.Name);
                     command.Parameters.AddWithValue("@description", tour.Description);
-                    /*command.Parameters.AddWithValue("@creation_date", tour.CreationDate);
                     command.Parameters.AddWithValue("@estimated_time", tour.EstimatedTime);
                     command.Parameters.AddWithValue("@distance", tour.Distance);
                     command.Parameters.AddWithValue("@tour_from", tour.From);
                     command.Parameters.AddWithValue("@tour_to", tour.To);
-                    command.Parameters.AddWithValue("@transport_type", tour.TransportType);*/
+                    //command.Parameters.AddWithValue("@transport_type", tour.TransportType);*/
 
                     int affectedRows = command.ExecuteNonQuery();
                     if (affectedRows <= 0)
                     {
-                        throw new Exception("Tour not created");
+                        throw new CouldNotCreateTourException();
                     }
                     
                 }
             }
             catch(Exception ex)
             {
-                throw ex;
+                _logger.LogError($"Could not create Tour {ex}");
+                throw new CouldNotCreateTourException();
             }
         }
+
 
         public bool Delete(Guid id)
         {
@@ -70,7 +72,8 @@ namespace TourPlanner.DAL.Repositories
             }
         }
    
-        public IEnumerable<Tour> GetAll(/*Tour criteria*/)
+
+        public IEnumerable<Tour> GetAll()
         {
             List<Tour> tours = new();
 
@@ -83,18 +86,22 @@ namespace TourPlanner.DAL.Repositories
 
                 while (reader.Read())
                 {
-                    tours.Add(new Tour {
-                        Id = Guid.Parse(reader.GetString(0)), 
+                    Tour newTour =
+                    new Tour
+                    {
+                        Id = Guid.Parse(reader.GetString(0)),
                         Name = reader.GetString(1),
                         Description = reader.GetString(2),
-                        /*CreationDate = reader.GetDateTime(3),
+                        CreationDate = reader.GetDateTime(3),
                         EstimatedTime = reader.GetInt32(4),
                         Distance = reader.GetDouble(5),
-                        From = new Location { Street = reader.GetString(6)}, // !!
-                        To = new Location { Street = reader.GetString(7)},
-                        TransportType = reader.GetFieldValue<EnumTransportType>(8)*/
-                    }
-                    );
+                        From = reader.GetString(6), // !!
+                        To = reader.GetString(7)
+                        //TransportType = reader.GetFieldValue<EnumTransportType>(8)*/
+                    };
+                    newTour.GenerateSummary();
+                    tours.Add(newTour);
+
                 }
             }
 
@@ -118,18 +125,20 @@ namespace TourPlanner.DAL.Repositories
                     Id = Guid.Parse(reader.GetString(0)),
                     Name = reader.GetString(1),
                     Description = reader.GetString(2),
-                    /*CreationDate = reader.GetDateTime(3),
+                    CreationDate = reader.GetDateTime(3),
                     EstimatedTime = reader.GetInt32(4),
-                    Distance = reader.GetFloat(5),
-                    From = new Location { Street = reader.GetString(6) }, // !!
-                    To = new Location { Street = reader.GetString(7) },
-                    TransportType = (EnumTransportType)reader.GetValue(8)  // !!*/
+                    Distance = reader.GetDouble(5),
+                    From = reader.GetString(6) , // !!
+                    To = reader.GetString(7) 
+                    //TransportType = (EnumTransportType)reader.GetValue(8)  // !!*/
                 };
-
+                tour.GenerateSummary();
                 return tour;
             }
         }
 
+
+        // TODO
         public bool Update(Tour tour)
         {
             using (var command = conn.CreateCommand())
@@ -152,27 +161,6 @@ namespace TourPlanner.DAL.Repositories
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }
         }
-
-        /*
-         *  IDisposeable
-         */
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    conn.Dispose();
-                }
-                this.disposed = true;
-            }
-        }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this); //???
-        }
+ 
     }
 }

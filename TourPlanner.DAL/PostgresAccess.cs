@@ -10,15 +10,12 @@ namespace TourPlanner.DAL
      */
     public sealed class PostgresAccess 
     {
-        //private static readonly Lazy<PostgresAccess> lazy = new Lazy<PostgresAccess>(() => new PostgresAccess());
-        //public static PostgresAccess Instance { get { return lazy.Value; } }
-
         private NpgsqlConnection _connection;
-        ILogger _postgreslogger;
+        ILogger _logger;
 
         public PostgresAccess(ILogger<PostgresAccess> logger)
         {
-            _postgreslogger = logger;
+            _logger = logger;
             
             try
             {
@@ -28,23 +25,16 @@ namespace TourPlanner.DAL
             }
             catch (System.Exception e)
             {
-                //Console.WriteLine($"[{DateTime.UtcNow}]\tError connecting to PostgresDB: {e.Message}");
-                _postgreslogger.LogError("Error connecting to PostgresDB");
+                _logger.LogError("Error connecting to PostgresDB");
                 throw; 
             }
 
-            _postgreslogger.LogInformation("Connection to PostgresDB established.");
-            //Console.WriteLine($"[{DateTime.UtcNow}]\tConnection to PostgresDB established.");
+            _logger.LogInformation("Connection to PostgresDB established.");
         }
 
         public NpgsqlConnection GetConnection()
         {
             return _connection;
         }
-
-        //public void Dispose()
-        //{
-        //    _connection.Close();
-        //}
     }
 }

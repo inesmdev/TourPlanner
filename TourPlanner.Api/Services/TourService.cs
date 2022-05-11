@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
-using Serilog;
 using TourPlanner.Api.Services.MapQuestService;
 using Microsoft.Extensions.Logging;
 
@@ -14,13 +13,17 @@ namespace TourPlanner.Api.Services
         ITourRepository _repository; // _  -> being created externaly
         IMapQuestService _mapQuestService;
         ILogger<TourService> _tourlogger;
-                                     
+        
+        /*
+         * Constructor
+         */
         public TourService(ITourRepository repository, IMapQuestService mapapi, ILogger<TourService> logger)
         {
             _repository = repository;
             _mapQuestService = mapapi;
             _tourlogger = logger;
         }
+
 
         public Tour? Add(TourInput tourinput)
         {
@@ -34,21 +37,20 @@ namespace TourPlanner.Api.Services
             try
             {
                 MapQuestTour res = _mapQuestService.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
-                tour.Description = res.EstimatedTime.ToString();
+                tour.EstimatedTime = res.EstimatedTime;
+                tour.Distance = res.Distance;
             }
             catch
             {
                 return null;
             }
 
-            
-            
-
+           
             try
             {
                 _repository.Create(tour);
                 tour.GenerateSummary();
-                _tourlogger.LogInformation("Test");
+                _tourlogger.LogInformation($"Tour successfully created, {tour.Summary}");
                 return tour;
             }
             catch
@@ -66,7 +68,9 @@ namespace TourPlanner.Api.Services
         {
             try
             {
-                return _repository.GetByID(id);
+                Tour tour = _repository.GetByID(id);
+                tour.GenerateSummary();
+                return tour;
             }
             catch(Exception ex)
             {
@@ -77,10 +81,10 @@ namespace TourPlanner.Api.Services
 
         public bool Delete(Guid id)
         {
-            _tourlogger.LogInformation("Hallo :D");
             return _repository.Delete(id);
         }
 
+        // To Do
         public Tour? Update(Tour tour)
         {
             try
