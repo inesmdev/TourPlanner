@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.UI.ViewModels;
 
-namespace TourPlanner.UI
+namespace TourPlanner.UI.Dialogs.DialogOk
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OkDialog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DialogOkView : UserControl
     {
-        public MainWindow()
+        public DialogOkView()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowVM();
         }
     }
 }
