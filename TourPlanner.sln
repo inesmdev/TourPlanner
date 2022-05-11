@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.UI", "TourPlann
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.Models", "TourPlanner.Models\TourPlanner.Models.csproj", "{4115B6E8-35B3-45DD-813B-2CCB0E0650A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.BL", "TourPlanner.BL\TourPlanner.BL.csproj", "{14AF775E-9BF4-4F66-9B6E-24583FE49454}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.DAL", "TourPlanner.DAL\TourPlanner.DAL.csproj", "{7532C137-337F-4724-BDA1-CFDAB9BA3876}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.Helper", "TourPlanner.Helper\TourPlanner.Helper.csproj", "{1B7EC952-D7A2-49F3-B984-3C35C0914CE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.Test", "TourPlanner.Test\TourPlanner.Test.csproj", "{6B65437E-2149-4702-838F-E60C716E11C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.Test", "TourPlanner.Test\TourPlanner.Test.csproj", "{6B65437E-2149-4702-838F-E60C716E11C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.Api", "TourPlanner.Api\TourPlanner.Api.csproj", "{E53B5F84-287D-4A2E-96CF-C80923B49611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.Exceptions", "TourPlanner.Exceptions\TourPlanner.Exceptions.csproj", "{4B2DA12D-008E-46ED-AB8E-A890AD7DB622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,22 +29,22 @@ Global
 		{4115B6E8-35B3-45DD-813B-2CCB0E0650A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4115B6E8-35B3-45DD-813B-2CCB0E0650A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4115B6E8-35B3-45DD-813B-2CCB0E0650A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14AF775E-9BF4-4F66-9B6E-24583FE49454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14AF775E-9BF4-4F66-9B6E-24583FE49454}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14AF775E-9BF4-4F66-9B6E-24583FE49454}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14AF775E-9BF4-4F66-9B6E-24583FE49454}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7532C137-337F-4724-BDA1-CFDAB9BA3876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7532C137-337F-4724-BDA1-CFDAB9BA3876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7532C137-337F-4724-BDA1-CFDAB9BA3876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7532C137-337F-4724-BDA1-CFDAB9BA3876}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B7EC952-D7A2-49F3-B984-3C35C0914CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B7EC952-D7A2-49F3-B984-3C35C0914CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B7EC952-D7A2-49F3-B984-3C35C0914CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B7EC952-D7A2-49F3-B984-3C35C0914CE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B65437E-2149-4702-838F-E60C716E11C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B65437E-2149-4702-838F-E60C716E11C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B65437E-2149-4702-838F-E60C716E11C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B65437E-2149-4702-838F-E60C716E11C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53B5F84-287D-4A2E-96CF-C80923B49611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53B5F84-287D-4A2E-96CF-C80923B49611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53B5F84-287D-4A2E-96CF-C80923B49611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53B5F84-287D-4A2E-96CF-C80923B49611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2DA12D-008E-46ED-AB8E-A890AD7DB622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2DA12D-008E-46ED-AB8E-A890AD7DB622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2DA12D-008E-46ED-AB8E-A890AD7DB622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2DA12D-008E-46ED-AB8E-A890AD7DB622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

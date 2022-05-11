@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using TourPlanner.BL.TourService;
+using TourPlanner.Api.Services;
 using TourPlanner.Test.Mocks;
 
 namespace TourPlanner.Test
@@ -9,7 +9,6 @@ namespace TourPlanner.Test
         [SetUp]
         public void Setup()
         {
-            ITourService tourService = new TourService(new MockTourRepository());
         }
 
         [Test]

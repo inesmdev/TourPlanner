@@ -1,9 +1,9 @@
 ﻿<Application x:Class="TourPlanner.UI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewModels="clr-namespace:TourPlanner.UI.ViewModels"
              xmlns:dialogYesNo="clr-namespace:TourPlanner.UI.Dialogs.DialogYesNo"   
              xmlns:dialogCreateTour="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTour"
+             xmlns:dialogOk="clr-namespace:TourPlanner.UI.Dialogs.DialogOk"
              Startup="OnStartup"
              >
 
@@ -19,7 +19,11 @@
         <DataTemplate DataType="{x:Type dialogCreateTour:DialogCreateTourViewModel}">
             <dialogCreateTour:DialogCreateTourView></dialogCreateTour:DialogCreateTourView>
         </DataTemplate>
-        
+
+        <DataTemplate DataType="{x:Type dialogOk:DialogOkViewModel}">
+            <dialogOk:DialogOkView></dialogOk:DialogOkView>
+        </DataTemplate>
+
         <!-- Ref to Config Class-->
         <!-- Another Config for TestProject -> Mock DB -->
         
