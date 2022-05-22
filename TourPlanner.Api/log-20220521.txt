@@ -1,0 +1,47 @@
+2022-05-21 22:00:43.766 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:16:33.102 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'TourPlanner.Api.Services.TourLogService.ITourLogService' while attempting to activate 'TourPlanner.Api.Controllers.TourLogController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method3(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-05-21 22:18:23.448 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:20:01.969 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:20:02.253 +02:00 [ERR] Could not create Tourlog (3fa85f64-5717-4562-b3fc-2c963f66afa6).
+2022-05-21 22:20:20.127 +02:00 [ERR] Could not create Tourlog (3fa85f64-5717-4562-b3fc-2c963f66afa6).
+2022-05-21 22:22:07.227 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:23:01.018 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:24:07.530 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:25:44.934 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:26:33.781 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:28:14.064 +02:00 [INF] Tourlog (3fa85f64-5717-4562-b3fc-2c963f66afa6) successfully created.
+2022-05-21 22:28:56.525 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:28:56.738 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-21 22:39:26.639 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:39:26.853 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-21 22:40:04.602 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-21 22:51:28.335 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET TourLog/{id}" for actions - TourPlanner.Api.Controllers.TourLogController.GetAll (TourPlanner.Api),TourPlanner.Api.Controllers.TourLogController.Get (TourPlanner.Api). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-05-21 22:53:55.726 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 22:54:15.279 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-21 22:54:15.353 +02:00 [ERR] Could not update tourlog (3fa85f64-5717-4562-b3fc-2c963f66afa6)
+2022-05-21 23:13:22.487 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 23:19:02.302 +02:00 [INF] Connection to PostgresDB established.
+2022-05-21 23:19:31.566 +02:00 [INF] Connection to PostgresDB established.

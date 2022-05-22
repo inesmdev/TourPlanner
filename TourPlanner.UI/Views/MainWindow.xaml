@@ -13,7 +13,6 @@
     </intr:Interaction.Triggers>
 
     <DockPanel>
-       
         <Menu DockPanel.Dock="Top" Padding="2">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -77,18 +76,6 @@
                     </ToolBar>
                 </ToolBarTray>
 
-                <!--<DataGrid 
-                    Grid.Row="1" 
-                    ItemsSource="{Binding TourList, UpdateSourceTrigger=PropertyChanged}" 
-                    SelectedItem="{Binding SelectedTour, Mode=TwoWay}"
-                    AutoGenerateColumns="False">
-                    
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Tourname" Binding="{Binding Tourname}"/>
-                        <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate}"/>
-                    </DataGrid.Columns>
-                </DataGrid>-->
-
                 <ListView 
                     Grid.Row="1" 
                     ItemsSource="{Binding TourList, UpdateSourceTrigger=PropertyChanged}" 
@@ -109,6 +96,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -123,13 +111,35 @@
 
                 <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch"/>
 
-                <DataGrid Grid.Row="2">
-                    <DataGrid.Columns>
+               <!-- <ToolBarTray Grid.Row="2">
+                    <ToolBar ToolBarTray.IsLocked="True">
+                        <Button 
+                            Content="New Tourlog" 
+                            Margin="5 0 5 0" 
+                            Command="{Binding AddTourLogCommand}"  
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        <Button 
+                            Content="Delete Tourlog" 
+                            Margin="5 0 5 0"
+                            Command="{Binding DeleteTourLogCommand}"  
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            />
+                        <Button 
+                            Content="Edit Tourlog" 
+                            Margin="5 0 5 0"
+                            Command="{Binding EditTourLogCommand}"  
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            />
+                    </ToolBar>
+                </ToolBarTray>-->
+
+                <DataGrid Grid.Row="3" Name="dataGrid1" ItemsSource="{Binding TourLogList}">
+                    <!--<DataGrid.Columns>
                         <DataGridTextColumn Header="Date"/>
                         <DataGridTextColumn Header="Duration"/>
                         <DataGridTextColumn Header="Distance"/>
                         <DataGridTextColumn Header="Other"/>
-                    </DataGrid.Columns>
+                    </DataGrid.Columns>-->
                 </DataGrid>
             </Grid>
         </Grid>

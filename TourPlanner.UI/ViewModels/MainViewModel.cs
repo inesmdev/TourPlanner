@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Models;
+using TourPlanner.UI.Models;
 
 namespace TourPlanner.UI.ViewModels
 {
@@ -15,6 +16,9 @@ namespace TourPlanner.UI.ViewModels
     public class MainViewModel : BaseVM
     {
         public ObservableCollection<Tour> TourList { get; private set; }
+        public ObservableCollection<TourUI> TourList_ { get; private set; }
+
+        //public ObservableCollection<TourLog> TourLogList { get; private set; }
 
         private RelayCommand addTourCommand;
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour);
@@ -27,6 +31,60 @@ namespace TourPlanner.UI.ViewModels
 
         private RelayCommand generatePdfReportCommand;
         public ICommand GeneratePdfReportCommand => generatePdfReportCommand ??= new RelayCommand(GeneratePdfReport);
+
+        private RelayCommand windowLoadedCommand;
+        public ICommand WindowLoadedCommand => windowLoadedCommand ??= new RelayCommand(WindowLoaded);
+
+        /*
+         *  Selected Tour
+         */
+        private Tour selectedTour;
+        public Tour SelectedTour
+        {
+            get
+            {
+                return selectedTour;
+            }
+            set
+            {
+                if (selectedTour != value)
+                {
+                    selectedTour = value;
+                    RaisePropertyChangedEvent("SelectedTour");
+                }
+            }
+        }
+
+
+        /*
+         *  TourLogs
+         */
+        private RelayCommand addTourLogCommand;
+        public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(AddTourLog);
+
+        private RelayCommand editTourLogCommand;
+        public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(EditTourLog);
+
+        private RelayCommand deleteTourLogCommand;
+        public ICommand DeleteTourLogCommand => deleteTourLogCommand ??= new RelayCommand(DeleteTourLog);
+
+
+        private void AddTourLog(object obj)
+        {
+
+            throw new System.NotImplementedException();
+        }
+
+        private void DeleteTourLog(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void EditTourLog(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
 
         private async void GeneratePdfReport(object parameter)
         {
@@ -46,7 +104,7 @@ namespace TourPlanner.UI.ViewModels
                         //var httpcontent = await res.Content.ReadAsStringAsync(); //??
                         Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
                         _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
-  
+
                     }
                     else
                     {
@@ -57,8 +115,7 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-        private RelayCommand windowLoadedCommand;
-        public ICommand WindowLoadedCommand => windowLoadedCommand ??= new RelayCommand(WindowLoaded);
+
 
         /*
          *  Constructor
@@ -66,25 +123,7 @@ namespace TourPlanner.UI.ViewModels
         public MainViewModel()
         {
             TourList = new ObservableCollection<Tour>();
-        }
-
-
-        // Selected Tour
-        private Tour selectedTour;
-        public Tour SelectedTour
-        {
-            get
-            {
-                return selectedTour;
-            }
-            set
-            {
-                if (selectedTour != value)
-                {
-                    selectedTour = value;
-                    RaisePropertyChangedEvent("SelectedTour");
-                }
-            }
+            //TourLogList = new ObservableCollection<TourLog>();
         }
 
 
@@ -109,7 +148,6 @@ namespace TourPlanner.UI.ViewModels
                     {
                         //var httpcontent = await res.Content.ReadAsStringAsync(); //??
                         var httpcontent = await res.Content.ReadAsStringAsync(); //??
-
 
                         // String -> Tour
                         Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
@@ -240,5 +278,13 @@ namespace TourPlanner.UI.ViewModels
                 }
             }
         }
+
+
+        
+        // Load tourLogs on Proeprty changed
+
+        
+
     }
 }
+

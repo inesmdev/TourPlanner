@@ -13,6 +13,11 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
         public string Description { get; set; }
         public string From { get; set; }
         public string To { get; set; }
+        //public EnumTransportType TransportType { get; set; }
+
+
+      
+
 
         private ICommand yesCommand = null;
         public ICommand YesCommand

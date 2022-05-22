@@ -15,7 +15,7 @@
         <DataTemplate DataType="{x:Type dialogYesNo:DialogYesNoViewModel}">
             <dialogYesNo:DialogYesNoView></dialogYesNo:DialogYesNoView>
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type dialogCreateTour:DialogCreateTourViewModel}">
             <dialogCreateTour:DialogCreateTourView></dialogCreateTour:DialogCreateTourView>
         </DataTemplate>
@@ -24,9 +24,8 @@
             <dialogOk:DialogOkView></dialogOk:DialogOkView>
         </DataTemplate>
 
-        <!-- Ref to Config Class-->
-        <!-- Another Config for TestProject -> Mock DB -->
+     
+       
         
-        <!-- Define some Styles van be referenced-->
     </Application.Resources>
 </Application>

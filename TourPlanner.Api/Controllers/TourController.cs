@@ -26,7 +26,6 @@ namespace TourPlanner.Api.Controllers
         public ActionResult<List<Tour>> GetAll()
         {
             var tours = _tourservice.GetAll();
-            _logger.LogInformation($"Tours: {tours[0].Summary}");
 
             return Ok(tours);
         }
@@ -70,6 +69,7 @@ namespace TourPlanner.Api.Controllers
             var existingTour = _tourservice.Get(idParsed);
             if (existingTour is null)
                 return NotFound();
+
 
             Tour tourdb = _tourservice.Update(tour);
 

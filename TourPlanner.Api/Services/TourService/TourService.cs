@@ -10,9 +10,9 @@ namespace TourPlanner.Api.Services
 {
     public class TourService : ITourService
     {
-        ITourRepository _repository; // _  -> being created externaly
+        ITourRepository _repository; 
         IMapQuestService _mapQuestService;
-        ILogger<TourService> _tourlogger;
+        ILogger<TourService> _logger;
         
         /*
          * Constructor
@@ -21,49 +21,57 @@ namespace TourPlanner.Api.Services
         {
             _repository = repository;
             _mapQuestService = mapapi;
-            _tourlogger = logger;
+            _logger = logger;
         }
 
 
-        public Tour? Add(TourInput tourinput)
+        /*
+         *  Create new tour
+         */
+        public Tour Add(TourInput tourinput)
         {
-            Tour tour = new Tour();
-            tour.Id = Guid.NewGuid();
-            tour.Name = tourinput.Name;
-            tour.Description = tourinput.Description;
-            tour.From = tourinput.From;
-            tour.To = tourinput.To;
+            Tour tour = new Tour()
+            {
+                Id = Guid.NewGuid(),
+                Name = tourinput.Name,
+                Description = tourinput.Description,
+                From = tourinput.From,
+                To = tourinput.To,
+                TransportType = tourinput.TransportType
+            };
 
+            
+            // Call the MapQuest Api to get the missing information about the tour
             try
             {
                 MapQuestTour res = _mapQuestService.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
                 tour.EstimatedTime = res.EstimatedTime;
                 tour.Distance = res.Distance;
-            }
-            catch
-            {
-                return null;
-            }
 
-           
-            try
-            {
                 _repository.Create(tour);
                 tour.GenerateSummary();
-                _tourlogger.LogInformation($"Tour successfully created, {tour.Summary}");
+                _logger.LogInformation($"Tour successfully created, {tour.Summary}");
                 return tour;
             }
-            catch
+            catch(Exception ex)
             {
+                _logger.LogError($"{ex}");
                 return null;
             }
         }
 
 
+        /*
+         *  Get all tours
+         */
         public List<Tour> GetAll() =>
             _repository.GetAll().ToList();
 
 
+    
+        /*
+         *  Get a tour by Id
+         */
         public Tour Get(Guid id)
         {
             try
@@ -74,25 +82,28 @@ namespace TourPlanner.Api.Services
             }
             catch(Exception ex)
             {
+                _logger.LogError($"{ex}");
                 return null;
             }
         }
 
 
+        /*
+         * Delete tour by id
+         */
         public bool Delete(Guid id)
         {
             return _repository.Delete(id);
         }
 
-        // To Do
-        public Tour? Update(Tour tour)
+        
+        /*
+         *  Edit tour
+         */
+        public Tour Update(Tour tour)
         {
             try
             {
-
-                //? Call Api? 
-                // Edit Tour what can be change?
-
                 _repository.Update(tour);
                 return tour;
             }
@@ -100,8 +111,6 @@ namespace TourPlanner.Api.Services
             {
                 return null;
             }
-
-
         }
     }
 }

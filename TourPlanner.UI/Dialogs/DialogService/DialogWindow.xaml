@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="DialogWindow" Height="600" Width="600"
         WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight">
-    
+        SizeToContent="WidthAndHeight"
+        >
+
     <ContentPresenter x:Name="ContentPresenter" Content="{Binding}"></ContentPresenter>
 </Window>

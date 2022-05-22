@@ -1,0 +1,3 @@
+2022-05-22 10:57:15.997 +02:00 [INF] Connection to PostgresDB established.
+2022-05-22 11:09:15.610 +02:00 [INF] Connection to PostgresDB established.
+2022-05-22 12:38:15.221 +02:00 [INF] Connection to PostgresDB established.

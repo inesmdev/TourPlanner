@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TourPlanner.Models
+﻿namespace TourPlanner.Models
 {
     public class TourInput
     {
@@ -12,6 +6,16 @@ namespace TourPlanner.Models
         public string Description { get; set; }
         public string From { get; set; }
         public string To { get; set; }
-        //public EnumTransportType TransportType { get; set; }
+        public EnumTransportType TransportType { get; set; }
+
+
+        // Validate TourInput ->  Call Helper Function
+
+        public bool Validate()
+        {
+
+
+            return true;
+        }
     }
 }
