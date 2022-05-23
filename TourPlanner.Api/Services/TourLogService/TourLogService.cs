@@ -23,12 +23,23 @@ namespace TourPlanner.Api.Services.TourLogService
         }
 
 
-        public TourLog Add(TourLog tourlog)
+        public TourLog Add(TourLogUserInput tourlogInput)
         {
+            TourLog tourlog = new TourLog()
+            {
+                Id = Guid.NewGuid(),
+                TourId = tourlogInput.TourId,
+                DateTime = tourlogInput.DateTime,
+                TourRating = tourlogInput.TourRating,
+                TourDifficulty = tourlogInput.TourDifficulty,
+                TotalTime = tourlogInput.TotalTime,
+                Comment = tourlogInput.Comment
+            };
+
             try
             {
                 _repository.Create(tourlog);
-                _logger.LogInformation($"Tourlog ({tourlog.Id}) successfully created.");
+                _logger.LogInformation($"Tourlog successfully created.");
                 return tourlog;
             }
             catch
@@ -63,6 +74,7 @@ namespace TourPlanner.Api.Services.TourLogService
         public List<TourLog> GetAll() {
             return _repository.GetAll().ToList();
         }
+
 
         public List<TourLog> GetAll(Guid tourid)
         {

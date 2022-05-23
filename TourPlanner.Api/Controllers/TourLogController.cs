@@ -45,14 +45,22 @@ namespace TourPlanner.Api.Controllers
                
 
         [HttpPost]
-        public IActionResult Create(TourLog tourlog)
+        public IActionResult Create(TourLogUserInput tourlogInput)
         {
-            TourLog tourlogdb = _tourlogservice.Add(tourlog);
+            TourLog tourlog = _tourlogservice.Add(tourlogInput);
 
-            if (tourlogdb == null)
+            if (tourlog == null)
                 return BadRequest();
+
             else
-                return CreatedAtAction(nameof(Create), new { Id = tourlog.Id }, tourlog); ;
+                return CreatedAtAction(nameof(Create), new {
+                    Id = tourlog.Id,
+                    TourId = tourlog.TourId,
+                    TourRating = tourlog.TourRating,
+                    TourDifficulty = tourlog.TourDifficulty,
+                    TotalTime = tourlog.TotalTime,
+                    Comment = tourlog.Comment
+                }, tourlog);
         }
         
 

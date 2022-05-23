@@ -12,6 +12,8 @@
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
 
+
+
     <DockPanel>
         <Menu DockPanel.Dock="Top" Padding="2">
             <Menu.ItemsPanel>
@@ -83,7 +85,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding TourData.Name}"></TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>
@@ -105,20 +107,20 @@
                         <TextBlock Text="Map Placeholder"/>
                     </TabItem>
                     <TabItem Header="Description">
-                        <TextBlock Text="{Binding SelectedTour.Summary}"/>
+                        <TextBlock Text="{Binding SelectedTour.TourData.Summary}"/>
                     </TabItem>
                 </TabControl>
 
                 <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch"/>
 
-               <!-- <ToolBarTray Grid.Row="2">
+               <ToolBarTray Grid.Row="2">
                     <ToolBar ToolBarTray.IsLocked="True">
                         <Button 
                             Content="New Tourlog" 
                             Margin="5 0 5 0" 
                             Command="{Binding AddTourLogCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
-                        <Button 
+                       <!-- <Button 
                             Content="Delete Tourlog" 
                             Margin="5 0 5 0"
                             Command="{Binding DeleteTourLogCommand}"  
@@ -129,16 +131,29 @@
                             Margin="5 0 5 0"
                             Command="{Binding EditTourLogCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                            />
+                            />-->
                     </ToolBar>
-                </ToolBarTray>-->
+                </ToolBarTray>
 
-                <DataGrid Grid.Row="3" Name="dataGrid1" ItemsSource="{Binding TourLogList}">
-                    <!--<DataGrid.Columns>
-                        <DataGridTextColumn Header="Date"/>
-                        <DataGridTextColumn Header="Duration"/>
-                        <DataGridTextColumn Header="Distance"/>
-                        <DataGridTextColumn Header="Other"/>
+                <DataGrid Grid.Row="3" 
+                          Name="DataGrid_Tourlogs" 
+                          ItemsSource="{Binding SelectedTour.Tourlogs, UpdateSourceTrigger=LostFocus}" 
+                          AlternatingRowBackground = "LightBlue"
+                          AlternationCount = "2"
+                          AutoGenerateColumns="True"
+                          IsReadOnly="True"
+                      
+                          >
+                   <!-- <DataGrid.Columns>-->
+                       <!-- <DataGridTextColumn Header="TourId" Binding="{Binding TourId}"/>
+
+                        <DataGridTextColumn Header="Date" Binding="{Binding DateTime}"/>
+                        <DataGridTextColumn Header="Duration" Binding="{Binding TotalTime }"/>
+                        <DataGridComboBoxColumn Header="Rating" ItemsSource="{Binding Source={StaticResource EnumTourDifficulty}}"/>
+                        <DataGridComboBoxColumn Header="Difficulty"/>
+                        <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"/>
+
+
                     </DataGrid.Columns>-->
                 </DataGrid>
             </Grid>

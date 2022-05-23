@@ -1,10 +1,11 @@
-﻿using TourPlanner.Models;
+﻿using System.Collections.ObjectModel;
+using TourPlanner.Models;
 
 namespace TourPlanner.UI.Models
 {
     public class TourUI
     {
-        Tour tour { get; set; }
-        TourLog tourlog { get; set; }
+        public Tour TourData { get; set; }
+        public ObservableCollection<TourLog> Tourlogs { get; set; }
     }
 }

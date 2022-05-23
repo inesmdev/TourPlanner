@@ -12,7 +12,7 @@ namespace TourPlanner.Api.Services.TourLogService
 
         TourLog Get(Guid id);
 
-        TourLog Add(TourLog tourlog);
+        TourLog Add(TourLogUserInput tourlogInput);
 
         public TourLog Update(TourLog tour);
 

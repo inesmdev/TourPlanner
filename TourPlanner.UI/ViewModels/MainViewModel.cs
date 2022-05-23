@@ -15,10 +15,7 @@ namespace TourPlanner.UI.ViewModels
      */
     public class MainViewModel : BaseVM
     {
-        public ObservableCollection<Tour> TourList { get; private set; }
-        public ObservableCollection<TourUI> TourList_ { get; private set; }
-
-        //public ObservableCollection<TourLog> TourLogList { get; private set; }
+        public ObservableCollection<TourUI> TourList { get; private set; }
 
         private RelayCommand addTourCommand;
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour);
@@ -35,11 +32,14 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand windowLoadedCommand;
         public ICommand WindowLoadedCommand => windowLoadedCommand ??= new RelayCommand(WindowLoaded);
 
+        private RelayCommand addTourLogCommand;
+        public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(AddTourLog);
+
         /*
          *  Selected Tour
          */
-        private Tour selectedTour;
-        public Tour SelectedTour
+        private TourUI selectedTour;
+        public TourUI SelectedTour
         {
             get
             {
@@ -55,37 +55,19 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
+        
+        /*
+         *  Constructor
+         */
+        public MainViewModel()
+        {
+            TourList = new ObservableCollection<TourUI>();
+        }
+
 
         /*
-         *  TourLogs
+         *  Generate Pdf Report
          */
-        private RelayCommand addTourLogCommand;
-        public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(AddTourLog);
-
-        private RelayCommand editTourLogCommand;
-        public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(EditTourLog);
-
-        private RelayCommand deleteTourLogCommand;
-        public ICommand DeleteTourLogCommand => deleteTourLogCommand ??= new RelayCommand(DeleteTourLog);
-
-
-        private void AddTourLog(object obj)
-        {
-
-            throw new System.NotImplementedException();
-        }
-
-        private void DeleteTourLog(object obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void EditTourLog(object obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
         private async void GeneratePdfReport(object parameter)
         {
             if (selectedTour != null)
@@ -104,7 +86,6 @@ namespace TourPlanner.UI.ViewModels
                         //var httpcontent = await res.Content.ReadAsStringAsync(); //??
                         Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
                         _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
-
                     }
                     else
                     {
@@ -113,17 +94,6 @@ namespace TourPlanner.UI.ViewModels
                     }
                 }
             }
-        }
-
-
-
-        /*
-         *  Constructor
-         */
-        public MainViewModel()
-        {
-            TourList = new ObservableCollection<Tour>();
-            //TourLogList = new ObservableCollection<TourLog>();
         }
 
 
@@ -155,7 +125,11 @@ namespace TourPlanner.UI.ViewModels
                         // Show Tour
                         if (tour != null)
                         {
-                            TourList.Add(tour);
+                            TourList.Add(new TourUI()
+                            {
+                                TourData = tour,
+                                Tourlogs = new ObservableCollection<TourLog>() // no tour logs at start
+                            });
                         }
                         else
                         {
@@ -175,13 +149,15 @@ namespace TourPlanner.UI.ViewModels
 
 
         /*
-         *  Delete Tour
+         *  Delete Tour -> Delete Tour and Tourlogs per Tour
          */
         private async void DeleteTour(object parameter)
         {
             if (selectedTour != null)
             {
-                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel($"Are your sure you want to delete Tour  \"{selectedTour.Name}\", {selectedTour.Description}? Deleted Tours cannot be recovered!"); // Add Tour Details
+                // (1. Delete Tourlogs)
+
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogYesNo.DialogYesNoViewModel($"Are your sure you want to delete Tour  \"{selectedTour.TourData.Name}\", {selectedTour.TourData.Description}? Deleted Tours cannot be recovered!"); // Add Tour Details
                 Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
 
                 if (result == Dialogs.DialogService.DialogResult.Yes)
@@ -189,8 +165,8 @@ namespace TourPlanner.UI.ViewModels
                     // Send Htttp POST Request to /Tour
                     using (HttpClient client = new HttpClient())
                     {
-                        var content = new StringContent(selectedTour.Id.ToString("N"), Encoding.UTF8, "application/json");
-                        var res = await client.DeleteAsync($"https://localhost:5001/Tour/" + selectedTour.Id.ToString("N"));
+                        var content = new StringContent(selectedTour.TourData.Id.ToString("N"), Encoding.UTF8, "application/json");
+                        var res = await client.DeleteAsync($"https://localhost:5001/Tour/" + selectedTour.TourData.Id.ToString("N"));
 
                         res.EnsureSuccessStatusCode();
                         if (res.IsSuccessStatusCode)
@@ -204,6 +180,10 @@ namespace TourPlanner.UI.ViewModels
                         }
                     }
                 }
+
+                // 2. Delete Tour
+
+
             }
         }
 
@@ -215,7 +195,7 @@ namespace TourPlanner.UI.ViewModels
         {
             if (selectedTour != null)
             {
-                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Edit Tour", selectedTour); // Add Tour Details
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Edit Tour", selectedTour.TourData); // Add Tour Details
                 Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
 
                 // If user clickt on "Create Tour"
@@ -225,7 +205,7 @@ namespace TourPlanner.UI.ViewModels
                     using (HttpClient client = new HttpClient())
                     {
                         var content = new StringContent(data, Encoding.UTF8, "application/json");
-                        var res = await client.PutAsync("https://localhost:5001/Tour/" + selectedTour.Id.ToString("N"), content);
+                        var res = await client.PutAsync("https://localhost:5001/Tour/" + selectedTour.TourData.Id.ToString("N"), content);
 
                         if (res.IsSuccessStatusCode)
                         {
@@ -235,7 +215,7 @@ namespace TourPlanner.UI.ViewModels
                             Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
 
                             var index = TourList.IndexOf(selectedTour);
-                            TourList[index] = tour;
+                            TourList[index].TourData = tour;
                         }
                         else
                         {
@@ -255,6 +235,7 @@ namespace TourPlanner.UI.ViewModels
         {
             using (HttpClient client = new HttpClient())
             {
+                // Get all Tours
                 var res = await client.GetAsync("https://localhost:5001/Tour");
 
                 res.EnsureSuccessStatusCode();
@@ -266,25 +247,98 @@ namespace TourPlanner.UI.ViewModels
                     // String -> List<Tour>
                     List<Tour> tours = JsonConvert.DeserializeObject<List<Tour>>(content);
 
-
                     foreach (Tour tour in tours)
                     {
-                        TourList.Add(tour);
+                        TourUI tourui = new TourUI();
+                        tourui.TourData = tour;
+
+                        // Get Tourlog per Tour
+                        var tourlogRes = await client.GetAsync("https://localhost:5001/TourLog/all/" + tour.Id.ToString("N"));
+                        
+                        if (tourlogRes.IsSuccessStatusCode)
+                        {
+                            var tourlogContent = await tourlogRes.Content.ReadAsStringAsync();
+                            List<TourLog> tourlogs = JsonConvert.DeserializeObject<List<TourLog>>(tourlogContent);
+                            tourui.Tourlogs = new ObservableCollection<TourLog>(tourlogs);
+                        }
+                        else
+                        {
+                            // empty list -> no logs
+                            tourui.Tourlogs = new ObservableCollection<TourLog>();
+                        }
+
+                        TourList.Add(tourui);
                     }
                 }
                 else
                 {
                     // Alert Error
+
                 }
             }
         }
 
 
-        
-        // Load tourLogs on Proeprty changed
+        /*
+         *  Create new TourLog
+         */
+        private async void AddTourLog(object parameter)
+        {
+            if(selectedTour != null)
+            {
+               TourLog tourlog;
 
-        
+                // Pop up Window
+               Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTourLog.DialogCreateTourLogViewModel("Create new Tourlog");
+               Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
 
+                // If user clickt on "Create Tour"
+               if (result == Dialogs.DialogService.DialogResult.Yes)
+               {
+                    // Send Htttp POST Request to /Tour
+                    using (HttpClient client = new HttpClient())
+                    {
+                        // Deserialze data
+                        TourLogUserInput dataJson = JsonConvert.DeserializeObject<TourLogUserInput>(data);
+                        // Serialize data
+                        dataJson.TourId = selectedTour.TourData.Id;
+                        
+                        string dataJson2 = JsonConvert.SerializeObject(dataJson);
+
+
+                        var content = new StringContent(dataJson2, Encoding.UTF8, "application/json");
+                        var res = await client.PostAsync("https://localhost:5001/TourLog", content);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            //var httpcontent = await res.Content.ReadAsStringAsync(); //??
+                            var httpcontent = await res.Content.ReadAsStringAsync(); //??
+
+                            // String -> Tour
+                            tourlog = JsonConvert.DeserializeObject<TourLog>(httpcontent);
+
+                            // Show Tour
+                            if (tourlog != null)
+                            {
+                                // add tourlog
+                                // selected tour
+                                var index = TourList.IndexOf(selectedTour);
+                                TourList[index].Tourlogs.Add(tourlog);
+                            }
+                            else
+                            {
+                                Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tourlog");
+                                _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                            }
+                        }
+                        else
+                        {
+                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tourlog");
+                            _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                        }
+                    }
+               }
+            }
+        }
     }
 }
-

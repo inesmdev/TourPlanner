@@ -5,6 +5,6 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         >
-
+    
     <ContentPresenter x:Name="ContentPresenter" Content="{Binding}"></ContentPresenter>
 </Window>

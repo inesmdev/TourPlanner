@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dialogYesNo="clr-namespace:TourPlanner.UI.Dialogs.DialogYesNo"   
              xmlns:dialogCreateTour="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTour"
-             xmlns:dialogOk="clr-namespace:TourPlanner.UI.Dialogs.DialogOk"
+             xmlns:dialogOk="clr-namespace:TourPlanner.UI.Dialogs.DialogOk" 
+             xmlns:dialogCreateTourLog="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTourLog"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:enm="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
+
              Startup="OnStartup"
              >
 
@@ -24,8 +28,27 @@
             <dialogOk:DialogOkView></dialogOk:DialogOkView>
         </DataTemplate>
 
-     
-       
-        
+        <DataTemplate DataType="{x:Type dialogCreateTourLog:DialogCreateTourLogViewModel}">
+            <dialogCreateTourLog:DialogCreateTourLogView></dialogCreateTourLog:DialogCreateTourLogView>
+        </DataTemplate>
+
+        <!-- Enum -->
+        <ObjectDataProvider x:Key='EnumTourRating' ObjectType='{x:Type System:Enum}' MethodName='GetValues'>
+            <ObjectDataProvider.MethodParameters>
+                <x:TypeExtension TypeName='enm:EnumTourRating'></x:TypeExtension>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key='EnumTourDifficulty' ObjectType='{x:Type System:Enum}' MethodName='GetValues'>
+            <ObjectDataProvider.MethodParameters>
+                <x:TypeExtension TypeName='enm:EnumTourDifficulty'></x:TypeExtension>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key='EnumTransportType' ObjectType='{x:Type System:Enum}' MethodName='GetValues'>
+            <ObjectDataProvider.MethodParameters>
+                <x:TypeExtension TypeName='enm:EnumTransportType'></x:TypeExtension>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Application.Resources>
 </Application>

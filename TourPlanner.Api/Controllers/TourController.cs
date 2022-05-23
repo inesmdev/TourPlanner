@@ -53,7 +53,7 @@ namespace TourPlanner.Api.Controllers
             if(tour == null)
                 return BadRequest();
             else
-                return CreatedAtAction(nameof(Create), new {Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);;
+                return CreatedAtAction(nameof(Create), new {Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);
         }
 
 
