@@ -35,3 +35,7 @@ Distance: 260,2985
 2022-05-23 17:13:27.266 +02:00 [INF] Connection to PostgresDB established.
 2022-05-23 17:14:48.105 +02:00 [INF] Tourlog successfully created.
 2022-05-23 17:14:54.247 +02:00 [INF] Tourlog successfully created.
+2022-05-23 17:41:17.506 +02:00 [INF] Connection to PostgresDB established.
+2022-05-23 17:41:33.720 +02:00 [INF] Tourlog successfully created.
+2022-05-23 17:42:04.830 +02:00 [INF] Connection to PostgresDB established.
+2022-05-23 17:42:25.899 +02:00 [INF] Tourlog successfully created.

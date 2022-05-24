@@ -35,6 +35,12 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand addTourLogCommand;
         public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(AddTourLog);
 
+        private RelayCommand deleteTourLogCommand;
+        public ICommand DeleteTourLogCommand => deleteTourLogCommand ??= new RelayCommand(DeleteTourLog);
+
+        private RelayCommand editTourLogCommand;
+        public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(EditTourLog);
+
         /*
          *  Selected Tour
          */
@@ -55,7 +61,29 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-        
+
+        /*
+         *  Selected TourLog
+         */
+        private TourLog selectedTourLog;
+        public TourLog SelectedTourLog
+        {
+            get
+            {
+                return selectedTourLog;
+            }
+            set
+            {
+                if (selectedTourLog != value)
+                {
+                    selectedTourLog = value;
+                    RaisePropertyChangedEvent("SelectedTourLog");
+                }
+            }
+        }
+
+
+
         /*
          *  Constructor
          */
@@ -249,12 +277,16 @@ namespace TourPlanner.UI.ViewModels
 
                     foreach (Tour tour in tours)
                     {
-                        TourUI tourui = new TourUI();
-                        tourui.TourData = tour;
-
-                        // Get Tourlog per Tour
-                        var tourlogRes = await client.GetAsync("https://localhost:5001/TourLog/all/" + tour.Id.ToString("N"));
+                        TourUI tourui = new TourUI()
+                        {
+                            TourData = tour
+                        };
                         
+
+                        // Fetch tourlogs for each tour
+                        var tourlogRes = await client.GetAsync("https://localhost:5001/all/" + tour.Id.ToString("N"));
+                        
+
                         if (tourlogRes.IsSuccessStatusCode)
                         {
                             var tourlogContent = await tourlogRes.Content.ReadAsStringAsync();
@@ -273,6 +305,7 @@ namespace TourPlanner.UI.ViewModels
                 else
                 {
                     // Alert Error
+
 
                 }
             }
@@ -340,5 +373,43 @@ namespace TourPlanner.UI.ViewModels
                }
             }
         }
+
+
+        private async void DeleteTourLog(object parameter)
+        {
+            if (selectedTourLog != null)
+            {
+                // Send Htttp POST Request to /Tour
+                using (HttpClient client = new HttpClient())
+                {
+                    var res = await client.DeleteAsync("https://localhost:5001/TourLog/" + selectedTourLog.Id.ToString("N"));
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        var index = TourList.IndexOf(selectedTour);
+                        TourList[index].Tourlogs.Remove(selectedTourLog);
+
+                    }
+                    else
+                    {
+                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create TourLog");
+                        _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                    }
+                }
+            }
+
+        }
+
+        private  void EditTourLog(object parameter)
+        {
+            if(selectedTourLog != null)
+            {
+
+
+
+
+            }
+        }
+
     }
 }

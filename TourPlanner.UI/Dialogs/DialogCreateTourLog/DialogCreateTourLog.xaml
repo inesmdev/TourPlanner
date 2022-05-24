@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTourLog"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-
-
         
     <DockPanel HorizontalAlignment="Stretch">
         
@@ -17,7 +14,7 @@
 
             <!-- Input TourName -->
             <Label Margin="20 10 20 0" >Date:</Label>
-            <TextBox Margin="20 0 20 5" FontSize="14" Text="{Binding DateTime}"></TextBox>
+            <DatePicker Margin="20 0 20 5" FontSize="14" Text="{Binding DateTime}"></DatePicker>
 
             <!-- Input Description -->
             <Label Margin="20 10 20 0">TourDiffictulty:</Label>

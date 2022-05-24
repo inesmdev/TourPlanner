@@ -120,7 +120,7 @@
                             Margin="5 0 5 0" 
                             Command="{Binding AddTourLogCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
-                       <!-- <Button 
+                       <Button 
                             Content="Delete Tourlog" 
                             Margin="5 0 5 0"
                             Command="{Binding DeleteTourLogCommand}"  
@@ -131,7 +131,7 @@
                             Margin="5 0 5 0"
                             Command="{Binding EditTourLogCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                            />-->
+                            />
                     </ToolBar>
                 </ToolBarTray>
 
@@ -142,9 +142,9 @@
                           AlternationCount = "2"
                           AutoGenerateColumns="True"
                           IsReadOnly="True"
-                      
+                          SelectedItem="{Binding SelectedTourLog}"
                           >
-                   <!-- <DataGrid.Columns>-->
+                       <!-- <DataGrid.Columns>-->
                        <!-- <DataGridTextColumn Header="TourId" Binding="{Binding TourId}"/>
 
                         <DataGridTextColumn Header="Date" Binding="{Binding DateTime}"/>
