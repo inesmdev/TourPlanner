@@ -189,9 +189,10 @@ namespace TourPlanner.DAL.Repositories
                 command.CommandText = sql;
                 command.Parameters.AddWithValue("@date_time", tourlog.DateTime);
                 command.Parameters.AddWithValue("@rating", tourlog.TourRating);
+                command.Parameters.AddWithValue("@difficulty", tourlog.TourDifficulty);
                 command.Parameters.AddWithValue("@total_time", tourlog.TotalTime);
                 command.Parameters.AddWithValue("@comment", tourlog.Comment);
-                command.Parameters.AddWithValue("tour_log_id", tourlog.Id.ToString("N"));
+                command.Parameters.AddWithValue("@tour_log_id", tourlog.Id.ToString("N"));
 
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }

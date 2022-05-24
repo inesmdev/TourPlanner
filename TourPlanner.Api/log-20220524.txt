@@ -15,3 +15,49 @@
 2022-05-24 18:11:37.122 +02:00 [INF] Connection to PostgresDB established.
 2022-05-24 18:11:42.115 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-05-24 18:11:42.158 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:20:24.421 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:20:24.919 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:20:24.971 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:21:43.820 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:21:44.372 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:21:44.422 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:21:57.370 +02:00 [INF] Tourlog successfully created.
+2022-05-24 18:25:24.196 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:25:24.780 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:25:24.842 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:27:18.826 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:27:19.407 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:27:19.449 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:31:57.427 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:31:58.094 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:31:58.151 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:38:19.219 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:38:19.920 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:38:19.972 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:39:03.461 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:39:06.118 +02:00 [ERR] Could not update tourlog (f6443e33-9893-40a5-a738-c4bb5c23c642)
+2022-05-24 18:39:56.327 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:41:01.951 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:41:02.737 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:41:02.794 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:41:44.864 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:41:45.532 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:41:45.604 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:41:57.389 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:41:57.482 +02:00 [ERR] Could not update tourlog (f6443e33-9893-40a5-a738-c4bb5c23c642)
+2022-05-24 18:49:45.379 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:49:46.039 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:49:46.123 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:50:00.537 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:50:00.614 +02:00 [ERR] Could not update tourlog (02d767f1-0954-4371-9ff7-081869d6db7c)
+2022-05-24 18:51:42.312 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;

@@ -241,6 +241,7 @@ namespace TourPlanner.UI.ViewModels
                             var httpcontent = res.Content.ReadAsStringAsync().Result;
 
                             Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
+                            // Id = null?
 
                             var index = TourList.IndexOf(selectedTour);
                             TourList[index].TourData = tour;
@@ -400,14 +401,41 @@ namespace TourPlanner.UI.ViewModels
 
         }
 
-        private  void EditTourLog(object parameter)
+        private async void EditTourLog(object parameter)
         {
             if(selectedTourLog != null)
             {
+                // Pop Up Window
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTourLog.DialogCreateTourLogViewModel("Edit TourLog", selectedTourLog); 
+                Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
 
 
+                // Send Htttp POST Request to /Tour
+                using (HttpClient client = new HttpClient())
+                {
+                    // Tourid, Tourdata
+                    var content = new StringContent(data, Encoding.UTF8, "application/json");
+                    var res = await client.PutAsync("https://localhost:5001/TourLog/" + selectedTourLog.Id.ToString("N"), content);
 
+                    if (res.IsSuccessStatusCode)
+                    {
+                        // Update TourLog in Tourlogs list
+                        var databe = await res.Content.ReadAsStringAsync();
+                        var newlog = JsonConvert.DeserializeObject<TourLog>(databe);
 
+                        //newlog.Id = selectedTourLog.Id;
+                        //newlog.TourId = selectedTourLog.TourId;
+
+                        var index = TourList.IndexOf(selectedTour);
+                        var logindex = TourList[index].Tourlogs.IndexOf(selectedTourLog);
+                        TourList[index].Tourlogs[logindex] = newlog;
+                    }
+                    else
+                    {
+                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not edit Tourlog");
+                        _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                    }
+                }
             }
         }
 

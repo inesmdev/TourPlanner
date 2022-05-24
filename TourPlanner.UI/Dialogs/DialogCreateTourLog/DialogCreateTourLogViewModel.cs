@@ -10,11 +10,15 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
 {
     class DialogCreateTourLogViewModel : DialogViewModelBase
     {
+        public Guid Id { get; set; }
+        public Guid TourId { get; set; }
         public EnumTourDifficulty TourDifficulty { get; set; }
         public EnumTourRating TourRating { get; set; }
         public DateTime DateTime { get; set; }
         public float TotalTime { get; set; }
         public string Comment { get; set; }
+
+        private bool editMode = false;
 
         private ICommand yesCommand = null;
         public ICommand YesCommand
@@ -45,8 +49,18 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public DialogCreateTourLogViewModel(string message, TourLog tourlog)
         : base(message)
         {
+            Id = tourlog.Id;
+            TourId = tourlog.TourId;
+            TourDifficulty = tourlog.TourDifficulty;
+            TourRating = tourlog.TourRating;
+            DateTime = tourlog.DateTime;
+            TotalTime = tourlog.TotalTime;
+            Comment = tourlog.Comment;
+
             this.yesCommand = new RelayCommand(OnYesClicked);
             this.noCommand = new RelayCommand(OnNoClicked);
+
+            editMode = true;
         }
 
         /*
@@ -54,20 +68,39 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
        */
         private void OnYesClicked(object parameter)
         {
-            // Data
-            TourLogUserInput data = new TourLogUserInput
+            if(editMode == false)
             {
-                DateTime = this.DateTime,
-                TourDifficulty = this.TourDifficulty,
-                TourRating = this.TourRating,
-                TotalTime = this.TotalTime,
-                Comment = this.Comment
-            };
+                TourLogUserInput data = new TourLogUserInput
+                {
+                    DateTime = this.DateTime,
+                    TourDifficulty = this.TourDifficulty,
+                    TourRating = this.TourRating,
+                    TotalTime = this.TotalTime,
+                    Comment = this.Comment
+                };
+                // Json -> String
+                string dataJson = JsonConvert.SerializeObject(data);
 
-            // Json -> String
-            string dataJson = JsonConvert.SerializeObject(data);
+                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+            }
+            else
+            {
+                TourLog data = new TourLog
+                {
+                    Id = this.Id,
+                    TourId = this.TourId,
+                    DateTime = this.DateTime,
+                    TourDifficulty = this.TourDifficulty,
+                    TourRating = this.TourRating,
+                    TotalTime = this.TotalTime,
+                    Comment = this.Comment
+                };
 
-            this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);        
+                // Json -> String
+                string dataJson = JsonConvert.SerializeObject(data);
+
+                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+            }         
         }
 
         /*
