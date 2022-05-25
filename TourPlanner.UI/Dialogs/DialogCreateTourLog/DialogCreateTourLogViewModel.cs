@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,7 +16,7 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public EnumTourDifficulty TourDifficulty { get; set; }
         public EnumTourRating TourRating { get; set; }
         public DateTime DateTime { get; set; }
-        public float TotalTime { get; set; }
+        public string TotalTime { get; set; }
         public string Comment { get; set; }
 
         private bool editMode = false;
@@ -38,12 +39,14 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         {
             this.yesCommand = new RelayCommand(OnYesClicked);
             this.noCommand = new RelayCommand(OnNoClicked);
+            InitValues();
         }
 
         public DialogCreateTourLogViewModel(string message) : base(message)
         {
             this.yesCommand = new RelayCommand(OnYesClicked);
             this.noCommand = new RelayCommand(OnNoClicked);
+            InitValues();
         }
 
         public DialogCreateTourLogViewModel(string message, TourLog tourlog)
@@ -54,7 +57,7 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
             TourDifficulty = tourlog.TourDifficulty;
             TourRating = tourlog.TourRating;
             DateTime = tourlog.DateTime;
-            TotalTime = tourlog.TotalTime;
+            TotalTime = tourlog.TotalTime.ToString();
             Comment = tourlog.Comment;
 
             this.yesCommand = new RelayCommand(OnYesClicked);
@@ -63,44 +66,60 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
             editMode = true;
         }
 
+
+        void InitValues()
+        {
+            TourDifficulty = EnumTourDifficulty.beginner;
+            TourRating = EnumTourRating.five_star;
+            DateTime = DateTime.Now;
+            TotalTime = "0";
+            Comment = "";
+        }
+
+
         /*
         *  Executes when "Yes" (or "CreateTour") button is clicked
        */
         private void OnYesClicked(object parameter)
         {
-            if(editMode == false)
+            if (Validate())
             {
-                TourLogUserInput data = new TourLogUserInput
-                {
-                    DateTime = this.DateTime,
-                    TourDifficulty = this.TourDifficulty,
-                    TourRating = this.TourRating,
-                    TotalTime = this.TotalTime,
-                    Comment = this.Comment
-                };
-                // Json -> String
-                string dataJson = JsonConvert.SerializeObject(data);
+                // Validate the Data 
 
-                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                if (editMode == false)
+                {
+                    TourLogUserInput data = new TourLogUserInput
+                    {
+                        DateTime = this.DateTime,
+                        TourDifficulty = this.TourDifficulty,
+                        TourRating = this.TourRating,
+                        TotalTime = Int32.Parse(this.TotalTime),
+                        Comment = this.Comment
+                    };
+                    // Json -> String
+                    string dataJson = JsonConvert.SerializeObject(data);
+
+                    this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                }
+                else
+                {
+                    TourLog data = new TourLog
+                    {
+                        Id = this.Id,
+                        TourId = this.TourId,
+                        DateTime = this.DateTime,
+                        TourDifficulty = this.TourDifficulty,
+                        TourRating = this.TourRating,
+                        TotalTime = float.Parse(this.TotalTime),
+                        Comment = this.Comment
+                    };
+
+                    // Json -> String
+                    string dataJson = JsonConvert.SerializeObject(data);
+
+                    this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                }
             }
-            else
-            {
-                TourLog data = new TourLog
-                {
-                    Id = this.Id,
-                    TourId = this.TourId,
-                    DateTime = this.DateTime,
-                    TourDifficulty = this.TourDifficulty,
-                    TourRating = this.TourRating,
-                    TotalTime = this.TotalTime,
-                    Comment = this.Comment
-                };
-
-                // Json -> String
-                string dataJson = JsonConvert.SerializeObject(data);
-
-                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
-            }         
         }
 
         /*
@@ -109,6 +128,20 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         private void OnNoClicked(object parameter)
         {
             this.CloseDialogWithResult(parameter as Window, DialogResult.No);
+        }
+
+
+        private bool Validate()
+        {
+          
+
+            // Valid Format
+            // TotalTime -> Only floating point numbers allowed
+            Regex regex = new Regex(@"^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            if (!regex.IsMatch(TotalTime))
+                return false;
+            
+            return true;
         }
     }
 }

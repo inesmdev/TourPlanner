@@ -14,16 +14,20 @@
 
             <!-- Input TourName -->
             <Label Margin="20 10 20 0" >Date:</Label>
-            <DatePicker Margin="20 0 20 5" FontSize="14" Text="{Binding DateTime}"></DatePicker>
+            <DatePicker Margin="20 0 20 5" FontSize="14" SelectedDate="{Binding DateTime}"></DatePicker>
 
             <!-- Input Description -->
-            <Label Margin="20 10 20 0">TourDiffictulty:</Label>
+            <Label Margin="20 10 20 0">Diffictulty:</Label>
             <ComboBox Margin="20 0 20 5" FontSize="14" Name="cmbTourDifficulty" ItemsSource="{Binding Source={StaticResource EnumTourDifficulty}}" SelectedIndex="0" SelectedItem="{Binding TourDifficulty}"></ComboBox>
 
             <!-- Input From -->
-            <Label Margin="20 10 20 0">TourRating:</Label>
+            <Label Margin="20 10 20 0">Rating:</Label>
             <ComboBox Margin="20 0 20 5" FontSize="14" Name="cmbTourRating" ItemsSource="{Binding Source={StaticResource EnumTourRating}}" SelectedIndex="0" SelectedItem="{Binding TourRating}"></ComboBox>
 
+            <!-- Input To -->
+            <Label Margin="20 10 20 0">Total Time (Minutes):</Label>
+            <TextBox Margin="20 0 20 5" FontSize="14" Text="{Binding TotalTime}"></TextBox>
+            
             <!-- Input To -->
             <Label Margin="20 10 20 0">Comment:</Label>
             <TextBox Margin="20 0 20 5" FontSize="14" Text="{Binding Comment}"></TextBox>
@@ -32,7 +36,7 @@
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 20 20 20">
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button 
-                    Content="Create Tour" 
+                    Content="Create Tourlog" 
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom" 
                     Width="75"

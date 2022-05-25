@@ -27,5 +27,11 @@ namespace TourPlanner.Models
         public EnumTourDifficulty TourDifficulty { get; set; }
         public float TotalTime { get; set; }
         public string Comment { get; set; }
+
+   
     }
+
+
+
+
 }

@@ -61,3 +61,56 @@
 2022-05-24 18:51:42.312 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
                              SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
                              WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:52:54.793 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:52:55.602 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:52:55.668 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:53:05.866 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:53:05.881 +02:00 [INF] Tourlog (f6443e33-9893-40a5-a738-c4bb5c23c642) sucessfully updated.
+2022-05-24 18:55:47.810 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:55:48.499 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:55:48.565 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:56:09.047 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 18:56:09.729 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:56:09.775 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 18:56:39.543 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 18:56:39.556 +02:00 [INF] Tourlog (02d767f1-0954-4371-9ff7-081869d6db7c) sucessfully updated.
+2022-05-24 19:06:31.292 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 19:06:32.104 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 19:06:32.171 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 19:06:57.162 +02:00 [INF] Tourlog successfully created.
+2022-05-24 19:07:08.450 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-24 19:07:08.454 +02:00 [INF] Tourlog (041df065-8759-42ad-9196-97fff39f7b94) sucessfully updated.
+2022-05-24 19:09:38.771 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 19:09:39.521 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 19:09:39.574 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 19:13:58.175 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 19:13:58.893 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 19:14:59.372 +02:00 [INF] Tour successfully created, Tourname: Kirschblütenrundweg
+From:Leppersdorf 93, 4612 Scharten, Austria
+To:Leppersdorf 1, 4612 Scharten, Austria
+Description: Rundweg durch die schöne Scharten
+Estimated Time: 20413
+Distance: 539,4231
+2022-05-24 19:15:21.356 +02:00 [INF] Tourlog successfully created.
+2022-05-24 19:16:27.317 +02:00 [INF] Tourlog successfully created.
+2022-05-24 21:51:32.132 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 21:51:32.756 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 21:51:32.818 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:12:37.002 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 22:12:37.751 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:12:37.808 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:13:39.377 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 22:13:40.305 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:13:40.371 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:14:17.214 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 22:14:18.163 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:14:18.233 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:16:32.096 +02:00 [INF] Connection to PostgresDB established.
+2022-05-24 22:16:32.979 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-24 22:16:33.047 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]

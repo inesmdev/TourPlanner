@@ -41,6 +41,7 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand editTourLogCommand;
         public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(EditTourLog);
 
+
         /*
          *  Selected Tour
          */
@@ -89,8 +90,10 @@ namespace TourPlanner.UI.ViewModels
          */
         public MainViewModel()
         {
+            // Initalize TourList
             TourList = new ObservableCollection<TourUI>();
         }
+
 
 
         /*
@@ -125,6 +128,7 @@ namespace TourPlanner.UI.ViewModels
         }
 
 
+
         /*
          *  Create new Tour
          */
@@ -144,8 +148,7 @@ namespace TourPlanner.UI.ViewModels
 
                     if (res.IsSuccessStatusCode)
                     {
-                        //var httpcontent = await res.Content.ReadAsStringAsync(); //??
-                        var httpcontent = await res.Content.ReadAsStringAsync(); //??
+                        var httpcontent = await res.Content.ReadAsStringAsync(); // -> Json Content?
 
                         // String -> Tour
                         Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
@@ -156,19 +159,19 @@ namespace TourPlanner.UI.ViewModels
                             TourList.Add(new TourUI()
                             {
                                 TourData = tour,
-                                Tourlogs = new ObservableCollection<TourLog>() // no tour logs at start
+                                Tourlogs = new ObservableCollection<TourLog>() //Tourlogs do not have any logs when created
                             });
                         }
                         else
                         {
-                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour");
+                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour :/");
                             _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
 
                         }
                     }
                     else
                     {
-                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour");
+                        Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Tour :/");
                         _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
                     }
                 }
@@ -193,10 +196,8 @@ namespace TourPlanner.UI.ViewModels
                     // Send Htttp POST Request to /Tour
                     using (HttpClient client = new HttpClient())
                     {
-                        var content = new StringContent(selectedTour.TourData.Id.ToString("N"), Encoding.UTF8, "application/json");
                         var res = await client.DeleteAsync($"https://localhost:5001/Tour/" + selectedTour.TourData.Id.ToString("N"));
 
-                        res.EnsureSuccessStatusCode();
                         if (res.IsSuccessStatusCode)
                         {
                             TourList.Remove(selectedTour);
@@ -208,10 +209,6 @@ namespace TourPlanner.UI.ViewModels
                         }
                     }
                 }
-
-                // 2. Delete Tour
-
-
             }
         }
 
@@ -226,7 +223,7 @@ namespace TourPlanner.UI.ViewModels
                 Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Edit Tour", selectedTour.TourData); // Add Tour Details
                 Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
 
-                // If user clickt on "Create Tour"
+                // If user clicked on "Create Tour"
                 if (result == Dialogs.DialogService.DialogResult.Yes)
                 {
                     // Send Htttp POST Request to /Tour
@@ -241,14 +238,12 @@ namespace TourPlanner.UI.ViewModels
                             var httpcontent = res.Content.ReadAsStringAsync().Result;
 
                             Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
-                            // Id = null?
 
-                            var index = TourList.IndexOf(selectedTour);
-                            TourList[index].TourData = tour;
+                            TourList[TourList.IndexOf(selectedTour)].TourData = tour;
                         }
                         else
                         {
-                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not Update Tour");
+                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not update Tour :/");
                             _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
                         }
                     }
@@ -339,7 +334,6 @@ namespace TourPlanner.UI.ViewModels
                         
                         string dataJson2 = JsonConvert.SerializeObject(dataJson);
 
-
                         var content = new StringContent(dataJson2, Encoding.UTF8, "application/json");
                         var res = await client.PostAsync("https://localhost:5001/TourLog", content);
 
@@ -387,9 +381,7 @@ namespace TourPlanner.UI.ViewModels
 
                     if (res.IsSuccessStatusCode)
                     {
-                        var index = TourList.IndexOf(selectedTour);
-                        TourList[index].Tourlogs.Remove(selectedTourLog);
-
+                        TourList[TourList.IndexOf(selectedTour)].Tourlogs.Remove(selectedTourLog); // 
                     }
                     else
                     {
@@ -423,12 +415,7 @@ namespace TourPlanner.UI.ViewModels
                         var databe = await res.Content.ReadAsStringAsync();
                         var newlog = JsonConvert.DeserializeObject<TourLog>(databe);
 
-                        //newlog.Id = selectedTourLog.Id;
-                        //newlog.TourId = selectedTourLog.TourId;
-
-                        var index = TourList.IndexOf(selectedTour);
-                        var logindex = TourList[index].Tourlogs.IndexOf(selectedTourLog);
-                        TourList[index].Tourlogs[logindex] = newlog;
+                        TourList[TourList.IndexOf(selectedTour)].Tourlogs[TourList[TourList.IndexOf(selectedTour)].Tourlogs.IndexOf(selectedTourLog)] = newlog;
                     }
                     else
                     {
