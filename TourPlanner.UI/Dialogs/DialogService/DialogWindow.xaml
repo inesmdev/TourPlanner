@@ -1,9 +1,8 @@
 ﻿<Window x:Class="TourPlanner.UI.Dialogs.DialogService.DialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DialogWindow" Height="600" Width="600"
+        Title="DialogWindow" Height="600" Width="800"
         WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight"
         >
     
     <ContentPresenter x:Name="ContentPresenter" Content="{Binding}"></ContentPresenter>

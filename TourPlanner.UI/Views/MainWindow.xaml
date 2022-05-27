@@ -33,6 +33,25 @@
             <MenuItem Header="_Options">
                 <MenuItem Header="Cut"/>
             </MenuItem>
+
+            <Grid HorizontalAlignment="Right" Margin="15 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <TextBox FontSize="14" Text="{Binding SearchTerm}" Grid.Column="0"></TextBox>
+
+                <Button 
+                    Grid.Column="1"
+                    Content="Search" 
+                    Padding="5"
+                    Command="{Binding SearchCommand}"  
+                />
+            </Grid>
             
             <MenuItem HorizontalAlignment="Right">
                 <MenuItem.Header>
@@ -69,6 +88,7 @@
                             Command="{Binding DeleteTourCommand}"  
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             />
+                     
                         <Button 
                             Content="Edit" 
                             Margin="5 0 5 0"
@@ -76,6 +96,7 @@
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             />
                     </ToolBar>
+                    
                 </ToolBarTray>
 
                 <ListView 

@@ -18,7 +18,7 @@ namespace TourPlanner.Models
         expert,
     }
 
-    public class TourLog
+    public class TourLog : ISearchData
     {
         public Guid Id { get; set; }
         public Guid TourId { get; set;}
@@ -27,11 +27,5 @@ namespace TourPlanner.Models
         public EnumTourDifficulty TourDifficulty { get; set; }
         public float TotalTime { get; set; }
         public string Comment { get; set; }
-
-   
     }
-
-
-
-
 }

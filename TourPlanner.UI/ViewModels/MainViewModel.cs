@@ -41,6 +41,11 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand editTourLogCommand;
         public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(EditTourLog);
 
+        private RelayCommand searchCommand;
+        public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
+
+
+        public string SearchTerm { get; set; }
 
         /*
          *  Selected Tour
@@ -127,6 +132,39 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
+
+        /*
+         *  Search
+         */
+        private async void Search(object parameter)
+        {
+            try
+            {         
+                // Send Htttp POST Request to /Tour
+                using (HttpClient client = new HttpClient())
+                {
+
+
+
+                }
+
+                List<SearchResult> results = new List<SearchResult>();
+                results.Add(new SearchResult() { Title = "Test" });
+                results.Add(new SearchResult() { Title = "Test2" });
+
+
+                // Display Search Results
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogSearch.DialogSearchViewModel(results);
+                Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
+
+                // Return Id -> Mark Id In List?
+            }
+            catch
+            {
+                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogOk.DialogOkViewModel("Connection Error. Please try later.");
+                _ = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
+            }   
+        }
 
 
         /*

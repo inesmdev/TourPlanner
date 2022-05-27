@@ -16,3 +16,23 @@
 2022-05-25 10:27:04.716 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-05-25 10:27:30.210 +02:00 [INF] Tourlog successfully created.
 2022-05-25 11:27:03.377 +02:00 [ERR] Error connecting to PostgresDB
+2022-05-25 11:27:43.975 +02:00 [INF] Connection to PostgresDB established.
+2022-05-25 11:27:44.616 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-25 11:27:44.671 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-25 11:27:57.932 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:30:46.074 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:31:22.963 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:32:07.850 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:32:22.255 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:32:57.684 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
+                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
+                             WHERE tour_log_id=@tour_log_id;
+2022-05-25 11:32:57.690 +02:00 [INF] Tourlog (ac33de64-88b2-4703-aa5c-381dedb2b396) sucessfully updated.
+2022-05-25 11:33:57.931 +02:00 [INF] Tourlog successfully created.
+2022-05-25 11:36:15.930 +02:00 [INF] Connection to PostgresDB established.
+2022-05-25 11:36:16.551 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-25 11:36:16.609 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-25 11:36:39.805 +02:00 [INF] Tourlog successfully created.
+2022-05-25 12:24:26.318 +02:00 [INF] Connection to PostgresDB established.
+2022-05-25 12:24:26.909 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-25 12:24:26.970 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
