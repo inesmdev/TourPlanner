@@ -38,6 +38,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -50,6 +51,12 @@
                     Content="Search" 
                     Padding="5"
                     Command="{Binding SearchCommand}"  
+                />
+                <Button 
+                    Grid.Column="2"
+                    Content="X" 
+                    Padding="5"
+                    Command="{Binding ResetFilterCommand}"  
                 />
             </Grid>
             

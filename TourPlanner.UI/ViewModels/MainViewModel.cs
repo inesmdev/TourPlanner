@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Models;
 using TourPlanner.UI.Models;
+using TourPlanner.UI.Search;
 
 namespace TourPlanner.UI.ViewModels
 {
@@ -16,6 +17,8 @@ namespace TourPlanner.UI.ViewModels
     public class MainViewModel : BaseVM
     {
         public ObservableCollection<TourUI> TourList { get; private set; }
+        public ObservableCollection<TourUI> TourListBackup { get; private set; }
+
 
         private RelayCommand addTourCommand;
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour);
@@ -44,6 +47,8 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand searchCommand;
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
 
+        private RelayCommand resetFilterCommand;
+        public ICommand ResetFilterCommand => resetFilterCommand ??= new RelayCommand(ResetFilter);
 
         public string SearchTerm { get; set; }
 
@@ -97,9 +102,25 @@ namespace TourPlanner.UI.ViewModels
         {
             // Initalize TourList
             TourList = new ObservableCollection<TourUI>();
+            TourListBackup = null;
+
         }
 
 
+        private void ResetFilter(object parameter)
+        {
+            LoadListFromBackup();
+        }
+
+        private void LoadListFromBackup()
+        {
+            if (TourListBackup != null)
+            {
+                TourList = TourListBackup;
+                TourListBackup = null;
+                RaisePropertyChangedEvent("TourList");
+            }
+        }
 
         /*
          *  Generate Pdf Report
@@ -136,34 +157,17 @@ namespace TourPlanner.UI.ViewModels
         /*
          *  Search
          */
-        private async void Search(object parameter)
+        private void Search(object parameter)
         {
-            try
-            {         
-                // Send Htttp POST Request to /Tour
-                using (HttpClient client = new HttpClient())
-                {
-
-
-
-                }
-
-                List<SearchResult> results = new List<SearchResult>();
-                results.Add(new SearchResult() { Title = "Test" });
-                results.Add(new SearchResult() { Title = "Test2" });
-
-
-                // Display Search Results
-                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogSearch.DialogSearchViewModel(results);
-                Dialogs.DialogService.DialogResult result = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window, out string data);
-
-                // Return Id -> Mark Id In List?
-            }
-            catch
+            if (SearchTerm != null)
             {
-                Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogOk.DialogOkViewModel("Connection Error. Please try later.");
-                _ = Dialogs.DialogService.DialogService.OpenDialog(vm, parameter as Window);
-            }   
+                List<TourUI> result = SearchService.Search(TourList, SearchTerm);
+                // Selected Tour = clicked on
+                // Selcted tourlog
+                TourListBackup = TourList;
+                TourList = new ObservableCollection<TourUI>(result);
+                RaisePropertyChangedEvent("TourList");
+            }
         }
 
 
@@ -190,6 +194,8 @@ namespace TourPlanner.UI.ViewModels
 
                         // String -> Tour
                         Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
+                        
+                        LoadListFromBackup();
 
                         // Show Tour
                         if (tour != null)
@@ -222,6 +228,7 @@ namespace TourPlanner.UI.ViewModels
          */
         private async void DeleteTour(object parameter)
         {
+
             if (selectedTour != null)
             {
                 // (1. Delete Tourlogs)

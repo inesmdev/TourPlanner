@@ -5,7 +5,6 @@
              xmlns:dialogCreateTour="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTour"
              xmlns:dialogOk="clr-namespace:TourPlanner.UI.Dialogs.DialogOk" 
              xmlns:dialogCreateTourLog="clr-namespace:TourPlanner.UI.Dialogs.DialogCreateTourLog"
-             xmlns:dialogSearch="clr-namespace:TourPlanner.UI.Dialogs.DialogSearch"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:enm="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
              Startup="OnStartup"
@@ -32,9 +31,7 @@
             <dialogCreateTourLog:DialogCreateTourLogView></dialogCreateTourLog:DialogCreateTourLogView>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type dialogSearch:DialogSearchViewModel}">
-            <dialogSearch:DialogSearchView></dialogSearch:DialogSearchView>
-        </DataTemplate>
+      
 
         <!-- Enum -->
         <ObjectDataProvider x:Key='EnumTourRating' ObjectType='{x:Type System:Enum}' MethodName='GetValues'>
