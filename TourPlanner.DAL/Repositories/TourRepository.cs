@@ -15,7 +15,7 @@ namespace TourPlanner.DAL.Repositories
 
         public TourRepository(PostgresAccess db, ILogger<TourRepository> logger)
         {
-            conn = db.GetConnection(); // TODO: Exception Handling?
+            conn = db.GetConnection();
             conn.TypeMapper.MapEnum<EnumTransportType>("transporttype"); 
             _logger = logger;
         }
@@ -137,8 +137,6 @@ namespace TourPlanner.DAL.Repositories
                              $"distance=@distance, tour_from=@tour_from, tour_to=@tour_to, transport_type=@transport_type " +
                              $"WHERE tour_id=@tour_id;";
 
-                _logger.LogDebug($"Execute SQL Statement: {sql}");
-
                 command.CommandText = sql;
                 command.Parameters.AddWithValue("@tour_name", tour.Name);
                 command.Parameters.AddWithValue("@description", tour.Description);
@@ -148,7 +146,6 @@ namespace TourPlanner.DAL.Repositories
                 command.Parameters.AddWithValue("@tour_to", tour.To);
                 command.Parameters.AddWithValue("@transport_type", tour.TransportType);
                 command.Parameters.AddWithValue("@tour_id", tour.Id.ToString("N"));
-
 
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }

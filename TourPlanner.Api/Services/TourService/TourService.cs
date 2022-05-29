@@ -1,26 +1,26 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
-using TourPlanner.Api.Services.MapQuestService;
-using Microsoft.Extensions.Logging;
 
-namespace TourPlanner.Api.Services
+namespace TourPlanner.Api.Services.TourService
 {
     public class TourService : ITourService
     {
-        ITourRepository _repository; 
-        IMapQuestService _mapQuestService;
+        ITourRepository _repository;
+        IMapQuestService _mapapi;
         ILogger<TourService> _logger;
-        
+
         /*
          * Constructor
          */
         public TourService(ITourRepository repository, IMapQuestService mapapi, ILogger<TourService> logger)
         {
             _repository = repository;
-            _mapQuestService = mapapi;
+            _mapapi = mapapi;
             _logger = logger;
         }
 
@@ -40,24 +40,25 @@ namespace TourPlanner.Api.Services
                 TransportType = tourinput.TransportType
             };
 
-            
             // Call the MapQuest Api to get the missing information about the tour
             try
             {
-                MapQuestTour res = _mapQuestService.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
+                MapQuestTour res = _mapapi.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
                 tour.EstimatedTime = res.EstimatedTime;
                 tour.Distance = res.Distance;
 
                 _repository.Create(tour);
                 tour.GenerateSummary();
+
                 _logger.LogInformation($"Tour successfully created, {tour.Summary}");
+
                 return tour;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError($"Could not create tour ({tour.Id}, \"{ tour.Name}\")");
                 return null;
-            }
+            }        
         }
 
 
@@ -68,9 +69,9 @@ namespace TourPlanner.Api.Services
             _repository.GetAll().ToList();
 
 
-    
+
         /*
-         *  Get a tour by Id
+         *  Get a tour by id
          */
         public Tour Get(Guid id)
         {
@@ -80,9 +81,9 @@ namespace TourPlanner.Api.Services
                 tour.GenerateSummary();
                 return tour;
             }
-            catch(Exception ex)
+            catch
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError($"Could not get tour ({id})");
                 return null;
             }
         }
@@ -96,7 +97,7 @@ namespace TourPlanner.Api.Services
             return _repository.Delete(id);
         }
 
-        
+
         /*
          *  Edit tour
          */

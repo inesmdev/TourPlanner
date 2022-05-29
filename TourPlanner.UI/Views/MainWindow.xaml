@@ -12,7 +12,6 @@
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
 
-    
     <DockPanel>
         <Menu DockPanel.Dock="Top" Padding="2">
             <Menu.ItemsPanel>
@@ -23,9 +22,6 @@
             <MenuItem Header="_File">
                 <MenuItem Header="Export TourData" Command="{Binding ExportTourDataCommand}"/>
                 <MenuItem Header="Import TourData" Command="{Binding ImportTourDataCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Header="Cut"/>
             </MenuItem>
             <MenuItem Header="_Report">
                 <MenuItem Header="Generate Pdf Report" Command="{Binding GeneratePdfReportCommand}"/>
@@ -82,6 +78,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Tour Controls -->
                 <ToolBarTray Grid.Row="0">
                     <ToolBar ToolBarTray.IsLocked="True">
                         <Button 
@@ -130,6 +127,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Tour detail view -->
                 <TabControl Grid.Row="0" Grid.RowSpan="2">
                     <TabItem Header="Route">
                         <TextBlock Text="Map Placeholder"/>
@@ -141,7 +139,8 @@
 
                 <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch"/>
 
-               <ToolBarTray Grid.Row="2">
+                <!-- TourLog controls -->
+                <ToolBarTray Grid.Row="2">
                     <ToolBar ToolBarTray.IsLocked="True">
                         <Button 
                             Content="New Tourlog" 
@@ -166,23 +165,20 @@
                 <DataGrid Grid.Row="3" 
                           Name="DataGrid_Tourlogs" 
                           ItemsSource="{Binding SelectedTour.Tourlogs, UpdateSourceTrigger=LostFocus}" 
-                          AlternatingRowBackground = "LightBlue"
+                          AlternatingRowBackground = "LightGreen"
                           AlternationCount = "2"
-                          AutoGenerateColumns="True"
+                          AutoGenerateColumns="False"
                           IsReadOnly="True"
                           SelectedItem="{Binding SelectedTourLog}"
                           >
-                       <!-- <DataGrid.Columns>-->
-                       <!-- <DataGridTextColumn Header="TourId" Binding="{Binding TourId}"/>
-
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="TourId" Binding="{Binding TourId}"/>
                         <DataGridTextColumn Header="Date" Binding="{Binding DateTime}"/>
                         <DataGridTextColumn Header="Duration" Binding="{Binding TotalTime }"/>
-                        <DataGridComboBoxColumn Header="Rating" ItemsSource="{Binding Source={StaticResource EnumTourDifficulty}}"/>
-                        <DataGridComboBoxColumn Header="Difficulty"/>
+                        <DataGridComboBoxColumn Header="Rating" ItemsSource="{Binding Source={StaticResource EnumTourRating}}" SelectedItemBinding="{Binding TourRating}"/>
+                        <DataGridComboBoxColumn Header="Difficulty" ItemsSource="{Binding Source={StaticResource EnumTourDifficulty}}" SelectedItemBinding="{Binding TourDifficulty}"/>
                         <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"/>
-
-
-                    </DataGrid.Columns>-->
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>

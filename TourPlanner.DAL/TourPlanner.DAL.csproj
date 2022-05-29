@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TourPlanner.Models\TourPlanner.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

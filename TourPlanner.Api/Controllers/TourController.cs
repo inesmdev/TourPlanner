@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using TourPlanner.Api.Services;
+using TourPlanner.Api.Services.TourService;
 using TourPlanner.Models;
 
 namespace TourPlanner.Api.Controllers
@@ -14,6 +14,9 @@ namespace TourPlanner.Api.Controllers
         private readonly ITourService _tourservice;
         ILogger _logger;
 
+        /*
+         *  Constructor
+         */
         public TourController(ITourService tourservice, ILogger<TourController> logger)
         {
             _tourservice = tourservice;
@@ -21,17 +24,20 @@ namespace TourPlanner.Api.Controllers
         }
 
 
-        // GET all action
+        /*
+         *  Get all tours from db
+         */
         [HttpGet]
         public ActionResult<List<Tour>> GetAll()
         {
             var tours = _tourservice.GetAll();
-
             return Ok(tours);
         }
 
 
-        // GET by Id action
+        /*
+         *  Get specific tours by id
+         */
         [HttpGet("{id}")]
          public ActionResult<Tour> Get(string id)
          {
@@ -44,7 +50,9 @@ namespace TourPlanner.Api.Controllers
          }
 
 
-        // POST 
+        /*
+         *  Create new tour
+         */
         [HttpPost]
         public IActionResult Create(TourInput tourinput)
         {      
@@ -53,11 +61,21 @@ namespace TourPlanner.Api.Controllers
             if(tour == null)
                 return BadRequest();
             else
-                return CreatedAtAction(nameof(Create), new {Id = tour.Id, Name = tour.Name, Description = tour.Description, From=tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);
+                return CreatedAtAction(nameof(Create), new {
+                    Id = tour.Id, 
+                    Name = tour.Name, 
+                    Description = tour.Description, 
+                    From=tour.From, 
+                    To = tour.To, 
+                    EstimatedTime = tour.EstimatedTime, 
+                    Distance = tour.Distance, 
+                    Summary = tour.Summary}, tour);
         }
 
 
-        // PUT action -> Aktualisieren
+        /*
+         *  Update tour by id
+         */
         [HttpPut("{id}")]
         public IActionResult Update(string id, Tour tour)
         {
@@ -67,9 +85,9 @@ namespace TourPlanner.Api.Controllers
                 return BadRequest();
 
             var existingTour = _tourservice.Get(idParsed);
+
             if (existingTour is null)
                 return NotFound();
-
 
             Tour tourdb = _tourservice.Update(tour);
 
@@ -80,7 +98,9 @@ namespace TourPlanner.Api.Controllers
         }
 
         
-        // DELETE action
+        /*
+         *  Delete tour by id
+         */
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
@@ -90,14 +110,9 @@ namespace TourPlanner.Api.Controllers
                 return NotFound();
 
             if (_tourservice.Delete(Guid.Parse(id)))
-            {
                 return NoContent();
-
-            }
             else
-            {
                 return BadRequest();
-            }
         }
 
 
@@ -113,7 +128,5 @@ namespace TourPlanner.Api.Controllers
                 return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description, From = tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);
         }
         */
-
-
     }
 }

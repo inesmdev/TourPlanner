@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TourPlanner.Models;
 
-namespace TourPlanner.Api.Services
+namespace TourPlanner.Api.Services.TourService
 {
     public interface ITourService
     {

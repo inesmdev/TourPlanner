@@ -12,7 +12,6 @@ namespace TourPlanner.Api.Services.TourLogService
         ITourLogRepository _repository;
         ILogger<TourLogService> _logger;
 
-
         /*
          *  Constructor
          */
@@ -22,8 +21,10 @@ namespace TourPlanner.Api.Services.TourLogService
             _repository = repository;
         }
 
-
-        public TourLog Add(TourLogUserInput tourlogInput)
+        /*
+         *  Add new tourlog
+         */
+        public TourLog Add(TourLogInput tourlogInput)
         {
             TourLog tourlog = new TourLog()
             {
@@ -39,23 +40,27 @@ namespace TourPlanner.Api.Services.TourLogService
             try
             {
                 _repository.Create(tourlog);
-                _logger.LogInformation($"Tourlog successfully created.");
+                _logger.LogInformation($"Tourlog ({tourlog.Id}) successfully created");
                 return tourlog;
             }
             catch
             {
-                _logger.LogError($"Could not create Tourlog ({tourlog.Id}).");
+                _logger.LogError($"Could not create Tourlog ({tourlog.Id})");
                 return null;
             }
         }
 
-
+        /*
+         *  Delete tourlog
+         */
         public bool Delete(Guid id)
         {
             return _repository.Delete(id);
         }
 
-
+        /*
+         * Get tourlog by id
+         */
         public TourLog Get(Guid id)
         {
             try
@@ -63,24 +68,31 @@ namespace TourPlanner.Api.Services.TourLogService
                 TourLog tourlog = _repository.GetByID(id);
                 return tourlog;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError($"Could not delete tour ({id})");
                 return null;
             }
         }
 
-
+        /*
+         *  Get all tourlogs
+         */
         public List<TourLog> GetAll() {
             return _repository.GetAll().ToList();
         }
 
-
+        /*
+         * Get all tourlogs for specific tour
+         */
         public List<TourLog> GetAll(Guid tourid)
         {
             return _repository.GetAll(tourid).ToList();
         }
 
+        /*
+         * Update tourlog
+         */
         public TourLog Update(TourLog tourlog)
         {
             try

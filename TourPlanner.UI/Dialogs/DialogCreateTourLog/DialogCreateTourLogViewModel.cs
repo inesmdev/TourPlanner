@@ -88,7 +88,7 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
 
                 if (editMode == false)
                 {
-                    TourLogUserInput data = new TourLogUserInput
+                    TourLogInput data = new TourLogInput
                     {
                         DateTime = this.DateTime,
                         TourDifficulty = this.TourDifficulty,

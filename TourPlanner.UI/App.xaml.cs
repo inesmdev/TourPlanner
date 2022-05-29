@@ -1,10 +1,6 @@
-﻿using Autofac;
-using System.Windows;
-using TourPlanner.DAL.Repositories;
+﻿using System.Windows;
 using TourPlanner.UI.ViewModels;
 using TourPlanner.UI.Views;
-using Serilog;
-using TourPlanner.UI.Logging;
 
 namespace TourPlanner.UI
 {
@@ -12,7 +8,7 @@ namespace TourPlanner.UI
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {        
+    {
         // Constructor Injection:
         private void OnStartup(object sender, StartupEventArgs e)
         {

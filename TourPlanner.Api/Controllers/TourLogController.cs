@@ -45,7 +45,7 @@ namespace TourPlanner.Api.Controllers
                
 
         [HttpPost]
-        public IActionResult Create(TourLogUserInput tourlogInput)
+        public IActionResult Create(TourLogInput tourlogInput)
         {
             TourLog tourlog = _tourlogservice.Add(tourlogInput);
 

@@ -15,10 +15,10 @@ namespace TourPlanner.Models
     {
         beginner,
         intermediate,
-        expert,
+        expert
     }
 
-    public class TourLog : ISearchData
+    public class TourLog
     {
         public Guid Id { get; set; }
         public Guid TourId { get; set;}

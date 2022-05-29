@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TourPlanner.Models
+﻿namespace TourPlanner.Models
 {
+    // Rename -> MapQuestResult pls :)
     public class MapQuestTour
     {
         public int EstimatedTime { get; set; }

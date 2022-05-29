@@ -1,4 +1,6 @@
-﻿namespace TourPlanner.Models
+﻿using TourPlanner.Helper;
+
+namespace TourPlanner.Models
 {
     public class TourInput
     {
@@ -8,14 +10,12 @@
         public string To { get; set; }
         public EnumTransportType TransportType { get; set; }
 
-
-        // Validate TourInput ->  Call Helper Function
-
         public bool Validate()
         {
-
-
-            return true;
+            if (!Validator.isText(Name) || !Validator.isText(Description) || !Validator.isLocation(From) || !Validator.isLocation(To))
+                return false;
+            else
+                return true;
         }
     }
 }

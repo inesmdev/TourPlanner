@@ -8,4 +8,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TourPlanner.Exceptions\TourPlanner.Exceptions.csproj" />
+    <ProjectReference Include="..\TourPlanner.Helper\TourPlanner.Helper.csproj" />
+  </ItemGroup>
+
 </Project>
