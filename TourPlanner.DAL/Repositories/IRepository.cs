@@ -13,7 +13,7 @@ namespace TourPlanner.Repositories
         /*
          *  Read
          */
-        public IEnumerable<T> GetAll(/*T criteria*/);
+        public IEnumerable<T> GetAll();
 
         public T GetByID(Guid id);
 

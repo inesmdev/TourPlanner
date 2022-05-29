@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TourPlanner.Helper;
 
 namespace TourPlanner.Models
 {
@@ -12,6 +8,14 @@ namespace TourPlanner.Models
         public string Description { get; set; }
         public string From { get; set; }
         public string To { get; set; }
-        //public EnumTransportType TransportType { get; set; }
+        public EnumTransportType TransportType { get; set; }
+
+        public bool Validate()
+        {
+            if (!Validator.isText(Name) || !Validator.isText(Description) || !Validator.isLocation(From) || !Validator.isLocation(To))
+                return false;
+            else
+                return true;
+        }
     }
 }

@@ -4,9 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TourPlanner.Api.Services;
+using TourPlanner.Api.Services.TourService;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.Api.Services.ReportService;
+using TourPlanner.Api.Services.TourLogService;
 using TourPlanner.DAL;
 using TourPlanner.DAL.Repositories;
 
@@ -24,11 +25,13 @@ namespace TourPlanner.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ITourService, TourService>(); //??
-            services.AddSingleton<ITourRepository, TourRepository>(); //??
-            services.AddSingleton<IMapQuestService, MapQuestService>(); //??
+            services.AddSingleton<ITourService, TourService>(); 
+            services.AddSingleton<ITourRepository, TourRepository>();
+            services.AddSingleton<ITourLogRepository, TourLogRepository>();
+            services.AddSingleton<IMapQuestService, MapQuestService>(); 
             services.AddSingleton<IReportService, ReportService>();
             services.AddSingleton<PostgresAccess>();
+            services.AddSingleton<ITourLogService, TourLogService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>

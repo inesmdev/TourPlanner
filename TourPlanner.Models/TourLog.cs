@@ -15,12 +15,12 @@ namespace TourPlanner.Models
     {
         beginner,
         intermediate,
-        expert,
+        expert
     }
 
     public class TourLog
     {
-        public Guid TourLogId { get; set; }
+        public Guid Id { get; set; }
         public Guid TourId { get; set;}
         public DateTime DateTime { get; set; }
         public EnumTourRating TourRating { get; set; }

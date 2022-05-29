@@ -10,9 +10,6 @@ namespace TourPlanner.UI.Views
         public MainWindow()
         {
             InitializeComponent();
-
         }
-
-       
     }
 }

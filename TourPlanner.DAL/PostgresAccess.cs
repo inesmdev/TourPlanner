@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Npgsql;
-using System;
 
 namespace TourPlanner.DAL
 {
     /*
      *  Access to postgres DB via ADO.NET
-     *  Singelton, Lazy initialization
      */
     public sealed class PostgresAccess 
     {
@@ -23,7 +21,7 @@ namespace TourPlanner.DAL
                 _connection.Open();
 
             }
-            catch (System.Exception e)
+            catch
             {
                 _logger.LogError("Error connecting to PostgresDB");
                 throw; 

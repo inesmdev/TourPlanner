@@ -8,53 +8,42 @@ using TourPlanner.Models;
 namespace TourPlanner.DAL.Repositories
 {
     public class TourRepository : ITourRepository
-    {      
+    {
         private NpgsqlConnection conn;
         private const string TABLE_NAME = "tour";
         ILogger _logger;
 
-
         public TourRepository(PostgresAccess db, ILogger<TourRepository> logger)
         {
             conn = db.GetConnection();
-            conn.MapEnum<EnumTransportType>("transporttype"); // Deprecated?
-            conn.ReloadTypes();
+            conn.TypeMapper.MapEnum<EnumTransportType>("transporttype"); 
             _logger = logger;
         }
 
 
         public void Create(Tour tour)
         {
-            try
+            using (var command = conn.CreateCommand())
             {
-                using (var command = conn.CreateCommand())
+                string sql = $@"INSERT INTO {TABLE_NAME} 
+                                (tour_id, tour_name, description, estimated_time, distance, tour_from, tour_to, transport_type) 
+                                VALUES (@tour_id, @tour_name, @description, @estimated_time, @distance, @tour_from, @tour_to, @transport_type);";
+
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@tour_id", tour.Id.ToString("N"));
+                command.Parameters.AddWithValue("@tour_name", tour.Name);
+                command.Parameters.AddWithValue("@description", tour.Description);
+                command.Parameters.AddWithValue("@estimated_time", tour.EstimatedTime);
+                command.Parameters.AddWithValue("@distance", tour.Distance);
+                command.Parameters.AddWithValue("@tour_from", tour.From);
+                command.Parameters.AddWithValue("@tour_to", tour.To);
+                command.Parameters.AddWithValue("@transport_type", tour.TransportType);
+
+                int affectedRows = command.ExecuteNonQuery();
+                if (affectedRows <= 0)
                 {
-                    string sql = $@"INSERT INTO {TABLE_NAME} 
-                                (tour_id, tour_name, description, estimated_time, distance, tour_from, tour_to) 
-                                VALUES (@tour_id, @tour_name, @description, @estimated_time, @distance, @tour_from, @tour_to);";
-
-                    command.CommandText = sql;
-                    command.Parameters.AddWithValue("@tour_id", tour.Id.ToString("N"));
-                    command.Parameters.AddWithValue("@tour_name", tour.Name);
-                    command.Parameters.AddWithValue("@description", tour.Description);
-                    command.Parameters.AddWithValue("@estimated_time", tour.EstimatedTime);
-                    command.Parameters.AddWithValue("@distance", tour.Distance);
-                    command.Parameters.AddWithValue("@tour_from", tour.From);
-                    command.Parameters.AddWithValue("@tour_to", tour.To);
-                    //command.Parameters.AddWithValue("@transport_type", tour.TransportType);*/
-
-                    int affectedRows = command.ExecuteNonQuery();
-                    if (affectedRows <= 0)
-                    {
-                        throw new CouldNotCreateTourException();
-                    }
-                    
+                    throw new CouldNotCreateTourException();
                 }
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError($"Could not create Tour {ex}");
-                throw new CouldNotCreateTourException();
             }
         }
 
@@ -71,13 +60,13 @@ namespace TourPlanner.DAL.Repositories
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }
         }
-   
+
 
         public IEnumerable<Tour> GetAll()
         {
             List<Tour> tours = new();
 
-            using(var command = conn.CreateCommand())
+            using (var command = conn.CreateCommand())
             {
                 string sql = $"SELECT *  FROM {TABLE_NAME};";
                 command.CommandText = sql;
@@ -95,18 +84,19 @@ namespace TourPlanner.DAL.Repositories
                         CreationDate = reader.GetDateTime(3),
                         EstimatedTime = reader.GetInt32(4),
                         Distance = reader.GetDouble(5),
-                        From = reader.GetString(6), // !!
-                        To = reader.GetString(7)
-                        //TransportType = reader.GetFieldValue<EnumTransportType>(8)*/
+                        From = reader.GetString(6), 
+                        To = reader.GetString(7),
+                        TransportType = reader.GetFieldValue<EnumTransportType>(8)
                     };
+
                     newTour.GenerateSummary();
                     tours.Add(newTour);
-
                 }
             }
 
             return tours;
         }
+
 
         public Tour GetByID(Guid id)
         {
@@ -128,9 +118,9 @@ namespace TourPlanner.DAL.Repositories
                     CreationDate = reader.GetDateTime(3),
                     EstimatedTime = reader.GetInt32(4),
                     Distance = reader.GetDouble(5),
-                    From = reader.GetString(6) , // !!
-                    To = reader.GetString(7) 
-                    //TransportType = (EnumTransportType)reader.GetValue(8)  // !!*/
+                    From = reader.GetString(6), 
+                    To = reader.GetString(7),
+                    TransportType = (EnumTransportType)reader.GetValue(8) 
                 };
                 tour.GenerateSummary();
                 return tour;
@@ -138,29 +128,27 @@ namespace TourPlanner.DAL.Repositories
         }
 
 
-        // TODO
         public bool Update(Tour tour)
         {
             using (var command = conn.CreateCommand())
             {
                 string sql = $"UPDATE {TABLE_NAME} " +
-                             $"SET tour_name=@tour_name, description=@description, estimated_time=@estimated_time" +
+                             $"SET tour_name=@tour_name, description=@description, estimated_time=@estimated_time, " +
                              $"distance=@distance, tour_from=@tour_from, tour_to=@tour_to, transport_type=@transport_type " +
                              $"WHERE tour_id=@tour_id;";
 
                 command.CommandText = sql;
-                command.Parameters.AddWithValue("@tour_name", tour.Id);
-                command.Parameters.AddWithValue("@description", tour.Name);
-                /*command.Parameters.AddWithValue("@estimated_time", tour.EstimatedTime);
+                command.Parameters.AddWithValue("@tour_name", tour.Name);
+                command.Parameters.AddWithValue("@description", tour.Description);
+                command.Parameters.AddWithValue("@estimated_time", tour.EstimatedTime);
                 command.Parameters.AddWithValue("@distance", tour.Distance);
                 command.Parameters.AddWithValue("@tour_from", tour.From);
                 command.Parameters.AddWithValue("@tour_to", tour.To);
                 command.Parameters.AddWithValue("@transport_type", tour.TransportType);
-                command.Parameters.AddWithValue("@tour_id", tour.TourId);*/
+                command.Parameters.AddWithValue("@tour_id", tour.Id.ToString("N"));
 
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }
         }
- 
     }
 }

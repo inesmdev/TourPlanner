@@ -13,6 +13,8 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
         public string Description { get; set; }
         public string From { get; set; }
         public string To { get; set; }
+        public EnumTransportType TransportType { get; set; }
+
 
         private ICommand yesCommand = null;
         public ICommand YesCommand
@@ -62,12 +64,14 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             // Check if everything is set
             if (ValidateInput())
             {
-                TourInput data = new TourInput {
+                TourInput data = new TourInput
+                {
                     Name = this.Tourname,
                     Description = this.Description,
                     From = this.From,
                     To = this.To,
-            };
+                    TransportType = this.TransportType  
+                };
 
                 // Json -> String
                 string dataJson = JsonConvert.SerializeObject(data);
@@ -103,13 +107,13 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             bool isValid = true;
 
             // Are all Inputs filled out?
-            if(Tourname == null || Description == null || From == null || To == null)
+            if (Tourname == null || Description == null || From == null || To == null)
             {
                 isValid = false;
             }
 
             // Do the given Locations have the correct Format?
-            if(!ValidateLocation(From) || !ValidateLocation(To))
+            if (!ValidateLocation(From) || !ValidateLocation(To))
             {
                 isValid = false;
             }

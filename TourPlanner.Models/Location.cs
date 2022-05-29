@@ -1,8 +1,10 @@
-﻿namespace TourPlanner.Models
+﻿using TourPlanner.Exceptions;
+using TourPlanner.Helper;
+
+namespace TourPlanner.Models
 {
     public class Location
     {
-        // vgl. MapQuest Location ?
         public string Street { get; set; }
         public string City { get; set; }
         public string County { get; set; }
@@ -11,10 +13,7 @@
         public string PostalCode { get; set; }
 
         public Location()
-        {
-
-        }
-
+        {}
 
         public Location(string location)
         {
@@ -23,8 +22,9 @@
 
         private void ParseLocation(string location)
         {
-            // Street, City, Country, Postal Code
-            // Marchfeldstraße 25/9, 1200 Wien, Austria
+            if (!Validator.isLocation(location))
+                throw new CouldNotParseException("Failed to parse location");
+
 
             char[] delimiterChars = { ' ', ',' };
 
