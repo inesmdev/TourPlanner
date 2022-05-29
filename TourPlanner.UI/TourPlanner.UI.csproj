@@ -23,4 +23,17 @@
     <ProjectReference Include="..\TourPlanner.Models\TourPlanner.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Dialogs\DialogFilePath\DialogFilePath.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Dialogs\DialogFilePath\DialogFilePath.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

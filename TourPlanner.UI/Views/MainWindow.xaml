@@ -12,8 +12,7 @@
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
 
-
-
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top" Padding="2">
             <Menu.ItemsPanel>
@@ -22,7 +21,8 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="_File">
-                <MenuItem Header="Exit"/>
+                <MenuItem Header="Export TourData" Command="{Binding ExportTourDataCommand}"/>
+                <MenuItem Header="Import TourData" Command="{Binding ImportTourDataCommand}"/>
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem Header="Cut"/>

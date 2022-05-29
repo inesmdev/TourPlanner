@@ -80,7 +80,6 @@ namespace TourPlanner.Api.Controllers
         }
 
         
-
         // DELETE action
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
@@ -99,7 +98,22 @@ namespace TourPlanner.Api.Controllers
             {
                 return BadRequest();
             }
-
         }
+
+
+        /* 
+        [HttpPost]
+        public IActionResult ImportTourData(List<TourUI> tours)
+        {
+            Tour tour = _tourservice.Add(tourinput);
+
+            if (tour == null)
+                return BadRequest();
+            else
+                return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description, From = tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);
+        }
+        */
+
+
     }
 }

@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Models;
+using TourPlanner.UI.ImportExport;
 using TourPlanner.UI.Models;
 using TourPlanner.UI.Search;
 
@@ -18,7 +21,6 @@ namespace TourPlanner.UI.ViewModels
     {
         public ObservableCollection<TourUI> TourList { get; private set; }
         public ObservableCollection<TourUI> TourListBackup { get; private set; }
-
 
         private RelayCommand addTourCommand;
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour);
@@ -49,6 +51,16 @@ namespace TourPlanner.UI.ViewModels
 
         private RelayCommand resetFilterCommand;
         public ICommand ResetFilterCommand => resetFilterCommand ??= new RelayCommand(ResetFilter);
+
+
+        private RelayCommand exportTourDataCommand;
+        public ICommand ExportTourDataCommand => exportTourDataCommand ??= new RelayCommand(ExportTourData);
+
+
+        private RelayCommand importTourDataCommand;
+        public ICommand ImportTourDataCommand => importTourDataCommand ??= new RelayCommand(ImportTourData);
+
+
 
         public string SearchTerm { get; set; }
 
@@ -414,7 +426,6 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-
         private async void DeleteTourLog(object parameter)
         {
             if (selectedTourLog != null)
@@ -471,5 +482,49 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
+
+        private void ImportTourData(object parameter)
+        {
+            // FileInput
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON file (*.json)|*.json | Text file (*.txt)|*.txt";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var fileContent = File.ReadAllText(openFileDialog.FileName);
+
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                       // var content = new StringContent(data, Encoding.UTF8, "application/json");
+                       // var res = await client.PostAsync("https://localhost:5001/TourLog/" + selectedTourLog.Id.ToString("N"), content);
+
+
+                    }
+                }
+                catch
+                {
+                    // Error Popup
+                }
+
+                List<TourUI> tours = JsonConvert.DeserializeObject<List<TourUI>>(fileContent);
+
+                RaisePropertyChangedEvent("TourList");
+
+                // If tours dont already exist -> change if data has changed, else create bew tizr
+
+            }
+        }
+
+
+        private void ExportTourData(object parameter)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON file (*.json)|*.json | Text file (*.txt)|*.txt";
+
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(TourList));
+        }
     }
 }

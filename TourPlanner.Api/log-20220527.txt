@@ -22,3 +22,9 @@
 2022-05-27 21:50:19.428 +02:00 [INF] Connection to PostgresDB established.
 2022-05-27 21:50:20.003 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-05-27 21:50:20.050 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-27 21:52:31.998 +02:00 [INF] Connection to PostgresDB established.
+2022-05-27 21:52:32.697 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-27 21:52:32.755 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-27 21:58:32.838 +02:00 [INF] Connection to PostgresDB established.
+2022-05-27 21:58:33.397 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-27 21:58:33.433 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
