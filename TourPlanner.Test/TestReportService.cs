@@ -16,7 +16,7 @@ namespace TourPlanner.Test
         }
 
         [Test]
-        public void TestGetCoordinates()
+        public void TestReport()
         {
             Tour tour = new Tour() { Name = "Report Test", From = "Someplace 6", To = "Anotherplace 5", Description = "This is a very authentic description", EstimatedTime = 9, Distance = 10};
             tour.GenerateSummary();

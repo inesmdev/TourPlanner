@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 //using System.Text.Json;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Net.Http;
 using TourPlanner.Models;
@@ -36,6 +39,19 @@ namespace TourPlanner.Api.Services.MapQuestService
                 tour.EstimatedTime = time;
             }
             return tour;
+        }
+
+        public async Task<Image> GetMap(string from, string to)
+        {
+            Image map;
+            var url = "https://www.mapquestapi.com/staticmap/v5/map?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&start=" + to + "&end=" + from + "&size=600,400@2x";
+            using var client = new HttpClient();
+            var response = await client.PostAsync(url, null);
+            var bytes = response.Content.ReadAsByteArrayAsync().Result;
+            MemoryStream ms = new MemoryStream(bytes);
+            map = Image.FromStream(ms);
+            map.Save("test.jpg", ImageFormat.Jpeg);
+            return map;
         }
     }
 }
