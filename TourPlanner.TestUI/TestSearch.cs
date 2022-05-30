@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TourPlanner.UI.Models;
 using TourPlanner.UI.Search;
 
-namespace TourPlanner.Test
+namespace TourPlanner.TestUI
 {
     public class TestSearch
     {
@@ -27,12 +27,18 @@ namespace TourPlanner.Test
             tours.Add(new Tour()
             {
                 Id = System.Guid.NewGuid(),
-                Name = "TestTour2"
+                Name = "CoolTour"
             }); 
                   
             TourList.Add(new TourUI()
             {
                 TourData = tours[0],
+                Tourlogs = new ObservableCollection<TourLog>()
+            });
+
+            TourList.Add(new TourUI()
+            {
+                TourData = tours[1],
                 Tourlogs = new ObservableCollection<TourLog>()
             });
         }
@@ -42,33 +48,20 @@ namespace TourPlanner.Test
         {
             string keyword = "asdf";
 
-            SearchService.Search(TourList, keyword);
+            var res = SearchService.Search(TourList, keyword);
 
-            Assert.Pass();
+            Assert.AreEqual(new List<TourUI>(), res);
         }
 
-        [Test]
-        public void TestSearch_Match_in_TourLog()
-        {
-
-
-            Assert.Pass();
-        }
 
         [Test]
-        public void TestSearch_Match_in_Tour()
+        public void TestSearch_Match()
         {
+            string keyword = "ool";
 
+            var res = SearchService.Search(TourList, keyword);
 
-            Assert.Pass();
-        }
-
-        [Test]
-        public void TestSearch_EmptyTourList()
-        {
-
-
-            Assert.Pass();
-        }  
+            Assert.AreEqual(TourList[1], res[0]);
+        } 
     }
 }
