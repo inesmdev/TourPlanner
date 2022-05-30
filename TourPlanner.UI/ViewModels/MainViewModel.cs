@@ -471,36 +471,36 @@ namespace TourPlanner.UI.ViewModels
          *  Import tourdata from .json or .txt file
          *  TODO: Save to db, validate if file has correct format (-> json)
          */
-        private void ImportTourData(object parameter)
+        private async void ImportTourData(object parameter)
         {
             // FileInput
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "JSON file (*.json)|*.json | Text file (*.txt)|*.txt";
+            openFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
 
             if (openFileDialog.ShowDialog() == true)
             {
-                var fileContent = File.ReadAllText(openFileDialog.FileName);
+                string fileContent = File.ReadAllText(openFileDialog.FileName);
 
+                // Valid File Content? -> Json?
                 try
                 {
+                    List<TourUI> tours = JsonConvert.DeserializeObject<List<TourUI>>(fileContent);
+
                     using (HttpClient client = new HttpClient())
                     {
-                        // var content = new StringContent(data, Encoding.UTF8, "application/json");
-                        // var res = await client.PostAsync("https://localhost:5001/TourLog/" + selectedTourLog.Id.ToString("N"), content);
+                        var content = new StringContent(fileContent, Encoding.UTF8, "application/json");
+                        _ = await client.PutAsync("https://localhost:5001/Import", content);
 
-
+                        LoadListFromBackup();
+                        TourList = new ObservableCollection<TourUI>(tours);
+                        RaisePropertyChangedEvent("TourList");
                     }
                 }
                 catch
                 {
                     // Error Popup
-                }
-
-                List<TourUI> tours = JsonConvert.DeserializeObject<List<TourUI>>(fileContent);
-
-                RaisePropertyChangedEvent("TourList");
-
-                // If tours dont already exist -> change if data has changed, else create bew tizr
+                    MessageBox.Show("Error importing tours");
+                }       
             }
         }
 
@@ -510,7 +510,7 @@ namespace TourPlanner.UI.ViewModels
         private void ExportTourData(object parameter)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JSON file (*.json)|*.json | Text file (*.txt)|*.txt";
+            saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(TourList));

@@ -4,5 +4,7 @@ using TourPlanner.Repositories;
 namespace TourPlanner.DAL.Repositories
 {
     public interface ITourRepository : IRepository<Tour>
-    {}
+    {
+        public bool DeleteAll();
+    }
 }

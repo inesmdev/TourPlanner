@@ -1,38 +1,32 @@
-2022-05-30 00:15:11.548 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:15:12.408 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:15:12.473 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:15:44.411 +02:00 [INF] Tour successfully created, Tourname: SupercoolTour Nr 5\nFrom: Leppersdor 93, 4612 Scharten, Austria\nTo: Leppersdor 2, 4612 Scharten, Test\nDescription: TestTour\nEstimated Time: 20412\nDistance: 539,4167
-2022-05-30 00:16:08.865 +02:00 [INF] Tourlog (93f9b657-edf3-4a04-80cc-66ca723b4ee0) successfully created
-2022-05-30 00:16:53.524 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:16:54.245 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:16:54.304 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:16:54.328 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:17:06.189 +02:00 [INF] Tourlog (81559299-d479-4427-8c44-25c75536dbe5) successfully created
-2022-05-30 00:18:16.240 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:18:16.977 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:18:17.044 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:18:17.085 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:18:23.729 +02:00 [INF] Tourlog (60249791-a38e-43d8-8582-2958042c8e13) successfully created
-2022-05-30 00:19:12.972 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:19:13.633 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:19:13.723 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:19:13.764 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:19:21.378 +02:00 [INF] Tourlog (5b2cbfcc-3aaa-46bd-b902-290c3f4b5e50) successfully created
-2022-05-30 00:33:58.935 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:33:59.615 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:33:59.688 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:33:59.720 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:34:21.259 +02:00 [INF] Tour successfully created, Tourname: testtour\nFrom: Leppersdorf 93, 4612 Scharten, Austria\nTo: Leppersdorf 3, 4612 Scharten, Austria\nDescription: asdf\nEstimated Time: 34173\nDistance: 969,987
-2022-05-30 00:34:31.345 +02:00 [INF] Tourlog (9728cdd9-1aff-4572-a3e9-2c8a1744dcd0) successfully created
-2022-05-30 00:34:42.039 +02:00 [DBG] Execute SQL Statement: UPDATE tour_log 
-                             SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
-                             WHERE tour_log_id=@tour_log_id;
-2022-05-30 00:34:42.042 +02:00 [INF] Tourlog (9728cdd9-1aff-4572-a3e9-2c8a1744dcd0) sucessfully updated.
-2022-05-30 00:34:51.331 +02:00 [INF] Tourlog (bdf0921f-03fe-41af-b275-3dadbc5da26d) successfully created
-2022-05-30 00:39:20.228 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:39:20.872 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:39:20.925 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:39:20.953 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:40:44.259 +02:00 [INF] Connection to PostgresDB established.
-2022-05-30 00:40:44.875 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
-2022-05-30 00:40:44.917 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:55:16.411 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 11:55:17.005 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:55:17.065 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:58:23.158 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 11:58:23.851 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:58:23.908 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:59:53.821 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 11:59:54.498 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 11:59:54.556 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:02:21.898 +02:00 [INF] Tour successfully created, Tourname: asdf
+From: Leppersdorf 93, 4612 Scharten, Austria
+To: Leppersdorf 2, 4612 Scharten, Austria
+Description: asdf
+Estimated Time: 20412
+Distance: 539,4167
+2022-05-30 12:02:28.162 +02:00 [INF] Tourlog (04854c8b-f76e-4afa-9b45-56e4c3986747) successfully created
+2022-05-30 12:03:56.269 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 12:03:56.897 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:03:56.946 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:03:56.982 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:07:51.300 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 12:07:51.899 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:07:51.955 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:07:51.984 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:08:37.662 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 12:08:38.404 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:08:38.465 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:08:38.495 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:10:31.463 +02:00 [INF] Connection to PostgresDB established.
+2022-05-30 12:10:32.042 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:10:32.093 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-30 12:10:32.116 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]

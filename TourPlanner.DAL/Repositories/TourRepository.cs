@@ -47,7 +47,9 @@ namespace TourPlanner.DAL.Repositories
             }
         }
 
-
+        /*
+         *  Delete
+         */
         public bool Delete(Guid id)
         {
             using (var command = conn.CreateCommand())
@@ -56,6 +58,18 @@ namespace TourPlanner.DAL.Repositories
 
                 command.CommandText = sql;
                 command.Parameters.AddWithValue("@tour_id", id.ToString("N"));
+
+                return command.ExecuteNonQuery() > 0 ? true : false;
+            }
+        }
+
+        public bool DeleteAll()
+        {
+            using (var command = conn.CreateCommand())
+            {
+                string sql = $"DELETE FROM {TABLE_NAME};";
+
+                command.CommandText = sql;
 
                 return command.ExecuteNonQuery() > 0 ? true : false;
             }

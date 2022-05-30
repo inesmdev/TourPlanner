@@ -5,6 +5,7 @@ using System.Linq;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
+using TourPlanner.UI.Models;
 
 namespace TourPlanner.Api.Services.TourService
 {
@@ -113,5 +114,8 @@ namespace TourPlanner.Api.Services.TourService
                 return null;
             }
         }
+
+
+      
     }
 }

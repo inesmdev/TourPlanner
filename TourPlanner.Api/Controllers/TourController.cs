@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using TourPlanner.Api.Services.TourService;
 using TourPlanner.Models;
+using TourPlanner.UI.Models;
 
 namespace TourPlanner.Api.Controllers
 {
@@ -116,17 +117,7 @@ namespace TourPlanner.Api.Controllers
         }
 
 
-        /* 
-        [HttpPost]
-        public IActionResult ImportTourData(List<TourUI> tours)
-        {
-            Tour tour = _tourservice.Add(tourinput);
-
-            if (tour == null)
-                return BadRequest();
-            else
-                return CreatedAtAction(nameof(Create), new { Id = tour.Id, Name = tour.Name, Description = tour.Description, From = tour.From, To = tour.To, EstimatedTime = tour.EstimatedTime, Distance = tour.Distance, Summary = tour.Summary }, tour);
-        }
-        */
+        
+       
     }
 }
