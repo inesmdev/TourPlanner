@@ -1,8 +1,6 @@
 using NUnit.Framework;
-using TourPlanner.Api.Services;
-using TourPlanner.Test.Mocks;
 
-namespace TourPlanner.Test
+namespace TourPlanner.TestUI
 {
     public class Tests
     {
@@ -12,7 +10,7 @@ namespace TourPlanner.Test
         }
 
         [Test]
-        public void TestAddTour()
+        public void Test1()
         {
             Assert.Pass();
         }

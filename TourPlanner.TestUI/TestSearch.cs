@@ -1,26 +1,38 @@
 ﻿using NUnit.Framework;
 using TourPlanner.Models;
-using TourPlanner.UI.Models;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using TourPlanner.UI.Models;
+using TourPlanner.UI.Search;
 
 namespace TourPlanner.Test
 {
     public class TestSearch
     {
-        private ObservableCollection<TourUI> tours;
+        private ObservableCollection<TourUI> TourList;
+        private List<Tour> tours;
 
         [SetUp]
         public void Setup()
         {
+            TourList = new();
             tours = new();
 
-            tours.Add(new TourUI()
+            tours.Add(new Tour()
             {
-                TourData = new Tour()
-                {
-                    Id = System.Guid.NewGuid(),
-                    Name = "TestTour1"
-                },
+                Id = System.Guid.NewGuid(),
+                Name = "TestTour1"
+            });
+
+            tours.Add(new Tour()
+            {
+                Id = System.Guid.NewGuid(),
+                Name = "TestTour2"
+            }); 
+                  
+            TourList.Add(new TourUI()
+            {
+                TourData = tours[0],
                 Tourlogs = new ObservableCollection<TourLog>()
             });
         }
@@ -28,7 +40,9 @@ namespace TourPlanner.Test
         [Test]
         public void TestSearch_Notfound()
         {
-       
+            string keyword = "asdf";
+
+            SearchService.Search(TourList, keyword);
 
             Assert.Pass();
         }
@@ -55,6 +69,6 @@ namespace TourPlanner.Test
 
 
             Assert.Pass();
-        }
+        }  
     }
 }
