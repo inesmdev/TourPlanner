@@ -101,7 +101,9 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand importTourDataCommand;
         public ICommand ImportTourDataCommand => importTourDataCommand ??= new RelayCommand(ImportTourData);
 
-     
+        private RelayCommand changeAppearanceCommand;
+        public ICommand ChangeAppearanceCommand => changeAppearanceCommand ??= new RelayCommand(ChangeAppearance);
+
         /*
          *  Constructor
          */
@@ -158,6 +160,21 @@ namespace TourPlanner.UI.ViewModels
                     }
                 }
             }
+        }
+
+
+        /*
+         *  LightMode/Darkmode
+         */
+        private void ChangeAppearance(object paramter)
+        {
+            if (Properties.Settings.Default.ColorMode == "Dark")
+                Properties.Settings.Default.ColorMode = "Light";
+            else
+                Properties.Settings.Default.ColorMode = "Dark";
+
+            Properties.Settings.Default.Save();
+
         }
 
 
@@ -469,7 +486,6 @@ namespace TourPlanner.UI.ViewModels
 
         /*
          *  Import tourdata from .json or .txt file
-         *  TODO: Save to db, validate if file has correct format (-> json)
          */
         private async void ImportTourData(object parameter)
         {

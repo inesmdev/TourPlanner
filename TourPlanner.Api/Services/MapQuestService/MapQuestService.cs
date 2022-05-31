@@ -7,11 +7,21 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using TourPlanner.Models;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace TourPlanner.Api.Services.MapQuestService
 {
     public class MapQuestService : IMapQuestService
     {
+        IConfiguration _config;
+        
+    
+
+        public MapQuestService(IConfiguration config)
+        {
+            _config = config;
+        }
+
         public async Task<MapQuestTour> GetTour(Location from, Location to)
         {
             MapQuestTour tour = new MapQuestTour();
@@ -25,7 +35,7 @@ namespace TourPlanner.Api.Services.MapQuestService
             url += (to.City != null) ? to.City + "," : "";
             url += (to.County != null) ? to.County + "," : "";
             url += (to.PostalCode != null) ? to.PostalCode + "," : "";*/
-            var url = "http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&unit=k&" + "from=" + from.Street + "," + from.City + "," + from.Country + "," + from.PostalCode + "&to=" + to.Street + "," + to.City + "," + to.Country + "," + to.PostalCode + "&time";
+            var url = $"http://www.mapquestapi.com/directions/v2/route?key={_config.GetValue<string>("MapQuest:ApiKey")}&unit=k&" + "from=" + from.Street + "," + from.City + "," + from.Country + "," + from.PostalCode + "&to=" + to.Street + "," + to.City + "," + to.Country + "," + to.PostalCode + "&time";
             using var client = new HttpClient();
             var response = await client.PostAsync(url, null);
             string result = response.Content.ReadAsStringAsync().Result;

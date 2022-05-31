@@ -8,6 +8,7 @@
              xmlns:dialogFilePath="clr-namespace:TourPlanner.UI.Dialogs.DialogFilePath"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:enm="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
+             xmlns:properties="clr-namespace:TourPlanner.UI.Properties"
              Startup="OnStartup"
              >
 
@@ -52,6 +53,38 @@
                 <x:TypeExtension TypeName='enm:EnumTransportType'></x:TypeExtension>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        
+        <!-- LightMode/DarkMode -->
+        <!-- Default: Lightmode-->
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="#363C49"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
+                    <Setter Property="Background" Value="#363C49"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="#363C49"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
     </Application.Resources>
 </Application>
     

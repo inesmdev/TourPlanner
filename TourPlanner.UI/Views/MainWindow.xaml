@@ -4,6 +4,7 @@
         Title="TourPlanner" Height="1080" Width="1920"
         WindowState="Maximized"
         xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        xmlns:local="clr-namespace:TourPlanner.UI"
         >
     
     <intr:Interaction.Triggers>
@@ -27,7 +28,7 @@
                 <MenuItem Header="Generate Pdf Report" Command="{Binding GeneratePdfReportCommand}"/>
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem Header="Cut"/>
+                <MenuItem Header="Change Appearance (LightMode/DarkMode)" Command="{Binding ChangeAppearanceCommand}"/>
             </MenuItem>
 
             <Grid HorizontalAlignment="Right" Margin="15 0 0 0">

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 using System.Drawing;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.Models;
@@ -8,11 +9,13 @@ namespace TourPlanner.Test
     public class TestMapService
     {
         private IMapQuestService _mapQuestService;
+        private IConfiguration config;
 
         [SetUp]
         public void Setup()
         {
-            _mapQuestService = new MapQuestService();
+            config = new ConfigurationBuilder().AddUserSecrets<TestMapService>().Build();
+            _mapQuestService = new MapQuestService(config);
         }
 
         [Test]
