@@ -53,38 +53,27 @@
                 <x:TypeExtension TypeName='enm:EnumTransportType'></x:TypeExtension>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
-        
-        <!-- LightMode/DarkMode -->
-        <!-- Default: Lightmode-->
-        <Style TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="#363C49"/>
-                </DataTrigger>
-
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
-                    <Setter Property="Background" Value="#363C49"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
+       
+        <!-- Style Options -->
         <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="#363C49"/>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Small">
+                    <Setter Property="FontSize" Value="12"/>
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
-                    <Setter Property="Background" Value="Black"/>
-                    <Setter Property="Foreground" Value="White"/>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Medium">
+                    <Setter Property="FontSize" Value="14"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Big">
+                    <Setter Property="FontSize" Value="16"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Huge">
+                    <Setter Property="FontSize" Value="18"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
-
     </Application.Resources>
 </Application>
     

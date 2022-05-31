@@ -25,13 +25,13 @@ namespace TourPlanner.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Light")]
-        public string ColorMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("Small")]
+        public string FontSize {
             get {
-                return ((string)(this["ColorMode"]));
+                return ((string)(this["FontSize"]));
             }
             set {
-                this["ColorMode"] = value;
+                this["FontSize"] = value;
             }
         }
     }

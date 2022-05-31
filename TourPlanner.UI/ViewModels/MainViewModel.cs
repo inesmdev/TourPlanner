@@ -101,8 +101,18 @@ namespace TourPlanner.UI.ViewModels
         private RelayCommand importTourDataCommand;
         public ICommand ImportTourDataCommand => importTourDataCommand ??= new RelayCommand(ImportTourData);
 
-        private RelayCommand changeAppearanceCommand;
-        public ICommand ChangeAppearanceCommand => changeAppearanceCommand ??= new RelayCommand(ChangeAppearance);
+        private RelayCommand smallFontCommand;
+        public ICommand SmallFontCommand => smallFontCommand ??= new RelayCommand(SmallFont);
+
+        private RelayCommand bigFontCommand;
+        public ICommand BigFontCommand => bigFontCommand ??= new RelayCommand(BigFont);
+
+        private RelayCommand mediumFontCommand;
+        public ICommand MediumFontCommand => mediumFontCommand ??= new RelayCommand(MediumFont);
+
+        private RelayCommand hugeFontCommand;
+        public ICommand HugeFontCommand => hugeFontCommand ??= new RelayCommand(HugeFont);
+
 
         /*
          *  Constructor
@@ -112,25 +122,7 @@ namespace TourPlanner.UI.ViewModels
             TourList = new ObservableCollection<TourUI>();
             TourListBackup = null;
         }
-
-        /*
-         *  Reset filtered tourlist (search)
-         */
-        private void ResetFilter(object parameter)
-        {
-            LoadListFromBackup();
-        }
-
-        private void LoadListFromBackup()
-        {
-            if (TourListBackup != null)
-            {
-                TourList = TourListBackup;
-                TourListBackup = null;
-                RaisePropertyChangedEvent("TourList");
-            }
-        }
-
+     
         /*
          *  Generate pdf report
          *  TODO: File download
@@ -164,17 +156,30 @@ namespace TourPlanner.UI.ViewModels
 
 
         /*
-         *  LightMode/Darkmode
+         *  FontSize
          */
-        private void ChangeAppearance(object paramter)
+        private void SmallFont(object paramter)
         {
-            if (Properties.Settings.Default.ColorMode == "Dark")
-                Properties.Settings.Default.ColorMode = "Light";
-            else
-                Properties.Settings.Default.ColorMode = "Dark";
-
+            Properties.Settings.Default.FontSize="Small";
             Properties.Settings.Default.Save();
+        }
+   
+        private void MediumFont(object paramter)
+        {
+            Properties.Settings.Default.FontSize = "Medium";
+            Properties.Settings.Default.Save();
+        }
+        
+        private void BigFont(object paramter)
+        {
+            Properties.Settings.Default.FontSize = "Big";
+            Properties.Settings.Default.Save();
+        }
 
+        private void HugeFont(object paramter)
+        {
+            Properties.Settings.Default.FontSize = "Huge";
+            Properties.Settings.Default.Save();
         }
 
 
@@ -194,8 +199,27 @@ namespace TourPlanner.UI.ViewModels
 
 
         /*
-         *  Create new tour
+        *  Reset filtered tourlist (search)
+        */
+        private void ResetFilter(object parameter)
+        {
+            LoadListFromBackup();
+        }
+
+        private void LoadListFromBackup()
+        {
+            if (TourListBackup != null)
+            {
+                TourList = TourListBackup;
+                TourListBackup = null;
+                RaisePropertyChangedEvent("TourList");
+            }
+        }
+
+        /*
+         *  Tour
          */
+        // Add
         private async void AddTour(object parameter)
         {
             Dialogs.DialogService.DialogViewModelBase vm = new Dialogs.DialogCreateTour.DialogCreateTourViewModel("Create new Tour");
@@ -245,10 +269,7 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-
-        /*
-         *  Delete tour -> Delete tour and all tourlogs for this tour (db setting cascade)
-         */
+        // Delete tour -> Delete tour and all tourlogs for this tour (db setting cascade)
         private async void DeleteTour(object parameter)
         {
             if (selectedTour != null)
@@ -277,10 +298,7 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-
-        /*
-        *  Edit tour
-        */
+        // Edit tour
         private async void EditTour(object parameter)
         {
             if (selectedTour != null)
@@ -316,10 +334,7 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
-
-        /*
-         * Load tours when window is loaded
-         */
+        // Load tours when window is loaded   
         private async void WindowLoaded(object parameter)
         {
             using (HttpClient client = new HttpClient())
@@ -368,8 +383,9 @@ namespace TourPlanner.UI.ViewModels
         }
 
         /*
-         *  Create new TourLog
+         *  Tourlogs
          */
+        // Create new tourlog
         private async void AddTourLog(object parameter)
         {
             if (selectedTour != null)
@@ -427,6 +443,7 @@ namespace TourPlanner.UI.ViewModels
             }
         }
 
+        // Delete tourlog
         private async void DeleteTourLog(object parameter)
         {
             if (selectedTourLog != null)
@@ -450,7 +467,7 @@ namespace TourPlanner.UI.ViewModels
 
         }
 
-        
+        // Edit tourlog
         private async void EditTourLog(object parameter)
         {
             if (selectedTourLog != null)
@@ -483,6 +500,7 @@ namespace TourPlanner.UI.ViewModels
                 }
             }
         }
+
 
         /*
          *  Import tourdata from .json or .txt file

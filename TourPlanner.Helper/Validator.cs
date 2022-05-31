@@ -13,7 +13,10 @@ namespace TourPlanner.Helper
             Regex regex = new Regex(@"[0-9]+",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-            return regex.IsMatch(input);
+            if (regex.Match(input).Success && regex.Match(input).Length == input.Length)
+                return true;
+            else
+                return false;
         }
 
         /*
@@ -25,7 +28,10 @@ namespace TourPlanner.Helper
             Regex regex = new Regex(@"[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-            return regex.IsMatch(input);
+            if (regex.Match(input).Success && regex.Match(input).Length == input.Length)
+                return true;
+            else
+                return false;
         }
 
         /*
@@ -37,7 +43,10 @@ namespace TourPlanner.Helper
             Regex regex = new Regex(@"[A-Za-z0-9_ ]+",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-            return regex.IsMatch(input);
+            if (regex.Match(input).Success && regex.Match(input).Length == input.Length)
+                return true;
+            else
+                return false;
         }
 
         /*
@@ -51,7 +60,10 @@ namespace TourPlanner.Helper
             Regex regex = new Regex(locationPattern,
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-            return regex.IsMatch(input);
+            if (regex.Match(input).Success && regex.Match(input).Length == input.Length)
+                return true;
+            else
+                return false; ;
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Linq;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
-using TourPlanner.UI.Models;
 
 namespace TourPlanner.Api.Services.TourService
 {
@@ -55,7 +54,7 @@ namespace TourPlanner.Api.Services.TourService
 
                 return tour;
             }
-            catch (Exception ex)
+            catch
             {
                 _logger.LogError($"Could not create tour ({tour.Id}, \"{ tour.Name}\")");
                 return null;
@@ -114,8 +113,5 @@ namespace TourPlanner.Api.Services.TourService
                 return null;
             }
         }
-
-
-      
     }
 }
