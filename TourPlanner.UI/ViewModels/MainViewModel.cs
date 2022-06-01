@@ -323,6 +323,8 @@ namespace TourPlanner.UI.ViewModels
                             Tour tour = JsonConvert.DeserializeObject<Tour>(httpcontent);
 
                             TourList[TourList.IndexOf(selectedTour)].TourData = tour;
+                           // RaisePropertyChangedEvent("TourList");
+
                         }
                         else
                         {

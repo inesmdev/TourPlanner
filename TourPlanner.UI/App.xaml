@@ -10,10 +10,13 @@
              xmlns:enm="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
              xmlns:properties="clr-namespace:TourPlanner.UI.Properties"
              Startup="OnStartup"
+             xmlns:viewModels="clr-namespace:TourPlanner.UI.ViewModels"
              >
 
     <!-- Resources defined at the application level can be accessed by all other pages that are part of the application -->
     <Application.Resources>
+        <viewModels:MainViewModel x:Key="MainViewModel"/>
+        
         <!-- Custom Dialog Windows -->
         <DataTemplate DataType="{x:Type dialogYesNo:DialogYesNoViewModel}">
             <dialogYesNo:DialogYesNoView></dialogYesNo:DialogYesNoView>

@@ -106,6 +106,7 @@ namespace TourPlanner.Api.Services.TourService
             try
             {
                 _repository.Update(tour);
+                tour.GenerateSummary();
                 return tour;
             }
             catch

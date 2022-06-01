@@ -19,6 +19,13 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public string TotalTime { get; set; }
         public string Comment { get; set; }
 
+
+
+       
+
+
+
+
         private bool editMode = false;
 
         private ICommand yesCommand = null;
@@ -52,7 +59,9 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public DialogCreateTourLogViewModel(string message, TourLog tourlog)
         : base(message)
         {
-            Id = tourlog.Id;
+            
+
+        Id = tourlog.Id;
             TourId = tourlog.TourId;
             TourDifficulty = tourlog.TourDifficulty;
             TourRating = tourlog.TourRating;

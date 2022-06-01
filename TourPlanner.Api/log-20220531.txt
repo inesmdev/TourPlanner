@@ -127,3 +127,43 @@ Distance: 539,4167
                              SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
                              WHERE tour_log_id=@tour_log_id;
 2022-05-31 22:39:06.592 +02:00 [INF] Tourlog (10c4d5d1-63d3-4e35-972a-32d3e9387449) sucessfully updated.
+2022-05-31 22:43:54.798 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 22:43:55.627 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 22:43:55.708 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 22:43:55.749 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 22:43:55.784 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:02:34.143 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:02:34.945 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:02:35.020 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:02:35.063 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:02:35.102 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:03:11.386 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:03:12.222 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:03:12.295 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:03:12.334 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:03:12.368 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:04:12.996 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:04:13.864 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:04:13.946 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:04:13.984 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:04:14.020 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:05:50.188 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:05:51.134 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:05:51.217 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:05:51.262 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:05:51.304 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:07:28.506 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:07:29.252 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:07:29.357 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:07:29.397 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:07:29.440 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:08:33.329 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:08:34.294 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:08:34.378 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:08:34.433 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:08:34.470 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:09:18.568 +02:00 [INF] Connection to PostgresDB established.
+2022-05-31 23:09:19.340 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:09:19.398 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:09:19.426 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-05-31 23:09:19.453 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
