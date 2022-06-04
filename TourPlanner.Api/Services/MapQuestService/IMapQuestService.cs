@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,6 @@ namespace TourPlanner.Api.Services.MapQuestService
     {
         //Tour GetTour(string start, string end);
         public Task<MapQuestTour> GetTour(Location from, Location to);
-        public Task<Image> GetMap(string from, string to);
+        public Task<MemoryStream> GetMap(string from, string to);
     }
 }

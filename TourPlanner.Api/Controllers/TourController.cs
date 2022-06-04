@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TourPlanner.Api.Services.TourService;
 using TourPlanner.Models;
 using TourPlanner.UI.Models;
@@ -56,23 +57,35 @@ namespace TourPlanner.Api.Controllers
          */
         [HttpPost]
         public IActionResult Create(TourInput tourinput)
-        {      
+        {
             Tour tour = _tourservice.Add(tourinput);
 
-            if(tour == null)
+            if (tour == null)
                 return BadRequest();
             else
-                return CreatedAtAction(nameof(Create), new {
-                    Id = tour.Id, 
-                    Name = tour.Name, 
-                    Description = tour.Description, 
-                    From=tour.From, 
-                    To = tour.To, 
-                    EstimatedTime = tour.EstimatedTime, 
-                    Distance = tour.Distance, 
-                    Summary = tour.Summary}, tour);
+                return CreatedAtAction(nameof(Create), new
+                {
+                    Id = tour.Id,
+                    Name = tour.Name,
+                    Description = tour.Description,
+                    From = tour.From,
+                    To = tour.To,
+                    EstimatedTime = tour.EstimatedTime,
+                    Distance = tour.Distance,
+                    Summary = tour.Summary
+                }, tour);
         }
 
+        [HttpPost("/TourMap")]
+        public IActionResult CreateMap(string coordinates)
+        {
+            MemoryStream map = _tourservice.GetMap(coordinates);
+
+            if (map == null)
+                return BadRequest();
+            else
+                return base.File(map, "image/jpg");
+        }
 
         /*
          *  Update tour by id

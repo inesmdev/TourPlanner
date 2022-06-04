@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
@@ -59,6 +60,15 @@ namespace TourPlanner.Api.Services.TourService
                 _logger.LogError($"Could not create tour ({tour.Id}, \"{ tour.Name}\")");
                 return null;
             }        
+        }
+
+        public MemoryStream GetMap(string coordinates)
+        {
+            MemoryStream map;
+            string from = coordinates.Split("+")[0];
+            string to = coordinates.Split("+")[1];
+            map = _mapapi.GetMap(from,to).Result;
+            return map;
         }
 
 

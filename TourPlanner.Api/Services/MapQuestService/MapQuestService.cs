@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 //using System.Text.Json;
 using System.Drawing;
@@ -14,8 +14,6 @@ namespace TourPlanner.Api.Services.MapQuestService
     public class MapQuestService : IMapQuestService
     {
         IConfiguration _config;
-        
-    
 
         public MapQuestService(IConfiguration config)
         {
@@ -41,27 +39,30 @@ namespace TourPlanner.Api.Services.MapQuestService
             string result = response.Content.ReadAsStringAsync().Result;
             var deserialize = JsonConvert.DeserializeObject<dynamic>(result);
             int responseStatus = deserialize.info.statuscode;
-            if(responseStatus == 0)
+            if (responseStatus == 0)
             {
                 int time = deserialize.route.time;
                 double distance = deserialize.route.distance;
+                string fromCoordinates = deserialize.route.boundingBox.lr.lat + deserialize.route.boundingBox.lr.lng;
+                string toCoordinates = deserialize.route.boundingBox.ul.lat + deserialize.route.boundingBox.ul.lng;
+                tour.Map = GetMap(fromCoordinates, toCoordinates).Result;
                 tour.Distance = distance;
                 tour.EstimatedTime = time;
             }
             return tour;
         }
 
-        public async Task<Image> GetMap(string from, string to)
+        public async Task<MemoryStream> GetMap(string from, string to)
         {
             Image map;
-            var url = "https://www.mapquestapi.com/staticmap/v5/map?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&start=" + to + "&end=" + from + "&size=600,400@2x";
+            var url = "https://www.mapquestapi.com/staticmap/v5/map?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&start=" + from + "&end=" + to + "&size=600,400@2x";
             using var client = new HttpClient();
-            var response = await client.PostAsync(url, null);
+            var response = await client.GetAsync(url);
             var bytes = response.Content.ReadAsByteArrayAsync().Result;
             MemoryStream ms = new MemoryStream(bytes);
-            map = Image.FromStream(ms);
-            map.Save("test.jpg", ImageFormat.Jpeg);
-            return map;
+            //map = Image.FromStream(ms);
+            //map.Save("test.jpg", ImageFormat.Jpeg);
+            return ms;
         }
     }
 }
