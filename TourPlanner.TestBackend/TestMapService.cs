@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
-using System.Drawing;
+using System.IO;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.Models;
 
@@ -34,7 +34,7 @@ namespace TourPlanner.Test
             string from = "48.239178,16.387205";
             string to = "48.24622,16.374119";
 
-            Image result = _mapQuestService.GetMap(from, to).Result;
+            MemoryStream result = _mapQuestService.GetMap(from,to).Result;
 
             Assert.IsNotNull(result);
         }

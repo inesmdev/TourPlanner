@@ -43,9 +43,6 @@ namespace TourPlanner.Api.Services.MapQuestService
             {
                 int time = deserialize.route.time;
                 double distance = deserialize.route.distance;
-                string fromCoordinates = deserialize.route.boundingBox.lr.lat + deserialize.route.boundingBox.lr.lng;
-                string toCoordinates = deserialize.route.boundingBox.ul.lat + deserialize.route.boundingBox.ul.lng;
-                tour.Map = GetMap(fromCoordinates, toCoordinates).Result;
                 tour.Distance = distance;
                 tour.EstimatedTime = time;
             }
@@ -54,7 +51,6 @@ namespace TourPlanner.Api.Services.MapQuestService
 
         public async Task<MemoryStream> GetMap(string from, string to)
         {
-            Image map;
             var url = "https://www.mapquestapi.com/staticmap/v5/map?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&start=" + from + "&end=" + to + "&size=600,400@2x";
             using var client = new HttpClient();
             var response = await client.GetAsync(url);
