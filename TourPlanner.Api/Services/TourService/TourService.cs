@@ -44,7 +44,7 @@ namespace TourPlanner.Api.Services.TourService
             // Call the MapQuest Api to get the missing information about the tour
             try
             {
-                MapQuestTour res = _mapapi.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
+                MapQuestTour res = _mapapi.GetTour(new Location(tourinput.From), new Location(tourinput.To), tour.Id.ToString()).Result;
                 tour.EstimatedTime = res.EstimatedTime;
                 tour.Distance = res.Distance;
 
@@ -64,10 +64,10 @@ namespace TourPlanner.Api.Services.TourService
 
         public MemoryStream GetMap(string coordinates)
         {
-            MemoryStream map;
+            MemoryStream map = null;
             string from = coordinates.Split("+")[0];
             string to = coordinates.Split("+")[1];
-            map = _mapapi.GetMap(from,to).Result;
+            //map = _mapapi.GetMap(from,to).Result;
             return map;
         }
 

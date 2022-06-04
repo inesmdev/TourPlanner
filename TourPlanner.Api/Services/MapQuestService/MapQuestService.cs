@@ -20,7 +20,7 @@ namespace TourPlanner.Api.Services.MapQuestService
             _config = config;
         }
 
-        public async Task<MapQuestTour> GetTour(Location from, Location to)
+        public async Task<MapQuestTour> GetTour(Location from, Location to, string tourID)
         {
             MapQuestTour tour = new MapQuestTour();
             /*var url = @"http://www.mapquestapi.com/directions/v2/route?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&unit=k&from=";
@@ -43,22 +43,26 @@ namespace TourPlanner.Api.Services.MapQuestService
             {
                 int time = deserialize.route.time;
                 double distance = deserialize.route.distance;
+                string fromCoords = deserialize.route.boundingBox.lr.lat + deserialize.route.boundingBox.lr.lng;
+                string toCoords = deserialize.route.boundingBox.ul.lat + deserialize.route.boundingBox.ul.lng;
+                GetMap(fromCoords, toCoords, tourID);
                 tour.Distance = distance;
                 tour.EstimatedTime = time;
             }
             return tour;
         }
 
-        public async Task<MemoryStream> GetMap(string from, string to)
+        public async Task GetMap(string from, string to, string tourID)
         {
-            var url = "https://www.mapquestapi.com/staticmap/v5/map?key=qJ4MqmQIdQbucdNJBPQGrn5g98Xsx6Qo&start=" + from + "&end=" + to + "&size=600,400@2x";
+            var url = $"https://www.mapquestapi.com/staticmap/v5/map?key={_config.GetValue<string>("MapQuest:ApiKey")}&start=" + from + "&end=" + to + "&size=600,400@2x";
             using var client = new HttpClient();
             var response = await client.GetAsync(url);
             var bytes = response.Content.ReadAsByteArrayAsync().Result;
             MemoryStream ms = new MemoryStream(bytes);
-            //map = Image.FromStream(ms);
-            //map.Save("test.jpg", ImageFormat.Jpeg);
-            return ms;
+            Image map = Image.FromStream(ms);
+            var path = Directory.GetCurrentDirectory();
+            Directory.CreateDirectory(path + "\\StaticFiles");
+            map.Save(path + "\\StaticFiles\\" + tourID + ".jpg", ImageFormat.Jpeg);
         }
     }
 }

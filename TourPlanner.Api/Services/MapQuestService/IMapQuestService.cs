@@ -12,7 +12,7 @@ namespace TourPlanner.Api.Services.MapQuestService
     public interface IMapQuestService
     {
         //Tour GetTour(string start, string end);
-        public Task<MapQuestTour> GetTour(Location from, Location to);
-        public Task<MemoryStream> GetMap(string from, string to);
+        public Task<MapQuestTour> GetTour(Location from, Location to, string tourID);
+        public Task GetMap(string from, string to, string tourID);
     }
 }

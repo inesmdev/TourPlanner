@@ -77,9 +77,10 @@ namespace TourPlanner.Api.Controllers
         }
 
         [HttpPost("/TourMap")]
-        public IActionResult CreateMap(string coordinates)
+        public IActionResult CreateMap(string addresses)
         {
-            MemoryStream map = _tourservice.GetMap(coordinates);
+            //addresses in form: "adresse1 + addresse2"
+            MemoryStream map = _tourservice.GetMap(addresses);
 
             if (map == null)
                 return BadRequest();
