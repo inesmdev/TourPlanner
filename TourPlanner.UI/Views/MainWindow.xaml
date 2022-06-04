@@ -138,7 +138,7 @@
                 <!-- Tour detail view -->
                 <TabControl Grid.Row="0" Grid.RowSpan="2">
                     <TabItem Header="Route">
-                        <Image Width="200" 
+                        <Image Width="800" 
                         Source="{Binding SelectedTour.ImagePath}"/>
                     </TabItem>
                     <TabItem Header="Description">
