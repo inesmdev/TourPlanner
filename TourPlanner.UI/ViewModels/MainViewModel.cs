@@ -251,7 +251,7 @@ namespace TourPlanner.UI.ViewModels
                             {
                                 TourData = tour,
                                 Tourlogs = new ObservableCollection<TourLog>(), //Tourlogs do not have any logs when created
-                                ImagePath = $"https://localhost:5001/StaticFiles/{tour.Id}.jpg"
+                                ImagePath = $"https://localhost:5001/StaticFiles/{tour.Id.ToString()}.jpg"
                             });
                         }
                         else
@@ -357,7 +357,7 @@ namespace TourPlanner.UI.ViewModels
                         TourUI tourui = new TourUI()
                         {
                             TourData = tour,
-                            ImagePath = $"https://localhost:5001/StaticFiles/{tour.Id.ToString("N")}.jpg"
+                            ImagePath = $"https://localhost:5001/StaticFiles/{tour.Id.ToString()}.jpg"
                         };
 
                         // Fetch tourlogs for each tour

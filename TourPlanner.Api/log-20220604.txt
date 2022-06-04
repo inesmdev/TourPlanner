@@ -37,3 +37,53 @@ System.IO.DirectoryNotFoundException: C:\Users\admin\dev\repos\SWEN_Semesterproj
 2022-06-04 14:52:35.011 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-06-04 14:52:35.076 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-06-04 14:52:35.130 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:47:28.906 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 17:47:29.432 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:47:29.475 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:47:29.514 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:47:29.540 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:47:54.680 +02:00 [INF] Tour successfully created, Tourname: TestRou
+From: Leppersdorf 93, 4612 Scharten, Austria
+To: Leppersdorf 2, 4612 Scharten, Austria
+Description: asdf
+Estimated Time: 20412
+Distance: 539,4167
+2022-06-04 17:49:14.726 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 17:49:15.194 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:49:15.251 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:49:15.299 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:49:15.325 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:49:15.358 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:49:30.696 +02:00 [INF] Tour successfully created, Tourname: daölkfäökl
+From: Leppersdorf 93, 4612 Scharten, Austria
+To: Leppersdorf 2, 4612 Scharten, Austria
+Description: dasfadsf
+Estimated Time: 46701
+Distance: 1296,6857
+2022-06-04 17:50:36.966 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 17:50:37.534 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:50:37.585 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:50:37.625 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:50:37.649 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:50:37.676 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:50:37.701 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:51:03.613 +02:00 [INF] Tour successfully created, Tourname: akdsfäk
+From: Leppersdorf 93, 4612 Scharten, Austria
+To: Leppersdorf 2, 4612 Scharten, Austria
+Description: asdfdsf
+Estimated Time: 46701
+Distance: 1296,6857
+2022-06-04 17:53:59.594 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 17:54:00.108 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.170 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.208 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.235 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.263 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.287 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:00.310 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 17:54:23.492 +02:00 [INF] Tour successfully created, Tourname: dsfjkö
+From: Leppersdorf 93, 4612 Scharten, Austria
+To: Leppersdorf 2, 4612 Scharten, Austria
+Description: jasdf
+Estimated Time: 20412
+Distance: 539,4167
