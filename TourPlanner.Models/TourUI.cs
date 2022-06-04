@@ -21,6 +21,20 @@ namespace TourPlanner.UI.Models
             }
         }
 
+        private string _imagePath;
+        public string ImagePath {
+            get
+            {
+                return _imagePath;
+            }
+            set
+            {
+                _imagePath = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImagePath"));
+
+            }
+        }
+
         public ObservableCollection<TourLog> Tourlogs { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

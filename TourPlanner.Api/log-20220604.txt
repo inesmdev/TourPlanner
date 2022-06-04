@@ -1,0 +1,39 @@
+2022-06-04 13:55:25.469 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 13:55:26.181 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 13:55:26.272 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 13:55:26.428 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 13:55:26.464 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:11:48.578 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 14:34:25.181 +02:00 [FTL] Application startup exception
+System.IO.DirectoryNotFoundException: C:\Users\admin\dev\repos\SWEN_Semesterproject\TourPlanner\TourPlanner.Api\StaticFiles\
+   at Microsoft.Extensions.FileProviders.PhysicalFileProvider..ctor(String root, ExclusionFilters filters)
+   at Microsoft.Extensions.FileProviders.PhysicalFileProvider..ctor(String root)
+   at TourPlanner.Api.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\admin\dev\repos\SWEN_Semesterproject\TourPlanner\TourPlanner.Api\Startup.cs:line 69
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2022-06-04 14:37:59.054 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 14:37:59.896 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:37:59.972 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:38:00.020 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:38:00.054 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:48:08.213 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 14:48:09.295 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:48:09.412 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:48:09.482 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:48:09.532 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:49:49.338 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 14:49:50.264 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:49:50.366 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:49:50.454 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:49:50.504 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:52:34.079 +02:00 [INF] Connection to PostgresDB established.
+2022-06-04 14:52:34.928 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:52:35.011 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:52:35.076 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-04 14:52:35.130 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]

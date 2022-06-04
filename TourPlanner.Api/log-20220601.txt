@@ -84,3 +84,13 @@ Distance: 1296,6857
 2022-06-01 14:18:46.965 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-06-01 14:18:46.993 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
 2022-06-01 14:18:47.024 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:22:28.174 +02:00 [INF] Connection to PostgresDB established.
+2022-06-01 14:22:28.810 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:22:28.874 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:22:28.915 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:22:28.946 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:33:52.481 +02:00 [INF] Connection to PostgresDB established.
+2022-06-01 14:33:53.147 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:33:53.198 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:33:53.234 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]
+2022-06-01 14:33:53.262 +02:00 [DBG] System.Collections.Generic.List`1[TourPlanner.Models.TourLog]

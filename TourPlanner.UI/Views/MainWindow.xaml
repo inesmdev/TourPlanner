@@ -138,7 +138,8 @@
                 <!-- Tour detail view -->
                 <TabControl Grid.Row="0" Grid.RowSpan="2">
                     <TabItem Header="Route">
-                        <TextBlock Text="Map Placeholder"/>
+                        <Image Width="200" 
+                        Source="{Binding SelectedTour.ImagePath}"/>
                     </TabItem>
                     <TabItem Header="Description">
                         <TextBlock Text="{Binding SelectedTour.TourData.Summary}"/>
