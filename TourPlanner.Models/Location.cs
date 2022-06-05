@@ -31,11 +31,13 @@ namespace TourPlanner.Models
             string[] words = location.Split(delimiterChars);
 
             this.Street = words[0] + " " + words[1];
-            this.PostalCode = words[2];
-            this.City = words[3];
-            this.County = words[4];
-
-            // Split with Regex
+            this.PostalCode = words[3];
+            this.City = words[4];
+            this.Country = words[6];
+            /*this.Street = words[0];
+            this.PostalCode = words[1];
+            this.City = words[2];
+            this.Country = words[3];*/
         }
     }
 }

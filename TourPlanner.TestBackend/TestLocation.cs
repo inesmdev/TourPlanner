@@ -35,5 +35,21 @@ namespace TourPlanner.TestBackend
                    Location loc = new Location(invalidLocation);
                });
         }
+
+        [Test]
+        [TestCase("Leppersdorf 23, 4612 Scharten, Austria", new string[] { "Leppersdorf 23", "4612", "Scharten", "Austria" })]
+        [TestCase("Höchstädtplatz 1, 1200 Wien, Austria", new string[] { "Höchstädtplatz 1", "1200", "Wien", "Austria"})]
+        public void TestParseLocation_Splitting(string locationstring, string[] locationSplit)
+        {
+            Location location = new Location(locationstring);
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(location.Street, locationSplit[0], "Street");
+                Assert.AreEqual(location.PostalCode, locationSplit[1], "Postal Code");
+                Assert.AreEqual(location.City, locationSplit[2], "City");
+                Assert.AreEqual(location.Country, locationSplit[3], "Country");
+            });
+        }
     }
 }
