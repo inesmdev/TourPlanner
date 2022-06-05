@@ -34,6 +34,8 @@ namespace TourPlanner.Models
             this.PostalCode = words[2];
             this.City = words[3];
             this.County = words[4];
+
+            // Split with Regex
         }
     }
 }

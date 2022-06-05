@@ -8,12 +8,19 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using Microsoft.Extensions.Logging;
 
 namespace TourPlanner.Api.Services.ReportService
 {
     public class ReportService : IReportService
     {
         const string TARGET_PDF = "../../../target.pdf";
+        ILogger<ReportService> _logger;
+
+        public ReportService(ILogger<ReportService> logger)
+        {
+            _logger = logger;
+        }
 
         public void GeneratePdfReport(Tour tour)
         {
@@ -31,6 +38,7 @@ namespace TourPlanner.Api.Services.ReportService
             document.Add(new Paragraph(tour.Summary));
             document.Close();
 
+            _logger.LogInformation("Logging works :)");
             //throw new NotImplementedException();
         }
     }

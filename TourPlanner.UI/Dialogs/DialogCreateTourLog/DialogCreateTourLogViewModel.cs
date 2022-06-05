@@ -143,7 +143,6 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         private bool Validate()
         {
           
-
             // Valid Format
             // TotalTime -> Only floating point numbers allowed
             Regex regex = new Regex(@"^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);

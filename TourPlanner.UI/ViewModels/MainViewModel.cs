@@ -135,9 +135,9 @@ namespace TourPlanner.UI.ViewModels
                 // Send Htttp POST Request to /Tour
                 using (HttpClient client = new HttpClient())
                 {
-                    var jsonTour = JsonConvert.SerializeObject(selectedTour);
+                    var jsonTour = JsonConvert.SerializeObject(selectedTour.TourData);
                     var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
-                    var res = await client.PostAsync("https://localhost:5001/Report", content);
+                    var res = await client.PostAsync("https://localhost:5001/Report/test.pdf", content);
 
                     if (res.IsSuccessStatusCode)
                     {
