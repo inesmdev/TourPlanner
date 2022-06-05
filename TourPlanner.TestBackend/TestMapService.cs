@@ -22,21 +22,21 @@ namespace TourPlanner.Test
         public void TestGetCoordinates()
         {
             Location from = new Location() { City = "Vienna", Country = "AT", PostalCode = "1200", Street = "Handlskai 94-96" };
-            Location to = new Location() { City = "", Country = "AT", PostalCode = "", Street = "Prater" };
+            Location to = new Location() { City = "Vienna", Country = "AT", PostalCode = "1190", Street = "Hardtgasse 16-30" };
 
-            MapQuestTour result = _mapQuestService.GetTour(from, to).Result;
+            MapQuestTour result = _mapQuestService.GetTour(from, to, "abcd").Result;
             Assert.IsNotNull(result.Distance);
         }
 
-        [Test]
+        /*[Test]
         public void TestGetImage()
         {
             string from = "48.239178,16.387205";
             string to = "48.24622,16.374119";
 
-            MemoryStream result = _mapQuestService.GetMap(from,to).Result;
+            _mapQuestService.GetMap(from,to,"abcd");
 
-            Assert.IsNotNull(result);
-        }
+            As;
+        }*/
     }
 }
