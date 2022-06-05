@@ -22,6 +22,8 @@ namespace TourPlanner.Api.Services.ReportService
             _logger = logger;
         }
 
+        public ReportService() { }
+
         public void GeneratePdfReport(Tour tour)
         {
             PdfWriter writer = new PdfWriter(TARGET_PDF);

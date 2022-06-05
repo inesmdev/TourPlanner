@@ -22,7 +22,7 @@ namespace TourPlanner.Api.Controllers
         [HttpPost("{filename}")]
         public IActionResult Create(Tour tour, string filename)
         {
-            _logger.LogDebug(filename);
+            //_logger.LogDebug(filename);
             // Error Handling?
             _reportservice.GeneratePdfReport(tour);
 

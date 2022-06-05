@@ -49,7 +49,7 @@ namespace TourPlanner.Api.Services.MapQuestService
                 string tolat = deserialize.route.boundingBox.ul.lat;
                 string fromCoords = fromlat + "," + fromlng;
                 string toCoords = tolat + "," + tolng;
-                GetMap(fromCoords, toCoords, tourID);
+                await GetMap(fromCoords, toCoords, tourID);
                 tour.Distance = distance;
                 tour.EstimatedTime = time;
             }

@@ -101,7 +101,8 @@ namespace TourPlanner.DAL.Repositories
                 }
             }
 
-            _logger.LogDebug(tourslogs.ToString());
+            
+            //(tourslogs.ToString());
 
             return tourslogs;
         }
@@ -136,7 +137,7 @@ namespace TourPlanner.DAL.Repositories
                 }
             }
 
-            _logger.LogDebug(tourslogs.ToString());
+           // _logger.LogDebug(tourslogs.ToString());
 
             return tourslogs;
         }
@@ -184,7 +185,7 @@ namespace TourPlanner.DAL.Repositories
                              SET date_time=@date_time, rating=@rating, difficulty=@difficulty, total_time=@total_time, comment=@comment 
                              WHERE tour_log_id=@tour_log_id;";
 
-                _logger.LogDebug($"Execute SQL Statement: {sql}");
+               // _logger.LogDebug($"Execute SQL Statement: {sql}");
 
                 command.CommandText = sql;
                 command.Parameters.AddWithValue("@date_time", tourlog.DateTime);

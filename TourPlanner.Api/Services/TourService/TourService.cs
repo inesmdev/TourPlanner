@@ -51,8 +51,6 @@ namespace TourPlanner.Api.Services.TourService
                 _repository.Create(tour);
                 tour.GenerateSummary();
 
-                _logger.LogInformation($"Tour successfully created, {tour.Summary}");
-
                 return tour;
             }
             catch
