@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using iText.Kernel.Pdf;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using TourPlanner.Models;
 using TourPlanner.UI.Models;
 using TourPlanner.UI.Search;
+using Spire.Pdf;
 
 namespace TourPlanner.UI.ViewModels
 {
@@ -135,7 +137,7 @@ namespace TourPlanner.UI.ViewModels
             {
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+                saveFileDialog.Filter = "Pdf files (*.pdf)|*.pdf";
 
                 if (saveFileDialog.ShowDialog() == true)
                 {
@@ -149,23 +151,16 @@ namespace TourPlanner.UI.ViewModels
                         {
                             var jsonTour = JsonConvert.SerializeObject(selectedTour.TourData);
                             var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
-                            var res = await client.PostAsync("https://localhost:5001/Report/test.pdf", content);
+                         
+                       
 
-                            if (res.IsSuccessStatusCode)
+                            using (HttpResponseMessage response = await client.PostAsync("https://localhost:5001/Report", content))
+                            using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
                             {
-                                // var httpcontent = await res.Content.ReadAsStringAsync(); //??
-                                Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
-                                _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                                Spire.Pdf.PdfDocument docFrom = new Spire.Pdf.PdfDocument();
+                                docFrom.LoadFromStream(streamToReadFrom);
+                                docFrom.SaveToFile(saveFileDialog.FileName, FileFormat.PDF);
                             }
-                            else
-                            {
-                                Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Report");
-                                _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
-                            }
-
-                            //SaveFileDialog the File
-                            //File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(TourList));
-
                         }
                     }
                     catch

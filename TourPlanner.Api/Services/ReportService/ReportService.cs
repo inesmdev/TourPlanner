@@ -1,14 +1,11 @@
-﻿using System;
-using TourPlanner.Models;
-using iText.IO.Font.Constants;
-using iText.IO.Image;
+﻿using iText.IO.Font.Constants;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
-using iText.Layout.Properties;
 using Microsoft.Extensions.Logging;
+using TourPlanner.Models;
 
 namespace TourPlanner.Api.Services.ReportService
 {

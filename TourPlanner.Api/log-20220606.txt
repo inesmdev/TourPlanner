@@ -130,3 +130,17 @@ File name: 'C:\Users\admin\dev\repos\SWEN_Semesterproject\TourPlanner\TourPlanne
 2022-06-06 13:38:34.560 +02:00 [ERR] Could not create tour
 2022-06-06 13:38:40.125 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
 2022-06-06 13:38:50.677 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 13:53:52.894 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 13:53:53.149 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 13:54:34.091 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 13:54:34.303 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 14:06:20.913 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 14:06:21.174 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 14:09:09.411 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 14:09:09.759 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 14:09:42.419 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 14:09:42.664 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 14:19:28.556 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 14:19:28.879 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 14:22:09.295 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 14:22:09.604 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]

@@ -15,6 +15,7 @@
     <PackageReference Include="Serilog" Version="2.11.1-dev-01397" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.2-dev-00890" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
+    <PackageReference Include="Spire.PDF" Version="8.5.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
