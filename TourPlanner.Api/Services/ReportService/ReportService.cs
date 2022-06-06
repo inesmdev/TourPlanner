@@ -14,7 +14,9 @@ namespace TourPlanner.Api.Services.ReportService
 {
     public class ReportService : IReportService
     {
-        const string TARGET_PDF = "../../../target.pdf";
+        // const string TARGET_PDF = "../../../target.pdf";
+        const string TARGET_PDF = "./Pdfs/";
+
         ILogger<ReportService> _logger;
 
         public ReportService(ILogger<ReportService> logger)
@@ -26,7 +28,7 @@ namespace TourPlanner.Api.Services.ReportService
 
         public void GeneratePdfReport(Tour tour)
         {
-            PdfWriter writer = new PdfWriter(TARGET_PDF);
+            PdfWriter writer = new PdfWriter(TARGET_PDF + $"{ tour.Id }.pdf");
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 

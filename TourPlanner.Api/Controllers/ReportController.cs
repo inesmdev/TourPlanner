@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using System.Threading.Tasks;
 using TourPlanner.Api.Services.ReportService;
 using TourPlanner.Models;
 
@@ -19,14 +22,32 @@ namespace TourPlanner.Api.Controllers
         }
 
 
-        [HttpPost("{filename}")]
-        public IActionResult Create(Tour tour, string filename)
-        {
-            //_logger.LogDebug(filename);
-            // Error Handling?
-            _reportservice.GeneratePdfReport(tour);
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(Tour tour)
+        {       
+            _reportservice.GeneratePdfReport(tour); //return false if sth fails
+            
+            try
+            {
+                var filePath = $"./Pdfs/{tour.Id}.pdf"; 
 
-            return Ok();
+                // Get content type
+                var provider = new FileExtensionContentTypeProvider();
+
+                if (!provider.TryGetContentType(filePath, out var contentType))
+                {
+                    contentType = "application/octet-stream";
+                }
+
+
+                var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+
+                return File(bytes, contentType, Path.GetFileName(filePath));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

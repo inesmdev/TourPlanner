@@ -6,30 +6,28 @@ namespace TourPlanner.UI.Models
 {
     public class TourUI :INotifyPropertyChanged
     {
-
-
-        private Tour _tourData;
+        private Tour tourData;
         public Tour TourData {
             get
             {
-                return _tourData;
+                return tourData;
             }
             set
             {
-                _tourData = value;
+                tourData = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TourData"));
             }
         }
 
-        private string _imagePath;
+        private string imagePath;
         public string ImagePath {
             get
             {
-                return _imagePath;
+                return imagePath;
             }
             set
             {
-                _imagePath = value;
+                imagePath = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImagePath"));
 
             }

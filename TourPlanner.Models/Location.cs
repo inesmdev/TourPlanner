@@ -20,6 +20,7 @@ namespace TourPlanner.Models
             ParseLocation(location);
         }
 
+        // Regex
         private void ParseLocation(string location)
         {
             if (!Validator.isLocation(location))

@@ -149,3 +149,7 @@ Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
 2022-06-05 13:40:11.010 +02:00 [INF] Connection to PostgresDB established.
 2022-06-05 13:40:11.221 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
 2022-06-05 13:40:44.341 +02:00 [ERR] Tour (94f368bd-4882-468f-bef3-a6af967e1389) successfully created
+2022-06-05 13:42:55.470 +02:00 [INF] Connection to PostgresDB established.
+2022-06-05 13:42:55.669 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-05 13:55:45.796 +02:00 [INF] Connection to PostgresDB established.
+2022-06-05 13:55:46.030 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]

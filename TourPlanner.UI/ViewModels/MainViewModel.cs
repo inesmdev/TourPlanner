@@ -133,32 +133,45 @@ namespace TourPlanner.UI.ViewModels
         {
             if (selectedTour != null)
             {
-                // Call the Api
-                // Send Htttp POST Request to /Tour
-                try
-                {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var jsonTour = JsonConvert.SerializeObject(selectedTour.TourData);
-                        var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
-                        var res = await client.PostAsync("https://localhost:5001/Report/test.pdf", content);
 
-                        if (res.IsSuccessStatusCode)
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+
+
+                    // Call the Api
+                    // Send Htttp POST Request to /Tour
+                    try
+                    {
+                        using (HttpClient client = new HttpClient())
                         {
-                            // var httpcontent = await res.Content.ReadAsStringAsync(); //??
-                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
-                            _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
-                        }
-                        else
-                        {
-                            Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Report");
-                            _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                            var jsonTour = JsonConvert.SerializeObject(selectedTour.TourData);
+                            var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
+                            var res = await client.PostAsync("https://localhost:5001/Report/test.pdf", content);
+
+                            if (res.IsSuccessStatusCode)
+                            {
+                                // var httpcontent = await res.Content.ReadAsStringAsync(); //??
+                                Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Report Generated");
+                                _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                            }
+                            else
+                            {
+                                Dialogs.DialogService.DialogViewModelBase popup = new Dialogs.DialogOk.DialogOkViewModel("Could not create Report");
+                                _ = Dialogs.DialogService.DialogService.OpenDialog(popup, parameter as Window);
+                            }
+
+                            //SaveFileDialog the File
+                            //File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(TourList));
+
                         }
                     }
-                }
-                catch
-                {
-                    MessageBox.Show(DB_ERROR);
+                    catch
+                    {
+                        MessageBox.Show(DB_ERROR);
+                    }
                 }
             }
         }

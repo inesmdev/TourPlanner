@@ -101,9 +101,6 @@ namespace TourPlanner.DAL.Repositories
                 }
             }
 
-            
-            //(tourslogs.ToString());
-
             return tourslogs;
         }
 
@@ -136,8 +133,6 @@ namespace TourPlanner.DAL.Repositories
                     });
                 }
             }
-
-           // _logger.LogDebug(tourslogs.ToString());
 
             return tourslogs;
         }

@@ -23,7 +23,6 @@ namespace TourPlanner.Models
         public EnumTransportType TransportType { get; set; }
         public string Summary { get; set; }
 
-        // TODO: Add TransportType, better summary
         public void GenerateSummary()
         {
             this.Summary = $"Tourname: {Name}\nFrom: {From}\nTo: {To}\nDescription: {Description}\nEstimated Time: {EstimatedTime}\nDistance: {Distance}";
