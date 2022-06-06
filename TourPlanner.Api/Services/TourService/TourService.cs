@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using TourPlanner.Api.Services.MapQuestService;
 using TourPlanner.DAL.Repositories;
 using TourPlanner.Models;
@@ -43,22 +44,29 @@ namespace TourPlanner.Api.Services.TourService
             // Call the MapQuest Api to get the missing information about the tour
             try
             {
-                MapQuestTour res = _mapapi.GetTour(new Location(tourinput.From), new Location(tourinput.To)).Result;
+                MapQuestTour res = _mapapi.GetTour(new Location(tourinput.From), new Location(tourinput.To), tour.Id.ToString()).Result;
                 tour.EstimatedTime = res.EstimatedTime;
                 tour.Distance = res.Distance;
 
                 _repository.Create(tour);
                 tour.GenerateSummary();
 
-                _logger.LogInformation($"Tour successfully created, {tour.Summary}");
-
                 return tour;
             }
-            catch (Exception ex)
+            catch
             {
                 _logger.LogError($"Could not create tour ({tour.Id}, \"{ tour.Name}\")");
                 return null;
             }        
+        }
+
+        public MemoryStream GetMap(string coordinates)
+        {
+            MemoryStream map = null;
+            string from = coordinates.Split("+")[0];
+            string to = coordinates.Split("+")[1];
+            //map = _mapapi.GetMap(from,to).Result;
+            return map;
         }
 
 
@@ -106,6 +114,7 @@ namespace TourPlanner.Api.Services.TourService
             try
             {
                 _repository.Update(tour);
+                tour.GenerateSummary();
                 return tour;
             }
             catch

@@ -8,11 +8,15 @@
              xmlns:dialogFilePath="clr-namespace:TourPlanner.UI.Dialogs.DialogFilePath"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:enm="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
+             xmlns:properties="clr-namespace:TourPlanner.UI.Properties"
              Startup="OnStartup"
+             xmlns:viewModels="clr-namespace:TourPlanner.UI.ViewModels"
              >
 
     <!-- Resources defined at the application level can be accessed by all other pages that are part of the application -->
     <Application.Resources>
+        <viewModels:MainViewModel x:Key="MainViewModel"/>
+        
         <!-- Custom Dialog Windows -->
         <DataTemplate DataType="{x:Type dialogYesNo:DialogYesNoViewModel}">
             <dialogYesNo:DialogYesNoView></dialogYesNo:DialogYesNoView>
@@ -52,6 +56,27 @@
                 <x:TypeExtension TypeName='enm:EnumTransportType'></x:TypeExtension>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+       
+        <!-- Style Options -->
+        <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Small">
+                    <Setter Property="FontSize" Value="12"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Medium">
+                    <Setter Property="FontSize" Value="14"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Big">
+                    <Setter Property="FontSize" Value="16"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=FontSize}" Value="Huge">
+                    <Setter Property="FontSize" Value="18"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
     

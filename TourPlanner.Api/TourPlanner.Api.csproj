@@ -5,6 +5,7 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <UserSecretsId>a195f8c3-d251-4d6b-90c3-0eb489bcd583</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +23,4 @@
     <ProjectReference Include="..\TourPlanner.DAL\TourPlanner.DAL.csproj" />
     <ProjectReference Include="..\TourPlanner.Models\TourPlanner.Models.csproj" />
   </ItemGroup>
-
 </Project>

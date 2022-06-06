@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -9,12 +10,18 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
 {
     public class DialogCreateTourViewModel : DialogViewModelBase
     {
+        public Guid Id { get; set; }
         public string Tourname { get; set; }
         public string Description { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public EnumTransportType TransportType { get; set; }
+        public DateTime CreationDate { get; set; }
+        public int EstimatedTime { get; set; }
+        public double Distance { get; set; }
+        public string Summary { get; set; }
 
+        private bool editMode = false;
 
         private ICommand yesCommand = null;
         public ICommand YesCommand
@@ -48,10 +55,18 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
             this.yesCommand = new RelayCommand(OnYesClicked);
             this.noCommand = new RelayCommand(OnNoClicked);
 
+            // Set everything
+            this.Id = tour.Id;
             this.Tourname = tour.Name;
             this.Description = tour.Description;
             this.From = tour.From;
             this.To = tour.To;
+            this.TransportType = tour.TransportType;
+            this.CreationDate = tour.CreationDate;
+            this.EstimatedTime = tour.EstimatedTime;
+            this.Distance = tour.Distance;
+
+            editMode = true;
         }
 
 
@@ -60,23 +75,44 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTour
          */
         private void OnYesClicked(object parameter)
         {
-
-            // Check if everything is set
             if (ValidateInput())
             {
-                TourInput data = new TourInput
+                if (editMode == true)
                 {
-                    Name = this.Tourname,
-                    Description = this.Description,
-                    From = this.From,
-                    To = this.To,
-                    TransportType = this.TransportType  
-                };
+                    Tour data = new Tour
+                    {
+                        Id = this.Id,
+                        Name = this.Tourname,
+                        Description = this.Description,
+                        From = this.From,
+                        To = this.To,
+                        TransportType = this.TransportType,
+                        CreationDate = this.CreationDate,
+                        EstimatedTime = this.EstimatedTime,
+                        Distance = this.Distance,
+                    };
 
-                // Json -> String
-                string dataJson = JsonConvert.SerializeObject(data);
+                    // Json -> String
+                    string dataJson = JsonConvert.SerializeObject(data);
 
-                this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                    this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                }
+                else
+                {
+                    TourInput data = new TourInput
+                    {
+                        Name = this.Tourname,
+                        Description = this.Description,
+                        From = this.From,
+                        To = this.To,
+                        TransportType = this.TransportType
+                    };
+
+                    // Json -> String
+                    string dataJson = JsonConvert.SerializeObject(data);
+
+                    this.CloseDialogWithResult(parameter as Window, DialogResult.Yes, dataJson);
+                }
             }
         }
 

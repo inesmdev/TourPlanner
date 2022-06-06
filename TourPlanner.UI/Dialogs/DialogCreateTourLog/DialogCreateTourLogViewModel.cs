@@ -19,6 +19,13 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public string TotalTime { get; set; }
         public string Comment { get; set; }
 
+
+
+       
+
+
+
+
         private bool editMode = false;
 
         private ICommand yesCommand = null;
@@ -52,7 +59,9 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         public DialogCreateTourLogViewModel(string message, TourLog tourlog)
         : base(message)
         {
-            Id = tourlog.Id;
+            
+
+        Id = tourlog.Id;
             TourId = tourlog.TourId;
             TourDifficulty = tourlog.TourDifficulty;
             TourRating = tourlog.TourRating;
@@ -134,7 +143,6 @@ namespace TourPlanner.UI.Dialogs.DialogCreateTourLog
         private bool Validate()
         {
           
-
             // Valid Format
             // TotalTime -> Only floating point numbers allowed
             Regex regex = new Regex(@"^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);

@@ -16,6 +16,7 @@ namespace TourPlanner.UI.Search
             List<TourUI> results = new List<TourUI>();
             Regex regex = new Regex(keyword, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+          
             foreach (var item in list)
             {
                 // Serialize to string

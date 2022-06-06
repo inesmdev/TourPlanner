@@ -10,6 +10,9 @@ using TourPlanner.Api.Services.ReportService;
 using TourPlanner.Api.Services.TourLogService;
 using TourPlanner.DAL;
 using TourPlanner.DAL.Repositories;
+using TourPlanner.Api.Services.ImportService;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace TourPlanner.Api
 {
@@ -32,7 +35,9 @@ namespace TourPlanner.Api
             services.AddSingleton<IReportService, ReportService>();
             services.AddSingleton<PostgresAccess>();
             services.AddSingleton<ITourLogService, TourLogService>();
-            
+            services.AddSingleton<IImportService, ImportService>();
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -59,6 +64,14 @@ namespace TourPlanner.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseFileServer(new FileServerOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+                RequestPath = "/StaticFiles",
+                EnableDefaultFiles = true
             });
         }
     }
