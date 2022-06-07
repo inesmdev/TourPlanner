@@ -28,7 +28,7 @@ namespace TourPlanner.Api.Controllers
             
             try
             {
-                var filePath = $"./Pdfs/{tour.Id}.pdf"; 
+                var filePath = $"./Pdfs/{tour.TourData.Id}.pdf"; 
 
                 // Get content type
                 var provider = new FileExtensionContentTypeProvider();
