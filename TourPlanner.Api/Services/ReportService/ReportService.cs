@@ -65,7 +65,10 @@ namespace TourPlanner.Api.Services.ReportService
                 document.Add(new Paragraph("No Logs have been added yet"));
             }
             document.Close();
-            _logger.LogInformation($"Report");
+            if(_logger != null)
+            {
+                _logger.LogInformation($"Report");
+            }
         }
     }
 }
