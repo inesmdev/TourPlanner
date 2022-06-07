@@ -149,7 +149,7 @@ namespace TourPlanner.UI.ViewModels
                     {
                         using (HttpClient client = new HttpClient())
                         {
-                            var jsonTour = JsonConvert.SerializeObject(selectedTour.TourData);
+                            var jsonTour = JsonConvert.SerializeObject(selectedTour);
                             var content = new StringContent(jsonTour, Encoding.UTF8, "application/json");
                          
                        
