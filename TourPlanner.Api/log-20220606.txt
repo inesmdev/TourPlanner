@@ -144,3 +144,12 @@ File name: 'C:\Users\admin\dev\repos\SWEN_Semesterproject\TourPlanner\TourPlanne
 2022-06-06 14:19:28.879 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
 2022-06-06 14:22:09.295 +02:00 [INF] Connection to PostgresDB established.
 2022-06-06 14:22:09.604 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 23:32:45.006 +02:00 [ERR] Error connecting to PostgresDB
+2022-06-06 23:33:37.507 +02:00 [INF] Connection to PostgresDB established.
+2022-06-06 23:33:37.782 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-06 23:33:49.480 +02:00 [INF] Tour (94f368bd4882468fbef3a6af967e1389) deleted.
+2022-06-06 23:33:51.965 +02:00 [INF] Tour (a1df6475ed32467c9b9f21588e2c2ff0) deleted.
+2022-06-06 23:33:55.097 +02:00 [INF] Tour (0bffb915a58d43d88a7b4070e698c914) deleted.
+2022-06-06 23:34:28.203 +02:00 [ERR] Tour (6bc80a0c-ad11-429f-83ce-48063fd7d512) successfully created
+2022-06-06 23:34:40.427 +02:00 [INF] Tourlog (8755048d-89e0-49ec-a8d1-85a7f06358e1) successfully created
+2022-06-06 23:34:51.384 +02:00 [INF] Tour (6bc80a0cad11429f83ce48063fd7d512) successfully updated.

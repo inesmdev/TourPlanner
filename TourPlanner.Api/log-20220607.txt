@@ -1,0 +1,7 @@
+2022-06-07 15:28:05.465 +02:00 [FTL] Error connecting to PostgresDB
+2022-06-07 15:29:59.651 +02:00 [FTL] Error connecting to PostgresDB
+2022-06-07 15:30:14.665 +02:00 [INF] Connection to PostgresDB established.
+2022-06-07 15:30:14.887 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-07 15:30:27.568 +02:00 [INF] Logging works :)
+2022-06-07 15:43:50.401 +02:00 [INF] Connection to PostgresDB established.
+2022-06-07 15:43:50.681 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]

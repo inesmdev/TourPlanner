@@ -39,7 +39,7 @@ namespace TourPlanner.Api.Services.ReportService
             document.Add(new Paragraph(tour.Summary));
             document.Close();
 
-            //_logger.LogInformation($"Logging works :)");
+            _logger.LogInformation($"Logging works :)");
             //throw new NotImplementedException();
         }
     }

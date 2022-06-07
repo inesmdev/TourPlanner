@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using TourPlanner.Api.Services.TourService;
 using TourPlanner.Models;
-using TourPlanner.UI.Models;
 
 namespace TourPlanner.Api.Controllers
 {
@@ -42,8 +41,8 @@ namespace TourPlanner.Api.Controllers
          *  Get specific tours by id
          */
         [HttpGet("{id}")]
-         public ActionResult<Tour> Get(string id)
-         {
+        public ActionResult<Tour> Get(string id)
+        {
             var tour = _tourservice.Get(Guid.Parse(id));
 
             if (tour == null)
@@ -53,7 +52,7 @@ namespace TourPlanner.Api.Controllers
             }
 
             return Ok(tour);
-         }
+        }
 
 
         /*
@@ -71,7 +70,7 @@ namespace TourPlanner.Api.Controllers
             }
             else
             {
-                _logger.LogError($"Tour ({tour.Id}) successfully created");
+                _logger.LogInformation($"Tour ({tour.Id}) successfully created");
 
                 return CreatedAtAction(nameof(Create), new
                 {
@@ -84,7 +83,7 @@ namespace TourPlanner.Api.Controllers
                     Distance = tour.Distance,
                     Summary = tour.Summary
                 }, tour);
-            }      
+            }
         }
 
         // still neccesary?
@@ -136,7 +135,7 @@ namespace TourPlanner.Api.Controllers
             }
         }
 
-        
+
         /*
          *  Delete tour by id
          */
@@ -162,6 +161,6 @@ namespace TourPlanner.Api.Controllers
                 _logger.LogError($"Could not delete tour ({id}). Deletion failed.");
                 return BadRequest();
             }
-        }            
+        }
     }
 }

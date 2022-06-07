@@ -21,15 +21,14 @@ namespace TourPlanner.Api.Controllers
             _logger = logger;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> CreateAsync(Tour tour)
-        {       
+        {
             _reportservice.GeneratePdfReport(tour); //return false if sth fails
-            
+
             try
             {
-                var filePath = $"./Pdfs/{tour.Id}.pdf"; 
+                var filePath = $"./Pdfs/{tour.Id}.pdf";
 
                 // Get content type
                 var provider = new FileExtensionContentTypeProvider();
@@ -39,13 +38,14 @@ namespace TourPlanner.Api.Controllers
                     contentType = "application/octet-stream";
                 }
 
-
                 var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
 
                 return File(bytes, contentType, Path.GetFileName(filePath));
             }
             catch
             {
+                _logger.LogError("Report Generation failed.");
+
                 return BadRequest();
             }
         }

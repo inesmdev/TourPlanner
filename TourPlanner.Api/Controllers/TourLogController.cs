@@ -25,24 +25,24 @@ namespace TourPlanner.Api.Controllers
         [HttpGet("/all/{id}")]
         public ActionResult<List<TourLog>> GetAll(string id) =>
             Ok(_tourlogservice.GetAll(Guid.Parse(id)));
-        
+
 
         [HttpGet]
         public ActionResult<List<TourLog>> GetAll() =>
             Ok(_tourlogservice.GetAll());
-   
-         
+
+
         [HttpGet("{id}")]
-         public ActionResult<TourLog> Get(string id)
-         {
+        public ActionResult<TourLog> Get(string id)
+        {
             TourLog tourlog = _tourlogservice.Get(Guid.Parse(id));
 
             if (tourlog == null)
                 return NotFound();
 
             return Ok(tourlog);
-         }
-               
+        }
+
 
         [HttpPost]
         public IActionResult Create(TourLogInput tourlogInput)
@@ -53,7 +53,8 @@ namespace TourPlanner.Api.Controllers
                 return BadRequest();
 
             else
-                return CreatedAtAction(nameof(Create), new {
+                return CreatedAtAction(nameof(Create), new
+                {
                     Id = tourlog.Id,
                     TourId = tourlog.TourId,
                     TourRating = tourlog.TourRating,
@@ -62,7 +63,7 @@ namespace TourPlanner.Api.Controllers
                     Comment = tourlog.Comment
                 }, tourlog);
         }
-        
+
 
         [HttpPut("{id}")]
         public IActionResult Update(string id, TourLog tourlog)
@@ -81,7 +82,7 @@ namespace TourPlanner.Api.Controllers
             if (tourlogdb is null)
                 return BadRequest();
             else
-                return Ok(tourlogdb); // 204?
+                return Ok(tourlogdb); 
         }
 
 

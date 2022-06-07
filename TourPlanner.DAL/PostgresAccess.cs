@@ -24,7 +24,7 @@ namespace TourPlanner.DAL
             }
             catch
             {
-                _logger.LogError("Error connecting to PostgresDB");
+                _logger.LogCritical("Error connecting to PostgresDB");
                 throw new System.Exception("DB Connection failed");
             }
 
