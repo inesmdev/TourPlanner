@@ -1,0 +1,4 @@
+2022-06-07 16:06:13.930 +02:00 [INF] Connection to PostgresDB established.
+2022-06-07 16:06:14.404 +02:00 [INF] Send all tours from db: System.Collections.Generic.List`1[TourPlanner.Models.Tour]
+2022-06-07 16:06:29.352 +02:00 [INF] Tour (46d6a968d2164968b53d541441b9d025) successfully updated.
+2022-06-07 16:06:36.385 +02:00 [INF] Tour (46d6a968d2164968b53d541441b9d025) deleted.

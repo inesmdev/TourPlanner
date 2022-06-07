@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
 using TourPlanner.Api.Services.ReportService;
-using TourPlanner.Models;
+using TourPlanner.UI.Models;
 
 namespace TourPlanner.Api.Controllers
 {
@@ -21,15 +21,14 @@ namespace TourPlanner.Api.Controllers
             _logger = logger;
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Tour tour)
+        public async Task<IActionResult> CreateAsync(TourUI tour)
         {       
-            _reportservice.GeneratePdfReport(tour); //return false if sth fails
+            _reportservice.GeneratePdfReport(tour.TourData, tour.Tourlogs); //return false if sth fails
             
             try
             {
-                var filePath = $"./Pdfs/{tour.Id}.pdf"; 
+                var filePath = $"./Pdfs/{tour.TourData.Id}.pdf"; 
 
                 // Get content type
                 var provider = new FileExtensionContentTypeProvider();
@@ -39,13 +38,14 @@ namespace TourPlanner.Api.Controllers
                     contentType = "application/octet-stream";
                 }
 
-
                 var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
 
                 return File(bytes, contentType, Path.GetFileName(filePath));
             }
             catch
             {
+                _logger.LogError("Report Generation failed.");
+
                 return BadRequest();
             }
         }
